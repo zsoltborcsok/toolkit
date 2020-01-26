@@ -8,6 +8,7 @@ import org.nting.toolkit.component.Orientation;
 import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.ComponentUI;
 
+import playn.core.Canvas;
 import pythagoras.f.Dimension;
 import pythagoras.f.Point;
 import pythagoras.f.Rectangle;
@@ -67,6 +68,8 @@ public interface Component {
     // endregion
 
     // region Rendering
+    void paint(Canvas canvas);
+
     @SuppressWarnings("rawtypes")
     void setComponentUI(ComponentUI componentUI);
 

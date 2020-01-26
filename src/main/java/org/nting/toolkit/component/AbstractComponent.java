@@ -11,6 +11,7 @@ import org.nting.data.property.ObjectProperty;
 import org.nting.data.property.SetProperty;
 import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.PaintableComponent;
 import org.nting.toolkit.data.Properties;
 import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.ComponentUI;
@@ -24,7 +25,7 @@ import com.google.common.collect.Lists;
 import pythagoras.f.Dimension;
 import pythagoras.f.Point;
 
-public abstract class AbstractComponent implements Component, RuntimeBean {
+public abstract class AbstractComponent implements PaintableComponent, RuntimeBean {
 
     private final Properties properties = new Properties();
 
