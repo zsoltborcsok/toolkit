@@ -67,9 +67,11 @@ public interface Component {
     // endregion
 
     // region Rendering
-    void setComponentUI(ComponentUI<?> componentUI);
+    @SuppressWarnings("rawtypes")
+    void setComponentUI(ComponentUI componentUI);
 
-    ComponentUI<?> getComponentUI();
+    @SuppressWarnings("rawtypes")
+    ComponentUI getComponentUI();
 
     void setVisible(boolean visible);
 

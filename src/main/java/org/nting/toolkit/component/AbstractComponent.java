@@ -13,6 +13,7 @@ import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.data.Properties;
 import org.nting.toolkit.layout.LayoutManager;
+import org.nting.toolkit.ui.ComponentUI;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
@@ -41,6 +42,8 @@ public abstract class AbstractComponent implements Component, RuntimeBean {
     private final List<Component> components = Lists.newArrayList();
     private LayoutManager layoutManager;
     private final BiMap<Component, Object> layoutConstraintsMap = HashBiMap.create();
+    @SuppressWarnings("rawtypes")
+    private ComponentUI componentUI;
 
     private boolean focusable = true;
     private boolean focusNeutral = false;
@@ -194,6 +197,32 @@ public abstract class AbstractComponent implements Component, RuntimeBean {
             c.dirty();
             c = c.getParent();
         }
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
+    public void setComponentUI(ComponentUI componentUI) {
+        if (this.componentUI != null) {
+            this.componentUI.terminate(this);
+        }
+
+        if (componentUI == null) {
+            this.componentUI = null;
+        } else if (componentUI.isComponentSupported(this)) {
+            this.componentUI = componentUI;
+            componentUI.initialize(this);
+        } else {
+            throw new IllegalArgumentException(
+                    getClass().getSimpleName() + " is not supported by " + componentUI.getClass().getSimpleName());
+        }
+
+        reLayout();
+    }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public ComponentUI getComponentUI() {
+        return componentUI;
     }
 
     @Override
