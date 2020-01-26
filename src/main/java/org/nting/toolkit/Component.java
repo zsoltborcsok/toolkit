@@ -23,7 +23,9 @@ public interface Component {
 
     Point getPosition();
 
-    Rectangle getBounds();
+    default Rectangle getBounds() {
+        return new Rectangle(getPosition(), getSize());
+    }
     // endregion
 
     // region Tooltip
@@ -40,6 +42,8 @@ public interface Component {
     void setParent(Component parent);
 
     Component getParent();
+
+    boolean isAttached();
 
     void addComponent(Component child);
 
@@ -58,6 +62,8 @@ public interface Component {
     void setLayoutManager(LayoutManager layoutManager);
 
     LayoutManager getLayoutManager();
+
+    void reLayout();
     // endregion
 
     // region Rendering
@@ -92,9 +98,9 @@ public interface Component {
     // endregion
 
     // region extra features
-    void setId(String id);
+    void setId(Object id);
 
-    String getId();
+    Object getId();
 
     void setClip(boolean clip);
 

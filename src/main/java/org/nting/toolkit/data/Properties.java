@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import org.nting.data.Property;
 import org.nting.data.property.ListProperty;
 import org.nting.data.property.MapProperty;
+import org.nting.data.property.ObjectProperty;
 import org.nting.data.property.PropertySet;
 import org.nting.data.property.SetProperty;
 
@@ -27,8 +28,9 @@ public class Properties extends PropertySet {
     }
 
     @Override
-    public <T> Property<T> addObjectProperty(Object propertyId, T initialValue) {
-        return firstNonNull(getProperty(propertyId), () -> super.addObjectProperty(propertyId, initialValue));
+    public <T> ObjectProperty<T> addObjectProperty(Object propertyId, T initialValue) {
+        return firstNonNull((ObjectProperty<T>) this.<T> getProperty(propertyId),
+                () -> super.addObjectProperty(propertyId, initialValue));
     }
 
     @Override
