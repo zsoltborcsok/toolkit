@@ -65,6 +65,16 @@ public interface Component {
     LayoutManager getLayoutManager();
 
     void reLayout();
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    default Dimension getPreferredSize() {
+        ComponentUI componentUI = getComponentUI();
+        if (componentUI != null) {
+            return componentUI.getPreferredSize(this);
+        } else {
+            return getLayoutManager().preferredLayoutSize(this);
+        }
+    }
     // endregion
 
     // region Rendering
