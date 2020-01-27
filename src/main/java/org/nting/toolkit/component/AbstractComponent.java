@@ -1,5 +1,6 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ToolkitRunnable.createLoopedRunnable;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import org.nting.data.property.SetProperty;
 import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.PaintableComponent;
+import org.nting.toolkit.animation.Behavior;
 import org.nting.toolkit.data.Properties;
 import org.nting.toolkit.event.KeyEvent;
 import org.nting.toolkit.event.KeyListener;
@@ -30,6 +32,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import playn.core.PlayN;
 import pythagoras.f.Dimension;
 import pythagoras.f.Point;
 
@@ -63,6 +66,9 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     private boolean dirty = true;
     private boolean clip = false;
     private Object id;
+
+    private final List<Behavior> behaviors = Lists.newLinkedList();
+    private final List<Behavior> behaviorsToRemove = Lists.newLinkedList();
 
     @Override
     public void setSize(float width, float height) {
@@ -264,6 +270,25 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     }
 
     @Override
+    public void update(float delta) {
+        PaintableComponent.super.update(delta);
+
+        for (int i = 0; i < behaviors.size(); i++) {
+            Behavior behavior = behaviors.get(i);
+            if (behavior.isFinished()) {
+                behaviors.remove(i--);
+            } else {
+                try {
+                    behavior.update(delta);
+                } catch (RuntimeException e) {
+                    PlayN.log(AbstractComponent.class).error(e.getMessage(), e);
+                    behavior.fastForward();
+                }
+            }
+        }
+    }
+
+    @Override
     public void setFocusable(boolean focusable) {
         this.focusable = focusable;
     }
@@ -301,6 +326,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
         for (KeyListener listener : keyListeners) {
             keyListenerMethod.accept(listener, keyEvent);
             if (keyEvent.isConsumed()) {
+                handleBehaviorsToRemove();
                 break;
             }
         }
@@ -317,6 +343,9 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
 
     public <E extends MouseEvent> void fireMouseEvent(BiConsumer<MouseListener, E> mouseListenerMethod, E mouseEvent) {
         mouseListeners.forEach(listener -> mouseListenerMethod.accept(listener, mouseEvent));
+        if (mouseEvent.isConsumed()) {
+            handleBehaviorsToRemove();
+        }
     }
 
     @Override
@@ -337,6 +366,26 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     @Override
     public boolean isClip() {
         return clip;
+    }
+
+    @Override
+    public void addBehavior(Behavior behavior) {
+        if (!behaviors.contains(behavior)) {
+            behaviors.add(behavior);
+        }
+    }
+
+    @Override
+    public void removeBehaviorOnAnyConsumedEvent(Behavior behavior) {
+        toolkitManager().schedule(createLoopedRunnable(1, 0, () -> behaviorsToRemove.add(behavior)));
+    }
+
+    /** Call it when an event (key or mouse) is consumed. */
+    private void handleBehaviorsToRemove() {
+        if (0 < behaviorsToRemove.size()) {
+            behaviors.removeAll(behaviorsToRemove);
+            behaviorsToRemove.clear();
+        }
     }
 
     public final <T> Property<T> createProperty(Object propertyId, T initialValue) {

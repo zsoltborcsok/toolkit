@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 
 import org.nting.data.Registration;
 import org.nting.data.util.Pair;
+import org.nting.toolkit.animation.Behavior;
 import org.nting.toolkit.component.Alignment;
 import org.nting.toolkit.component.Orientation;
 import org.nting.toolkit.event.KeyEvent;
@@ -140,6 +141,10 @@ public interface Component {
     void setClip(boolean clip);
 
     boolean isClip();
+
+    void addBehavior(Behavior behavior);
+
+    void removeBehaviorOnAnyConsumedEvent(Behavior behavior);
 
     default float getBaselinePosition() {
         return -1;
