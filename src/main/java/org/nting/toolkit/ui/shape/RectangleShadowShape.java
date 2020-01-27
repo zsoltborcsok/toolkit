@@ -1,6 +1,6 @@
 package org.nting.toolkit.ui.shape;
 
-import org.nting.toolkit.util.ColorUtilities;
+import org.nting.toolkit.util.ColorUtils;
 
 import com.google.common.base.MoreObjects;
 
@@ -54,12 +54,12 @@ public class RectangleShadowShape extends BasicShape<RectangleShadowShape> {
                     // Support some 'rounding' by virtually leaving out one pixel at the corner
                     int k = sumKernel[x][y] - kernel[x][y];
                     float percent = 1 - k / (float) sum;
-                    colors[x][y] = ColorUtilities.moreTransparent(fillColor, percent * 100);
+                    colors[x][y] = ColorUtils.moreTransparent(fillColor, percent * 100);
                 }
             }
             for (int i = 0; i < kernelSize; i++) {
                 float percent = 1 - sumKernel[i][kernelSize - 1] / (float) sum;
-                colors[i][kernelSize] = colors[kernelSize][i] = ColorUtilities.moreTransparent(fillColor,
+                colors[i][kernelSize] = colors[kernelSize][i] = ColorUtils.moreTransparent(fillColor,
                         percent * 100);
             }
             colors[kernelSize][kernelSize] = fillColor;

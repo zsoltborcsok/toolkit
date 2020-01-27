@@ -1,6 +1,6 @@
 package org.nting.toolkit.ui.shape;
 
-import org.nting.toolkit.util.ColorUtilities;
+import org.nting.toolkit.util.ColorUtils;
 
 import com.google.common.base.MoreObjects;
 
@@ -51,7 +51,7 @@ public class CircleShadowShape extends BasicShape<CircleShadowShape> {
 
             for (int i = 0; i < kernelSize; i++) {
                 float percent = 1 - sumKernel[i] / (float) sum;
-                colors[i] = ColorUtilities.moreTransparent(fillColor, percent * 100);
+                colors[i] = ColorUtils.moreTransparent(fillColor, percent * 100);
             }
         }
 

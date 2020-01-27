@@ -5,7 +5,7 @@ import org.nting.data.Property;
 import playn.core.Color;
 import pythagoras.f.MathUtil;
 
-public class ColorUtilities {
+public class ColorUtils {
 
     public static boolean isTransparent(int color) {
         return 0 <= color && color < 0x01000000;

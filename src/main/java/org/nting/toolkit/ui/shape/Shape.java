@@ -1,6 +1,6 @@
 package org.nting.toolkit.ui.shape;
 
-import static org.nting.toolkit.util.ColorUtilities.asString;
+import static org.nting.toolkit.util.ColorUtils.asString;
 
 import com.google.common.base.MoreObjects;
 
