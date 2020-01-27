@@ -4,10 +4,23 @@ import org.nting.toolkit.Component;
 
 import com.google.common.base.MoreObjects;
 
+import playn.core.Mouse;
+
 public class MouseEvent extends InputEvent {
 
     public enum MouseButton {
-        BUTTON_LEFT, BUTTON_MIDDLE, BUTTON_RIGHT
+        BUTTON_LEFT, BUTTON_MIDDLE, BUTTON_RIGHT;
+
+        public static MouseButton fromInt(int button) {
+            if (button == Mouse.BUTTON_LEFT) {
+                return BUTTON_LEFT;
+            } else if (button == Mouse.BUTTON_MIDDLE) {
+                return BUTTON_MIDDLE;
+            } else if (button == Mouse.BUTTON_RIGHT) {
+                return BUTTON_RIGHT;
+            }
+            return null;
+        }
     }
 
     private float x;
