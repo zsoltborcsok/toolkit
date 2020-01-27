@@ -1,5 +1,7 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ToolkitServices.toolkitManager;
+
 import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -41,6 +43,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public final Property<Float> height = createProperty("height", 0f);
     public final Property<String> tooltipText = createProperty("tooltipText", null);
     public final Property<Boolean> visible = createProperty("visible", true);
+    public final Property<Boolean> focused = createReadOnlyProperty("focused", false);
     public final Property<Boolean> attached = createReadOnlyProperty("attached", false);
 
     private Pair<Alignment, Orientation> tooltipLocation = Pair.of(Alignment.TOP_LEFT, Orientation.VERTICAL);
@@ -278,6 +281,11 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     @Override
     public boolean isFocusNeutral() {
         return focusNeutral;
+    }
+
+    @Override
+    public void requestFocus() {
+        toolkitManager().keyDispatcher().requestFocus(this);
     }
 
     @Override
