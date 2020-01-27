@@ -2,8 +2,10 @@ package org.nting.toolkit.component;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 import org.nting.data.Property;
+import org.nting.data.Registration;
 import org.nting.data.bean.RuntimeBean;
 import org.nting.data.property.ListProperty;
 import org.nting.data.property.MapProperty;
@@ -13,6 +15,10 @@ import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.PaintableComponent;
 import org.nting.toolkit.data.Properties;
+import org.nting.toolkit.event.KeyEvent;
+import org.nting.toolkit.event.KeyListener;
+import org.nting.toolkit.event.MouseEvent;
+import org.nting.toolkit.event.MouseListener;
 import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.ComponentUI;
 
@@ -40,11 +46,14 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     private Pair<Alignment, Orientation> tooltipLocation = Pair.of(Alignment.TOP_LEFT, Orientation.VERTICAL);
 
     private Component parent;
-    private final List<Component> components = Lists.newArrayList();
+    private final List<Component> components = Lists.newLinkedList();
     private LayoutManager layoutManager;
     private final BiMap<Component, Object> layoutConstraintsMap = HashBiMap.create();
     @SuppressWarnings("rawtypes")
     private ComponentUI componentUI;
+
+    private final List<MouseListener> mouseListeners = Lists.newLinkedList();
+    private final List<KeyListener> keyListeners = Lists.newLinkedList();
 
     private boolean focusable = true;
     private boolean focusNeutral = false;
@@ -269,6 +278,37 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     @Override
     public boolean isFocusNeutral() {
         return focusNeutral;
+    }
+
+    @Override
+    public Registration addKeyListener(KeyListener keyListener) {
+        if (keyListener != null && !keyListeners.contains(keyListener)) {
+            keyListeners.add(keyListener);
+        }
+
+        return () -> keyListeners.remove(keyListener);
+    }
+
+    public void fireKeyEvent(BiConsumer<KeyListener, KeyEvent> keyListenerMethod, KeyEvent keyEvent) {
+        for (KeyListener listener : keyListeners) {
+            keyListenerMethod.accept(listener, keyEvent);
+            if (keyEvent.isConsumed()) {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public Registration addMouseListener(MouseListener mouseListener) {
+        if (mouseListener != null && !mouseListeners.contains(mouseListener)) {
+            mouseListeners.add(mouseListener);
+        }
+
+        return () -> mouseListeners.remove(mouseListener);
+    }
+
+    public <E extends MouseEvent> void fireMouseEvent(BiConsumer<MouseListener, E> mouseListenerMethod, E mouseEvent) {
+        mouseListeners.forEach(listener -> mouseListenerMethod.accept(listener, mouseEvent));
     }
 
     @Override

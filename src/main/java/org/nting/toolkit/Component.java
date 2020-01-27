@@ -1,10 +1,16 @@
 package org.nting.toolkit;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
+import org.nting.data.Registration;
 import org.nting.data.util.Pair;
 import org.nting.toolkit.component.Alignment;
 import org.nting.toolkit.component.Orientation;
+import org.nting.toolkit.event.KeyEvent;
+import org.nting.toolkit.event.KeyListener;
+import org.nting.toolkit.event.MouseEvent;
+import org.nting.toolkit.event.MouseListener;
 import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.ComponentUI;
 
@@ -110,6 +116,16 @@ public interface Component {
     boolean isFocusNeutral();
 
     void requestFocus();
+    // endregion
+
+    // region Event handling
+    Registration addKeyListener(KeyListener keyListener);
+
+    void fireKeyEvent(BiConsumer<KeyListener, KeyEvent> keyListenerMethod, KeyEvent keyEvent);
+
+    Registration addMouseListener(MouseListener mouseListener);
+
+    <E extends MouseEvent> void fireMouseEvent(BiConsumer<MouseListener, E> mouseListenerMethod, E mouseEvent);
     // endregion
 
     // region extra features
