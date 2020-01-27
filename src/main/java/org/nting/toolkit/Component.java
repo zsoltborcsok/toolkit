@@ -104,6 +104,10 @@ public interface Component {
 
     /** Indicates that the component needs repaint. */
     boolean isDirty();
+
+    default void update(float delta) {
+        getComponents().forEach(child -> child.update(delta));
+    }
     // endregion
 
     // region Focus
