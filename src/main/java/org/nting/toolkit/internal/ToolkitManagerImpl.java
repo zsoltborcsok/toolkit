@@ -1,9 +1,14 @@
 package org.nting.toolkit.internal;
 
+import static org.nting.toolkit.ToolkitServices.unitConverter;
+
 import java.util.List;
 
+import org.nting.toolkit.Component;
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.ToolkitRunnable;
+import org.nting.toolkit.component.Dialog;
+import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.event.ClipboardDispatcher;
 import org.nting.toolkit.event.KeyDispatcher;
 import org.nting.toolkit.event.MouseDispatcher;
@@ -44,11 +49,11 @@ public class ToolkitManagerImpl implements ToolkitManager {
         PlayN.clipboard().addPasteListener(clipboardDispatcher);
 
         canvasManager = new CanvasManager();
-        updateDluSize(false);
+        updateDluSize();
 
         PlayN.setResizeListener((width, height) -> {
             canvasManager.updateCanvas();
-            updateDluSize(false);
+            updateDluSize();
         });
     }
 
@@ -130,7 +135,39 @@ public class ToolkitManagerImpl implements ToolkitManager {
         }
     }
 
-    private void updateDluSize(boolean force) {
-        // TODO
+    private void updateDluSize() {
+        if (canvasManager.getCanvas() == null) {
+            return;
+        }
+
+        float width = canvasManager.getCanvas().width();
+        float height = canvasManager.getCanvas().height();
+
+        float xUnit = unitConverter().dialogUnitXAsPixel((Component) null);
+        float yUnit = unitConverter().dialogUnitYAsPixel((Component) null);
+
+        int dluSizeX = Math.round(width / xUnit);
+        int dluSizeY = Math.round(height / yUnit);
+
+        if (this.dluSizeX != dluSizeX || this.dluSizeY != dluSizeY) {
+            this.dluSizeX = dluSizeX;
+            this.dluSizeY = dluSizeY;
+
+            List<Popup> popups = Lists.newArrayList();
+            Component focusOwner = null;
+            if (root == null) {
+                root = new Root(canvasManager.getCanvas().width(), canvasManager.getCanvas().height());
+                // TODO tooltipManager().registerRoot(root);
+            } else {
+                focusOwner = keyDispatcher.getFocusOwner().getValue();
+                popups.addAll(root.popups());
+                root.popups().clear();
+                root.removeAllComponents();
+                root.setSize(width, height);
+            }
+            // TODO listener - toolkitApplicationService().updateForDluChange(false, dluSizeX, dluSizeY, root);
+            popups.stream().filter(Dialog.class::isInstance).forEach(popup -> root.popups().add(popup));
+            keyDispatcher.requestFocus(focusOwner);
+        }
     }
 }

@@ -65,6 +65,10 @@ public interface Component {
 
     void removeComponent(Component child);
 
+    default void removeAllComponents() {
+        getComponents().forEach(this::removeComponent);
+    }
+
     List<Component> getComponents();
 
     void setLayoutConstraint(Component child, Object constraints);

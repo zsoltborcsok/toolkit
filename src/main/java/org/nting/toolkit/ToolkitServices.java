@@ -3,6 +3,9 @@ package org.nting.toolkit;
 import java.util.Map;
 import java.util.Optional;
 
+import org.nting.toolkit.internal.ToolkitManagerImpl;
+import org.nting.toolkit.internal.UnitConverterImpl;
+
 import com.google.common.collect.Maps;
 
 import playn.core.PlayN;
@@ -10,6 +13,12 @@ import playn.core.PlayN;
 public class ToolkitServices {
 
     private static final Map<Class<?>, Object> services = Maps.newHashMap();
+
+    static {
+        setService(ToolkitManager.class, new ToolkitManagerImpl());
+        setService(Notifications.class, null); // TODO
+        setService(UnitConverter.class, new UnitConverterImpl());
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> T getService(Class<T> serviceType) {
@@ -41,5 +50,9 @@ public class ToolkitServices {
 
     public static Notifications notifications() {
         return getService(Notifications.class);
+    }
+
+    public static UnitConverter unitConverter() {
+        return getService(UnitConverter.class);
     }
 }

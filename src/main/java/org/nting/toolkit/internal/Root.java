@@ -132,6 +132,10 @@ public final class Root extends Panel {
         }
     }
 
+    public List<Popup> popups() {
+        return popups;
+    }
+
     @Override
     public void doLayout() {
         duringLayout = true;
