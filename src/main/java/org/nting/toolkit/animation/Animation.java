@@ -1,5 +1,7 @@
 package org.nting.toolkit.animation;
 
+import java.util.function.Consumer;
+
 /**
  * An Animation changes state over a specific duration. It is up to subclasses to implement the
  * {@link #updateState(int)} method to change the state as the Animation is updated over time. An Animation is updated
@@ -51,6 +53,18 @@ package org.nting.toolkit.animation;
  * Also, Animations can have an {@link Easing} to make the Animation look more smooth.
  */
 public abstract class Animation implements Behavior {
+
+    public static Animation createAnimation(int duration, Easing easing, int startDelay,
+            Consumer<Integer> updateState) {
+
+        return new Animation(duration, easing, startDelay) {
+
+            @Override
+            protected void updateState(int animationTime) {
+                updateState.accept(animationTime);
+            }
+        };
+    }
 
     /** Value indicating that the Animation loops forever. */
     public static final int LOOP_FOREVER = -1;
