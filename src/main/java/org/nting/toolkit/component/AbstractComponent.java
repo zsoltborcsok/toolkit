@@ -50,7 +50,9 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public final Property<Boolean> visible = createProperty("visible", true);
     public final Property<Boolean> focused = createReadOnlyProperty("focused", false);
     public final Property<Boolean> attached = createReadOnlyProperty("attached", false);
+    /** Feature is need to be activated first by {@link #activateMouseOver()} */
     public final Property<Boolean> mouseOver = new MouseOverProperty(this);
+    /** Feature is need to be activated first by {@link #activateMousePosition(boolean)} */
     public final Property<Point> mousePosition = new MousePositionProperty(this);
 
     private Pair<Alignment, Orientation> tooltipLocation = Pair.of(Alignment.TOP_LEFT, Orientation.VERTICAL);

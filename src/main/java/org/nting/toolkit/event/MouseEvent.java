@@ -82,8 +82,10 @@ public class MouseEvent extends InputEvent {
         return clickCount;
     }
 
-    public void setClickCount(int clickCount) {
-        this.clickCount = clickCount;
+    public void updateClickCount(MouseEvent lastMouseClick) {
+        if (getTime() <= lastMouseClick.getTime() + 500) {
+            clickCount = lastMouseClick.clickCount + 1;
+        }
     }
 
     public void translate(float x, float y) {

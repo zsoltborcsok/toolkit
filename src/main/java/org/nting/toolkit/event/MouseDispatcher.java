@@ -22,6 +22,7 @@ public class MouseDispatcher implements Listener {
     protected Component currentComponent;
     protected MouseEvent lastMousePress;
     protected MouseEvent lastMouseLongPress;
+    protected MouseEvent lastMouseClick;
     private ToolkitRunnable longPressRunnable;
     protected Component lastDraggedComponent; // Mouse drag should go to originally dragged component...
     protected final Point lastMousePosition = new Point(0, 0);
@@ -229,6 +230,9 @@ public class MouseDispatcher implements Listener {
                 if (deepestComponentAtLastMousePress == originalEvent.getSource()
                         && (lastMouseLongPress == null || lastMouseLongPress.getTime() != lastMousePress.getTime())) {
                     mouseEvent = originalEvent;
+                    if (lastMouseClick != null) {
+                        mouseEvent.updateClickCount(lastMouseClick);
+                    }
 
                     while (true) {
                         Component source = mouseEvent.getSource();
@@ -243,6 +247,7 @@ public class MouseDispatcher implements Listener {
                         }
                     }
 
+                    lastMouseClick = mouseEvent;
                     if (!lastMousePress.isConsumed() && !lastMouseRelease.isConsumed() && !mouseEvent.isConsumed()) {
                         toolkitManager().keyDispatcher().checkForcedFocus();
                     }
