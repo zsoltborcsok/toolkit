@@ -1,5 +1,8 @@
 package org.nting.toolkit;
 
+import static org.nting.toolkit.ui.ComponentUI.TRANSPARENT_COLOR;
+import static org.nting.toolkit.util.ColorUtils.isTransparent;
+
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -14,6 +17,7 @@ import org.nting.toolkit.event.MouseEvent;
 import org.nting.toolkit.event.MouseListener;
 import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.ComponentUI;
+import org.nting.toolkit.util.ColorUtils;
 
 import playn.core.Canvas;
 import pythagoras.f.Dimension;
@@ -92,6 +96,25 @@ public interface Component {
 
     @SuppressWarnings("rawtypes")
     ComponentUI getComponentUI();
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    default int getBackgroundColor() {
+        int backgroundColor = TRANSPARENT_COLOR;
+
+        ComponentUI componentUI = getComponentUI();
+        if (componentUI != null) {
+            backgroundColor = componentUI.getBackgroundColor(this);
+        }
+
+        Component parent = getParent();
+        if (parent != null && isTransparent(backgroundColor)) {
+            return parent.getBackgroundColor();
+        } else if (parent != null && backgroundColor >> 24 != 255) {
+            return ColorUtils.drawOver(parent.getBackgroundColor(), backgroundColor);
+        } else {
+            return backgroundColor;
+        }
+    }
 
     void setVisible(boolean visible);
 
