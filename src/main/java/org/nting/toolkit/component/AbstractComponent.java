@@ -18,6 +18,8 @@ import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.PaintableComponent;
 import org.nting.toolkit.animation.Behavior;
+import org.nting.toolkit.data.MouseOverProperty;
+import org.nting.toolkit.data.MousePositionProperty;
 import org.nting.toolkit.data.Properties;
 import org.nting.toolkit.event.KeyEvent;
 import org.nting.toolkit.event.KeyListener;
@@ -48,6 +50,8 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public final Property<Boolean> visible = createProperty("visible", true);
     public final Property<Boolean> focused = createReadOnlyProperty("focused", false);
     public final Property<Boolean> attached = createReadOnlyProperty("attached", false);
+    public final Property<Boolean> mouseOver = new MouseOverProperty(this);
+    public final Property<Point> mousePosition = new MousePositionProperty(this);
 
     private Pair<Alignment, Orientation> tooltipLocation = Pair.of(Alignment.TOP_LEFT, Orientation.VERTICAL);
 
@@ -346,6 +350,15 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
         if (mouseEvent.isConsumed()) {
             handleBehaviorsToRemove();
         }
+    }
+
+    public void activateMouseOver() {
+        properties.addCustomProperty("mouseOver", mouseOver);
+    }
+
+    public void activateMousePosition(boolean updateOnMouseDragged) {
+        ((MousePositionProperty) mousePosition).setUpdateOnMouseDragged(updateOnMouseDragged);
+        properties.addCustomProperty("mousePosition", mousePosition);
     }
 
     @Override
