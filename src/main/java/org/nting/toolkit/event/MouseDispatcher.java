@@ -137,7 +137,7 @@ public class MouseDispatcher implements Listener {
     protected void fireMousePressed(MouseEvent mouseEvent) {
         final MouseEvent originalEvent = new MouseEvent(mouseEvent);
         updatePopupsConsumesMousePressedAndClicked = false;
-        // TODO toolkitManager().root().updatePopups(mouseEvent.getSource());
+        toolkitManager().root().updatePopups(mouseEvent.getSource());
         if (updatePopupsConsumesMousePressedAndClicked) {
             return;
         }

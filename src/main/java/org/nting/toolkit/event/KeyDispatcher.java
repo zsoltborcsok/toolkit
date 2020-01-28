@@ -69,8 +69,8 @@ public class KeyDispatcher implements Listener {
         if (component == null) {
             previousFocusOwner = null;
         } else {
-            // TODO toolkitManager().root().updatePopups(component);
-            // TODO ToolkitUtils.scrollComponentToVisible(component);
+            toolkitManager().root().updatePopups(component);
+            ToolkitUtils.scrollComponentToVisible(component);
         }
     }
 
@@ -231,7 +231,7 @@ public class KeyDispatcher implements Listener {
     private Component getFocusCycleRoot(Component theFocusOwner) {
         Component focusCycleRoot = null;
         if (theFocusOwner != null) {
-            // TODO focusCycleRoot = ToolkitUtils.getPopupAncestor(theFocusOwner);
+            focusCycleRoot = ToolkitUtils.getPopupAncestor(theFocusOwner);
         }
         return focusCycleRoot == null ? toolkitManager().root() : focusCycleRoot;
     }

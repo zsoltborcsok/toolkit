@@ -1,5 +1,7 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ToolkitServices.toolkitManager;
+
 import java.util.List;
 
 import org.nting.data.Property;
@@ -47,7 +49,7 @@ public abstract class Popup extends AbstractComponent {
     }
 
     public void close() {
-        // TODO toolkitManager().root().setPopupVisible(this, false);
+        toolkitManager().root().setPopupVisible(this, false);
     }
 
     public void closed() {
