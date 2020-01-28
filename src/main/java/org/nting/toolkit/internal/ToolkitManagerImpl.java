@@ -2,7 +2,6 @@ package org.nting.toolkit.internal;
 
 import java.util.List;
 
-import org.nting.toolkit.Component;
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.ToolkitRunnable;
 import org.nting.toolkit.event.ClipboardDispatcher;
@@ -26,7 +25,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
     private final List<ToolkitRunnable> scheduledRunnables = Lists.newLinkedList();
     private final List<Runnable> afterPaintRunnables = Lists.newLinkedList();
 
-    private Component root;
+    private Root root;
     private int dluSizeX = -1;
     private int dluSizeY = -1;
 
@@ -65,7 +64,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
                 afterPaintRunnables.remove(i--);
             }
 
-            return true; // TODO root.canvasDirty;
+            return root.isCanvasDirty();
         } else {
             return false;
         }
@@ -103,7 +102,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
     }
 
     @Override
-    public Component root() {
+    public Root root() {
         return root;
     }
 

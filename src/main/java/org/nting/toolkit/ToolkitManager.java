@@ -3,6 +3,7 @@ package org.nting.toolkit;
 import org.nting.toolkit.event.ClipboardDispatcher;
 import org.nting.toolkit.event.KeyDispatcher;
 import org.nting.toolkit.event.MouseDispatcher;
+import org.nting.toolkit.internal.Root;
 
 public interface ToolkitManager {
 
@@ -19,7 +20,7 @@ public interface ToolkitManager {
 
     ClipboardDispatcher clipboardDispatcher();
 
-    Component root();
+    Root root();
 
     int getDluSizeX();
 

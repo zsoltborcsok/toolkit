@@ -38,4 +38,8 @@ public class ToolkitServices {
     public static ToolkitManager toolkitManager() {
         return getService(ToolkitManager.class);
     }
+
+    public static Notifications notifications() {
+        return getService(Notifications.class);
+    }
 }
