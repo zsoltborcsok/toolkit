@@ -29,7 +29,7 @@ public interface PaintableComponent extends Component {
                 if (isDirty()) {
                     doPaintComponent(canvas);
                     doLayout();
-                    getComponents().forEach(Component::dirty);
+                    getComponents().forEach(Component::repaint);
                 }
                 doPaintChildren(canvas);
                 if (isDirty()) {

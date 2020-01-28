@@ -76,6 +76,23 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     private final List<Behavior> behaviors = Lists.newLinkedList();
     private final List<Behavior> behaviorsToRemove = Lists.newLinkedList();
 
+    public AbstractComponent(String... reLayoutPropertyNames) {
+        properties.addValueChangeListener(event -> {
+            String propertyName = event.getPropertyName();
+            if ("visible".equals(propertyName)) {
+                reLayout();
+                return;
+            }
+            for (String reLayoutPropertyName : reLayoutPropertyNames) {
+                if (propertyName.equals(reLayoutPropertyName)) {
+                    reLayout();
+                    return;
+                }
+            }
+            repaint();
+        });
+    }
+
     @Override
     public void setSize(float width, float height) {
         this.width.setValue(width);
@@ -219,7 +236,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public void reLayout() {
         Component c = this;
         while (c != null) {
-            c.dirty();
+            c.repaint();
             c = c.getParent();
         }
     }
@@ -261,7 +278,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     }
 
     @Override
-    public void dirty() {
+    public void repaint() {
         dirty = true;
     }
 

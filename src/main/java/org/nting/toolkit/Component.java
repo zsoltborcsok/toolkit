@@ -98,7 +98,7 @@ public interface Component {
     boolean isVisible();
 
     /** Sets the dirty flag to true. */
-    void dirty();
+    void repaint();
 
     /** Sets the dirty flag to false. */
     void painted();
