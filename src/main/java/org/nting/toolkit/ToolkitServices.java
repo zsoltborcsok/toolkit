@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.nting.toolkit.internal.FontManagerImpl;
 import org.nting.toolkit.internal.ToolkitManagerImpl;
+import org.nting.toolkit.internal.TooltipManager;
 import org.nting.toolkit.internal.UnitConverterImpl;
 
 import com.google.common.collect.Maps;
@@ -20,6 +21,7 @@ public class ToolkitServices {
         setService(Notifications.class, null); // TODO
         setService(UnitConverter.class, new UnitConverterImpl());
         setService(FontManager.class, new FontManagerImpl());
+        setService(TooltipManager.class, new TooltipManager());
     }
 
     @SuppressWarnings("unchecked")
@@ -60,5 +62,9 @@ public class ToolkitServices {
 
     public static FontManager fontManager() {
         return getService(FontManager.class);
+    }
+
+    public static TooltipManager tooltipManager() {
+        return getService(TooltipManager.class);
     }
 }

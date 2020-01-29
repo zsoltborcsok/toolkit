@@ -1,5 +1,6 @@
 package org.nting.toolkit.internal;
 
+import static org.nting.toolkit.ToolkitServices.tooltipManager;
 import static org.nting.toolkit.ToolkitServices.unitConverter;
 
 import java.util.List;
@@ -157,7 +158,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
             Component focusOwner = null;
             if (root == null) {
                 root = new Root(canvasManager.getCanvas().width(), canvasManager.getCanvas().height());
-                // TODO tooltipManager().registerRoot(root);
+                tooltipManager().registerRoot(root);
             } else {
                 focusOwner = keyDispatcher.getFocusOwner().getValue();
                 popups.addAll(root.popups());
