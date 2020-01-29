@@ -1,5 +1,8 @@
 package org.nting.toolkit;
 
+import java.util.function.BiConsumer;
+
+import org.nting.data.Registration;
 import org.nting.toolkit.event.ClipboardDispatcher;
 import org.nting.toolkit.event.KeyDispatcher;
 import org.nting.toolkit.event.MouseDispatcher;
@@ -13,7 +16,7 @@ public interface ToolkitManager {
     void update(float delta);
     // endregion
 
-    // region Used internally by the Toolkit
+    // region Used related to the Toolkit
     MouseDispatcher mouseDispatcher();
 
     KeyDispatcher keyDispatcher();
@@ -29,5 +32,7 @@ public interface ToolkitManager {
     void schedule(ToolkitRunnable runnable);
 
     void invokeAfterRepaint(Runnable runnable);
+
+    Registration addDluChangeListener(BiConsumer<Integer, Integer> dluChangeListener);
     // endregion
 }

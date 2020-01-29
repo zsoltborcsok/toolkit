@@ -4,7 +4,9 @@ import static org.nting.toolkit.ToolkitServices.tooltipManager;
 import static org.nting.toolkit.ToolkitServices.unitConverter;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
+import org.nting.data.Registration;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.ToolkitRunnable;
@@ -30,6 +32,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
 
     private final List<ToolkitRunnable> scheduledRunnables = Lists.newLinkedList();
     private final List<Runnable> afterPaintRunnables = Lists.newLinkedList();
+    private final List<BiConsumer<Integer, Integer>> dluChangeListeners = Lists.newLinkedList();
 
     private Root root;
     private int dluSizeX = -1;
@@ -136,6 +139,15 @@ public class ToolkitManagerImpl implements ToolkitManager {
         }
     }
 
+    @Override
+    public Registration addDluChangeListener(BiConsumer<Integer, Integer> dluChangeListener) {
+        if (dluChangeListener != null && !dluChangeListeners.contains(dluChangeListener)) {
+            dluChangeListeners.add(dluChangeListener);
+        }
+
+        return () -> dluChangeListeners.remove(dluChangeListener);
+    }
+
     private void updateDluSize() {
         if (canvasManager.getCanvas() == null) {
             return;
@@ -166,7 +178,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
                 root.removeAllComponents();
                 root.setSize(width, height);
             }
-            // TODO listener - toolkitApplicationService().updateForDluChange(false, dluSizeX, dluSizeY, root);
+            dluChangeListeners.forEach(listener -> listener.accept(dluSizeX, dluSizeY));
             popups.stream().filter(popup -> popup instanceof Dialog).forEach(popup -> root.popups().add(popup));
             keyDispatcher.requestFocus(focusOwner);
         }
