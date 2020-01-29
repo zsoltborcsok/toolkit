@@ -3,6 +3,7 @@ package org.nting.toolkit;
 import java.util.Map;
 import java.util.Optional;
 
+import org.nting.toolkit.internal.FontManagerImpl;
 import org.nting.toolkit.internal.ToolkitManagerImpl;
 import org.nting.toolkit.internal.UnitConverterImpl;
 
@@ -18,7 +19,7 @@ public class ToolkitServices {
         setService(ToolkitManager.class, new ToolkitManagerImpl());
         setService(Notifications.class, null); // TODO
         setService(UnitConverter.class, new UnitConverterImpl());
-        setService(FontManager.class, null); // TODO
+        setService(FontManager.class, new FontManagerImpl());
     }
 
     @SuppressWarnings("unchecked")

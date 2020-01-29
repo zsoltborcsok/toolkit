@@ -38,7 +38,7 @@ public interface FontManager {
         }
     }
 
-    void setSize(int defaultSize);
+    void setSize(float defaultSize);
 
     Font getFont(FontSize fontSize);
 
