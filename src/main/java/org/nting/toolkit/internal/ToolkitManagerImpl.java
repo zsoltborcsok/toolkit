@@ -166,7 +166,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
                 root.setSize(width, height);
             }
             // TODO listener - toolkitApplicationService().updateForDluChange(false, dluSizeX, dluSizeY, root);
-            popups.stream().filter(Dialog.class::isInstance).forEach(popup -> root.popups().add(popup));
+            popups.stream().filter(popup -> popup instanceof Dialog).forEach(popup -> root.popups().add(popup));
             keyDispatcher.requestFocus(focusOwner);
         }
     }
