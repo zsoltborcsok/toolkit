@@ -1,8 +1,11 @@
 package org.nting.toolkit.internal;
 
+import static org.nting.toolkit.ToolkitServices.fontManager;
+
 import java.util.Map;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.FontManager;
 import org.nting.toolkit.UnitConverter;
 import org.nting.toolkit.component.AbstractComponent;
 
@@ -68,7 +71,7 @@ public class UnitConverterImpl implements UnitConverter {
     }
 
     private Font getDefaultFont() {
-        return null; // TODO
+        return fontManager().getFont(FontManager.FontSize.SMALL_FONT);
     }
 
     private Dimension getDialogBaseUnits(Font font) {

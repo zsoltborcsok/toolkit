@@ -18,6 +18,7 @@ public class ToolkitServices {
         setService(ToolkitManager.class, new ToolkitManagerImpl());
         setService(Notifications.class, null); // TODO
         setService(UnitConverter.class, new UnitConverterImpl());
+        setService(FontManager.class, null); // TODO
     }
 
     @SuppressWarnings("unchecked")
@@ -54,5 +55,9 @@ public class ToolkitServices {
 
     public static UnitConverter unitConverter() {
         return getService(UnitConverter.class);
+    }
+
+    public static FontManager fontManager() {
+        return getService(FontManager.class);
     }
 }
