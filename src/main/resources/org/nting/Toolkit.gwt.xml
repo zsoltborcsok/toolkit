@@ -1,0 +1,12 @@
+<module>
+    <inherits name='playn.PlayN'/>
+    <inherits name='org.nting.Assets'/>
+    <inherits name='com.google.common.collect.Collect'/>
+
+    <source path='bolts'/>
+    <source path='data'/>
+    <source path='toolkit'/>
+
+    <add-linker name="xsiframe"/>
+    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+</module>
