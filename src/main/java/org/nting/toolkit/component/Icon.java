@@ -11,4 +11,8 @@ public interface Icon {
     Content getContent(FontSize fontSize, Property<Integer> color);
 
     Content getContent(FontSize fontSize);
+
+    Content getContent(float size, int color);
+
+    Content getContent(float size);
 }
