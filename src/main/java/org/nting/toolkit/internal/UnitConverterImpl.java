@@ -61,7 +61,7 @@ public class UnitConverterImpl implements UnitConverter {
     private Dimension getDialogBaseUnits(Component component) {
         Font font = null;
         if (component instanceof AbstractComponent) {
-            font = ((AbstractComponent) component).getValue("FONT");
+            font = ((AbstractComponent) component).font.getValue();
         }
         if (font == null) {
             font = getDefaultFont();

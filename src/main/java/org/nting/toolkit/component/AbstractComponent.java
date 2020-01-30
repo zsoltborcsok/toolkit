@@ -34,6 +34,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import playn.core.Font;
 import playn.core.PlayN;
 import pythagoras.f.Dimension;
 import pythagoras.f.Point;
@@ -54,6 +55,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public final Property<Boolean> mouseOver = new MouseOverProperty(this);
     /** Feature is need to be activated first by {@link #activateMousePosition(boolean)} */
     public final Property<Point> mousePosition = new MousePositionProperty(this);
+    public final Property<Font> font = createProperty("font", null);
 
     private Pair<Alignment, Orientation> tooltipLocation = Pair.of(Alignment.TOP_LEFT, Orientation.VERTICAL);
 
