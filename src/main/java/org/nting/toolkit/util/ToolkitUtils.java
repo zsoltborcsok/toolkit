@@ -3,14 +3,21 @@ package org.nting.toolkit.util;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
 import static org.nting.toolkit.util.GwtCompatibleUtils.isAssignableFrom;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.nting.data.Property;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.FieldComponent;
+import org.nting.toolkit.component.LayeredPane;
+import org.nting.toolkit.component.Orientation;
 import org.nting.toolkit.component.Popup;
+import org.nting.toolkit.component.ScaledComponent;
 import org.nting.toolkit.component.ScrollComponent;
+import org.nting.toolkit.component.ScrollPane;
+import org.nting.toolkit.component.SplitPane;
+import org.nting.toolkit.ui.stone.Stone;
 
 import com.google.common.collect.Lists;
 
@@ -26,7 +33,45 @@ public class ToolkitUtils {
     }
 
     public static Component getDeepestComponentAt(Component component, float x, float y) {
-        return component; // TODO
+        Dimension size = component.getSize();
+        if (component.getParent() instanceof ScrollComponent) {
+            if (component.getParent() instanceof ScrollPane) {
+                size = ((ScrollPane) component.getParent()).getViewSize();
+            }
+            Point position = component.getPosition();
+            if (x < position.x || size.width - position.x <= x || y < position.y || size.height - position.y <= y) {
+                return null;
+            }
+        } else if (x < 0 || size.width <= x || y < 0 || size.height <= y) {
+            return null;
+        } else if (component instanceof SplitPane) {
+            SplitPane splitPane = (SplitPane) component;
+            float position = splitPane.orientation.getValue() == Orientation.HORIZONTAL ? x : y;
+            int dividerLocation = splitPane.getDividerLocation();
+            if (dividerLocation <= position && position <= dividerLocation + 8) {
+                return splitPane;
+            }
+        } else if (component instanceof ScaledComponent) {
+            ScaledComponent scaledComponent = (ScaledComponent) component;
+            x = x * scaledComponent.scaleX.getValue();
+            y = y * scaledComponent.scaleY.getValue();
+        }
+
+        Collection<Component> children = component instanceof LayeredPane
+                ? ((LayeredPane) component).getComponentsOnLayers()
+                : component.getComponents();
+        for (Component child : children) {
+            if (!child.isVisible())
+                continue;
+
+            Point childPosition = child.getPosition();
+            Component deepestChild = getDeepestComponentAt(child, x - childPosition.x, y - childPosition.y);
+            if (deepestChild != null) {
+                return deepestChild;
+            }
+        }
+
+        return component;
     }
 
     public static Component getRoot(Component component) {
@@ -144,25 +189,24 @@ public class ToolkitUtils {
         return null;
     }
 
-    // TODO
-    // public static LayeredPane getLayeredPaneAncestor(Component component) {
-    // for (Component parent = component.getParent(); parent != null; parent = parent.getParent()) {
-    // if (parent instanceof LayeredPane) {
-    // return (LayeredPane) parent;
-    // }
-    // }
-    // return null;
-    // }
-    //
-    // public static List<Stone> getAllStones(Stone root) {
-    // List<Stone> stones = Lists.newLinkedList();
-    // stones.add(root);
-    // for (int i = 0; i < stones.size(); i++) {
-    // stones.addAll(i + 1, stones.get(i).children());
-    // }
-    //
-    // return stones;
-    // }
+    public static LayeredPane getLayeredPaneAncestor(Component component) {
+        for (Component parent = component.getParent(); parent != null; parent = parent.getParent()) {
+            if (parent instanceof LayeredPane) {
+                return (LayeredPane) parent;
+            }
+        }
+        return null;
+    }
+
+    public static List<Stone> getAllStones(Stone root) {
+        List<Stone> stones = Lists.newLinkedList();
+        stones.add(root);
+        for (int i = 0; i < stones.size(); i++) {
+            stones.addAll(i + 1, stones.get(i).children());
+        }
+
+        return stones;
+    }
 
     public static <C extends Component> C getComponentById(Component parent, String... ids) {
         if (ids.length == 0) {
