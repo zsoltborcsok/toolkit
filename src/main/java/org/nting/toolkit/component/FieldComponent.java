@@ -12,5 +12,6 @@ public abstract class FieldComponent extends AbstractComponent {
         super(reLayoutPropertyNames);
     }
 
-    // TODO
+    // TODO...
+    public abstract void paste(String newText);
 }
