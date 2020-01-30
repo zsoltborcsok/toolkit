@@ -1,5 +1,7 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ui.stone.TextContentSingleLine.textContent;
+
 import org.nting.data.Property;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.event.ActionEvent;
@@ -8,21 +10,26 @@ import org.nting.toolkit.event.KeyEvent;
 import org.nting.toolkit.event.KeyListener;
 import org.nting.toolkit.event.MouseEvent;
 import org.nting.toolkit.event.MouseListener;
+import org.nting.toolkit.ui.stone.Content;
+import org.nting.toolkit.ui.stone.TextContent;
+import org.nting.toolkit.util.ToolkitUtils;
 
 import playn.core.Key;
 
 public class Button extends AbstractComponent {
 
+    public final Property<Integer> color = createProperty("color", 0xff222222);
     public final Property<String> text = createProperty("text", "");
-    // TODO public final Property<Content> image = createProperty("image", null);
+    public final Property<Content> image = createProperty("image", null);
     public final Property<Boolean> pressed = createReadOnlyProperty("pressed", false);
     public final Property<Boolean> enabled = createProperty("enabled", true);
+    public final Property<Integer> padding = createProperty("padding", 3);
 
     private final Actions actions = new Actions();
-    // TODO private final TextContent textContent = textContent(font, color, text);
+    private final TextContent textContent = textContent(font, color, text);
 
     public Button() {
-        super("text", "image", "pressed");
+        super("text", "image", "pressed", "padding");
 
         addMouseListener(new MouseHandler());
         addKeyListener(new KeyHandler());
@@ -32,26 +39,25 @@ public class Button extends AbstractComponent {
         return actions;
     }
 
-    // TODO
-    // public TextContent getTextContent() {
-    // return textContent;
-    // }
-    //
-    // public float getBaselinePosition() {
-    // return textContent.getPreferredSize().height - font.getValue().size() + padding.getValue();
-    // }
-    //
-    // @Override
-    // public int search(String searchText) {
-    // return textContent.search(searchText);
-    // }
-    //
-    // @Override
-    // public void highlightMatch(int index) {
-    // textContent.highlightMatch(index);
-    // repaint();
-    // ToolkitUtilities.scrollComponentToVisible(this);
-    // }
+    public TextContent getTextContent() {
+        return textContent;
+    }
+
+    public float getBaselinePosition() {
+        return textContent.getPreferredSize().height - font.getValue().size() + padding.getValue();
+    }
+
+    @Override
+    public int search(String searchText) {
+        return textContent.search(searchText);
+    }
+
+    @Override
+    public void highlightMatch(int index) {
+        textContent.highlightMatch(index);
+        repaint();
+        ToolkitUtils.scrollComponentToVisible(this);
+    }
 
     @Override
     public boolean isFocusable() {
