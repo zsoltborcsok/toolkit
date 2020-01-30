@@ -11,7 +11,7 @@ import org.nting.data.Property;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.AbstractComponent;
-import org.nting.toolkit.component.AbstractTextComponent;
+import org.nting.toolkit.component.FieldComponent;
 import org.nting.toolkit.util.ToolkitUtils;
 
 import playn.core.Key;
@@ -24,7 +24,7 @@ import playn.core.PlayN;
 public class KeyDispatcher implements Listener {
 
     private final Property<Component> focusOwner = new ObjectProperty<>(null);
-    private final Property<AbstractTextComponent> forcedFocusOwner = new ObjectProperty<>(null);
+    private final Property<FieldComponent> forcedFocusOwner = new ObjectProperty<>(null);
     private KeyEvent lastKeyPressed;
     private Component previousFocusOwner = null;
 
@@ -77,12 +77,12 @@ public class KeyDispatcher implements Listener {
     public void checkForcedFocus() {
         Component theFocusOwner = focusOwner.getValue();
         Component previousForcedFocusOwnerValue = forcedFocusOwner.getValue();
-        if (theFocusOwner instanceof AbstractTextComponent) {
+        if (theFocusOwner instanceof FieldComponent) {
             if (previousForcedFocusOwnerValue != theFocusOwner) {
                 if (previousForcedFocusOwnerValue != null) {
-                    forcedFocusOwner.setValue((AbstractTextComponent) theFocusOwner);
+                    forcedFocusOwner.setValue((FieldComponent) theFocusOwner);
                 } else if (previousFocusOwner == theFocusOwner) {
-                    forcedFocusOwner.setValue((AbstractTextComponent) theFocusOwner);
+                    forcedFocusOwner.setValue((FieldComponent) theFocusOwner);
                 } else {
                     forcedFocusOwner.setValue(null);
                 }
@@ -159,7 +159,7 @@ public class KeyDispatcher implements Listener {
         return focusOwner;
     }
 
-    public Property<AbstractTextComponent> getForcedFocusOwner() {
+    public Property<FieldComponent> getForcedFocusOwner() {
         return forcedFocusOwner;
     }
 

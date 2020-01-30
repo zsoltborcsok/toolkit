@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import org.nting.data.Property;
 import org.nting.toolkit.Component;
-import org.nting.toolkit.component.AbstractTextComponent;
+import org.nting.toolkit.component.FieldComponent;
 import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.ScrollComponent;
 
@@ -122,7 +122,7 @@ public class ToolkitUtils {
         return toolkitManager().keyDispatcher().getFocusOwner();
     }
 
-    public static Property<AbstractTextComponent> getForcedFocusOwner() {
+    public static Property<FieldComponent> getForcedFocusOwner() {
         return toolkitManager().keyDispatcher().getForcedFocusOwner();
     }
 
