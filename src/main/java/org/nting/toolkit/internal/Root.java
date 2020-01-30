@@ -13,6 +13,8 @@ import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.ScrollComponent;
 import org.nting.toolkit.component.TooltipPopup;
+import org.nting.toolkit.ui.shape.RectangleShape;
+import org.nting.toolkit.ui.stone.Background;
 import org.nting.toolkit.util.ToolkitUtils;
 
 import com.google.common.collect.Lists;
@@ -228,8 +230,8 @@ public final class Root extends Panel {
             if (!modalityPainted) { // paint modality curtain for dialogs
                 if (popup instanceof Dialog) {
                     Dialog dialog = (Dialog) popup;
-                    // new Background(new RectangleShape().fillColor(dialog.modalityCurtain.getValue())).paint(canvas,
-                    // dialog.getSize()); TODO
+                    new Background(new RectangleShape().fillColor(dialog.modalityCurtain.getValue())).paint(canvas,
+                            dialog.getSize());
                 }
 
                 int shadowSize = popup.shadowSize.getValue();

@@ -5,18 +5,14 @@ import org.nting.toolkit.layout.LayoutManager;
 
 import pythagoras.f.Rectangle;
 
-public class TooltipPopup extends StandardPopup {
+public class WindowPopup extends StandardPopup {
 
-    public TooltipPopup(Alignment alignment, Orientation orientation) {
+    public WindowPopup(Alignment alignment, Orientation orientation) {
         super(alignment, orientation);
-
-        setFocusable(false);
     }
 
-    public TooltipPopup(Alignment alignment, Orientation orientation, LayoutManager layoutManager) {
+    public WindowPopup(Alignment alignment, Orientation orientation, LayoutManager layoutManager) {
         super(alignment, orientation, layoutManager);
-
-        setFocusable(false);
     }
 
     @Override
