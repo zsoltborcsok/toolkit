@@ -59,7 +59,7 @@ public class TextContentSingleLine extends TextContent {
         bindings.add(Bindings.asBinding(text.addValueChangeListener(valueChangeListener)));
     }
 
-    private static TextLayouts createSingleTextLayouts(Font font, String text) {
+    private TextLayouts createSingleTextLayouts(Font font, String text) {
         if (!Strings.isNullOrEmpty(text)) {
             return new TextLayouts(text, font, PlayN.graphics().layoutText(text,
                     new TextFormat(font, Float.MAX_VALUE, TextFormat.Alignment.LEFT)));

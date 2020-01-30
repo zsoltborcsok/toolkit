@@ -264,7 +264,7 @@ public class TextContent extends Content {
         return textLayouts.layouts;
     }
 
-    private static TextLayouts createTextLayouts(Font font, String text, float wrapWidth) {
+    private TextLayouts createTextLayouts(Font font, String text, float wrapWidth) {
         if (!Strings.isNullOrEmpty(text)) {
             return new TextLayouts(text, font, PlayN.graphics().layoutText(text,
                     new TextFormat(font, Math.max(0, wrapWidth), Alignment.LEFT), new TextWrap(wrapWidth)));

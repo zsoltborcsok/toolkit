@@ -52,7 +52,7 @@ public abstract class ScrollComponent extends AbstractComponent {
 
     protected abstract Dimension getViewPrefSize();
 
-    private static float shrinkIntervalToZero(float minValue, float maxValue, float value) {
+    private float shrinkIntervalToZero(float minValue, float maxValue, float value) {
         if (value < minValue) {
             return value - minValue;
         } else if (maxValue < value) {
