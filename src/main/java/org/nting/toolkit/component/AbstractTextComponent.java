@@ -15,6 +15,7 @@ import org.nting.toolkit.event.MouseListener;
 
 public abstract class AbstractTextComponent extends AbstractComponent {
 
+    public final Property<Integer> color = createProperty("color", 0xff222222);
     public final Property<String> text = createProperty("text", "");
     public final Property<String> selectedText;
 
