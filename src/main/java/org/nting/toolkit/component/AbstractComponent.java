@@ -6,6 +6,7 @@ import static org.nting.toolkit.ToolkitServices.toolkitManager;
 import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import org.nting.data.Property;
 import org.nting.data.Registration;
@@ -469,6 +470,13 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public <COMPONENT extends AbstractComponent> COMPONENT set(String propertyName, Object value) {
         getProperty(propertyName).setValue(value);
         return (COMPONENT) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <COMPONENT extends AbstractComponent> COMPONENT process(Consumer<COMPONENT> consumer) {
+        COMPONENT component = (COMPONENT) this;
+        consumer.accept(component);
+        return component;
     }
 
     public Registration addValueChangeListener(ValueChangeListener<Object> listener) {
