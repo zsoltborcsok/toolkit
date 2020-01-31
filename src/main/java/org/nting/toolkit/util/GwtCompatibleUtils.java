@@ -1,9 +1,9 @@
 package org.nting.toolkit.util;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -128,24 +128,25 @@ public class GwtCompatibleUtils {
     }
 
     public static String convertStreamToString(InputStream inputStream) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        try { // It seems GWT does not support try-with-resources
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line).append("\n");
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        try {
+            byte[] data = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, bytesRead);
             }
-            return stringBuilder.toString();
+            buffer.flush();
         } catch (IOException e) {
             PlayN.log(GwtCompatibleUtils.class).error(e.getMessage(), e);
-            return "";
         } finally {
             try {
-                reader.close();
+                inputStream.close();
             } catch (IOException e) {
                 PlayN.log(GwtCompatibleUtils.class).error(e.getMessage(), e);
             }
         }
+
+        return new String(buffer.toByteArray(), StandardCharsets.UTF_8).replace("\r\n", "\n").replace('\r', '\n');
     }
 
     @SuppressWarnings("unchecked")
