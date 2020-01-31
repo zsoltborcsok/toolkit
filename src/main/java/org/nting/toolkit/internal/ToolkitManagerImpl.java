@@ -93,6 +93,8 @@ public class ToolkitManagerImpl implements ToolkitManager {
                 runnable.update(delta);
             }
         }
+
+        tooltipManager().update(delta);
     }
 
     @Override
