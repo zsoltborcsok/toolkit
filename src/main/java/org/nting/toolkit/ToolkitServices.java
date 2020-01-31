@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.nting.toolkit.internal.FontManagerImpl;
+import org.nting.toolkit.internal.NotificationsImpl;
 import org.nting.toolkit.internal.ToolkitManagerImpl;
 import org.nting.toolkit.internal.TooltipManager;
 import org.nting.toolkit.internal.UnitConverterImpl;
@@ -18,7 +19,7 @@ public class ToolkitServices {
 
     static {
         setService(ToolkitManager.class, new ToolkitManagerImpl());
-        setService(Notifications.class, null); // TODO
+        setService(Notifications.class, new NotificationsImpl());
         setService(UnitConverter.class, new UnitConverterImpl());
         setService(FontManager.class, new FontManagerImpl());
         setService(TooltipManager.class, new TooltipManager());
