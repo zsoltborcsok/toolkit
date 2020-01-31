@@ -6,6 +6,7 @@ import static org.nting.toolkit.ToolkitServices.toolkitManager;
 
 import java.util.List;
 
+import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.Notifications;
 import org.nting.toolkit.component.Dialog;
@@ -35,7 +36,7 @@ public final class Root extends Panel {
     public Root(float width, float height) {
         setSize(width, height);
 
-        attached.setValue(true);
+        ((ObjectProperty<Boolean>) this.attached).forceValue(true);
         if (renderingOptimisation()) {
             toolkitManager().schedule(createLoopedRunnable(-1, 100, this::repaint));
         }
