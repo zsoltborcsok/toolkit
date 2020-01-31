@@ -2,16 +2,19 @@ package org.nting.toolkit.component;
 
 import static org.nting.toolkit.ToolkitRunnable.createLoopedRunnable;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
+import static org.nting.toolkit.util.GwtCompatibleUtils.collectImplementedTypes;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import org.nting.data.Property;
 import org.nting.data.Registration;
 import org.nting.data.ValueChangeListener;
 import org.nting.data.bean.RuntimeBean;
+import org.nting.data.property.BeanProperty;
 import org.nting.data.property.ListProperty;
 import org.nting.data.property.MapProperty;
 import org.nting.data.property.ObjectProperty;
@@ -94,6 +97,22 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
                 }
             }
             repaint();
+        });
+
+        injectStyleProperties();
+    }
+
+    /** Inject style properties at the latest time; toolkitManager() is properly initialized by then. */
+    private void injectStyleProperties() {
+        createBeanProperty("componentUI", AbstractComponent::getComponentUI, AbstractComponent::setComponentUI);
+
+        Registration[] registration = new Registration[1];
+        registration[0] = attached.addValueChangeListener(event -> {
+            if (event.getValue()) {
+                collectImplementedTypes(this)
+                        .forEach(type -> toolkitManager().getStyleInjector().injectProperties(this, type.getName()));
+                registration[0].remove();
+            }
         });
     }
 
@@ -432,6 +451,11 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
         ObjectProperty<T> property = properties.addObjectProperty(propertyId, initialValue);
         property.setReadOnly(true);
         return property;
+    }
+
+    public final <T> Property<T> createBeanProperty(Object propertyId, Function<AbstractComponent, T> getter,
+            BiConsumer<AbstractComponent, T> setter) {
+        return properties.addCustomProperty(propertyId, new BeanProperty<>(this, getter, setter));
     }
 
     @SafeVarargs

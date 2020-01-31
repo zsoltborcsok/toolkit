@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 import org.nting.data.Registration;
+import org.nting.data.inject.Injector;
+import org.nting.data.inject.InjectorFactory;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.ToolkitRunnable;
@@ -16,6 +18,7 @@ import org.nting.toolkit.event.ClipboardDispatcher;
 import org.nting.toolkit.event.KeyDispatcher;
 import org.nting.toolkit.event.MouseDispatcher;
 import org.nting.toolkit.event.PointerDispatcher;
+import org.nting.toolkit.ui.style.AbstractStyleModule;
 
 import com.google.common.collect.Lists;
 
@@ -37,6 +40,8 @@ public class ToolkitManagerImpl implements ToolkitManager {
     private Root root;
     private int dluSizeX = -1;
     private int dluSizeY = -1;
+
+    private Injector styleInjector;
 
     public ToolkitManagerImpl() {
         keyDispatcher = new KeyDispatcher();
@@ -116,6 +121,18 @@ public class ToolkitManagerImpl implements ToolkitManager {
     }
 
     @Override
+    public void setStyleModule(AbstractStyleModule styleModule) {
+        styleInjector = InjectorFactory.createInjector(styleModule);
+
+        updateDluSize();
+    }
+
+    @Override
+    public Injector getStyleInjector() {
+        return styleInjector;
+    }
+
+    @Override
     public int getDluSizeX() {
         return dluSizeX;
     }
@@ -149,7 +166,7 @@ public class ToolkitManagerImpl implements ToolkitManager {
     }
 
     private void updateDluSize() {
-        if (canvasManager.getCanvas() == null) {
+        if (canvasManager.getCanvas() == null || styleInjector == null) {
             return;
         }
 

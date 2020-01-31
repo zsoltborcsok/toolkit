@@ -27,7 +27,7 @@ public class GwtCompatibleUtils {
             return true;
         }
 
-        // Do not use -XdisableClassMetadata compiler flag! (What to do with InjectorImpl?)
+        // Do not use -XdisableClassMetadata compiler flag!
         // Or set <disableClassMetadata> to false in maven plugin configuration.
         Class<?> currentSuperClass = checkedType.getSuperclass();
         while (currentSuperClass != null) {
@@ -37,6 +37,19 @@ public class GwtCompatibleUtils {
             currentSuperClass = currentSuperClass.getSuperclass();
         }
         return false;
+    }
+
+    /** Returns all the implemented classes, in the order as they extend each other. */
+    public static List<Class<?>> collectImplementedTypes(Object object) {
+        List<Class<?>> types = Lists.newLinkedList();
+
+        Class<?> type = object.getClass();
+        while (type != null) {
+            types.add(0, type);
+            type = type.getSuperclass();
+        }
+
+        return types;
     }
 
     public static String getSimpleName(Class<?> clazz) {
