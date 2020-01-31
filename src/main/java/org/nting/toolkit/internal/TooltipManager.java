@@ -1,17 +1,28 @@
 package org.nting.toolkit.internal;
 
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
+import static org.nting.toolkit.ToolkitServices.unitConverter;
+import static org.nting.toolkit.layout.FormLayout.xy;
 
+import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.component.Alignment;
+import org.nting.toolkit.component.Label;
+import org.nting.toolkit.component.MultiLineLabel;
+import org.nting.toolkit.component.Orientation;
 import org.nting.toolkit.component.TooltipPopup;
 import org.nting.toolkit.event.KeyEvent;
 import org.nting.toolkit.event.KeyListener;
 import org.nting.toolkit.event.MouseEvent;
 import org.nting.toolkit.event.MouseListener;
 import org.nting.toolkit.event.MouseMotionEvent;
+import org.nting.toolkit.layout.FormLayout;
 import org.nting.toolkit.util.ToolkitUtils;
 
+import com.google.common.base.Strings;
+
 import playn.core.Key;
+import pythagoras.f.MathUtil;
 import pythagoras.f.Point;
 import pythagoras.f.Rectangle;
 
@@ -60,29 +71,13 @@ public class TooltipManager {
     }
 
     private void showToolTip() {
-        // TODO
-        // String tooltipText = tooltipComponent.getTooltipText();
-        // if (!Strings.isNullOrEmpty(tooltipText)) {
-        // showToolTip(tooltipText, tooltipComponent);
-        // } else {
-        // Pair<String, Rectangle> advancedTooltip = tooltipComponent.getAdvancedTooltip(tooltipLocation);
-        // if (advancedTooltip != null) {
-        // tooltipText = advancedTooltip.getFirst();
-        // Rectangle rectangle = advancedTooltip.getSecond();
-        // Point rootPosition = ToolkitUtils.getRootPosition(tooltipComponent);
-        // rectangle.translate(rootPosition.x, rootPosition.y);
-        //
-        // if (tooltipText.contains("\n")) {
-        // showToolTip(tooltipText, rectangle, true);
-        // } else {
-        // float tooltipMaxWidth = getTooltipMaxWidth(rectangle);
-        // float prefWidth = new LabelBuilder().text(tooltipText).component.getPreferredSize().width;
-        // showToolTip(tooltipText, rectangle, tooltipMaxWidth <= prefWidth);
-        // }
-        // }
-        // }
-        //
-        // dismissTime = DISMISS_DELAY;
+        String tooltipText = tooltipComponent.getTooltipText();
+        if (!Strings.isNullOrEmpty(tooltipText)) {
+            showToolTip(tooltipText, tooltipComponent);
+        }
+        // TODO support different tooltips of the same component based on the 'tooltipLocation'
+
+        dismissTime = DISMISS_DELAY;
     }
 
     private void showToolTip(String tooltipText, Component component) {
@@ -91,25 +86,23 @@ public class TooltipManager {
     }
 
     private void showToolTip(String tooltipText, Rectangle rectangle, boolean multiLine) {
-        // TODO
-        // if (!multiLine) {
-        // ContainerBuilder<TooltipPopup> tooltipPopupBuilder = new ContainerBuilder<>(new TooltipPopup(
-        // tooltipComponent.getTooltipLocation(), new FormLayout("2dlu, pref, 2dlu", "1dlu, pref, 1dlu")));
-        // tooltipPopupBuilder.addLabel(xy(1, 1)).text(tooltipText).color(tooltipPopupBuilder.component.color);
-        // tooltipPopup = tooltipPopupBuilder.component;
-        // tooltipPopup.showRelativeTo(rectangle);
-        // } else {
-        // int tooltipMaxWidth = MathUtil.ifloor(getTooltipMaxWidth(rectangle))
-        // - unitConverter().dialogUnitXAsPixel(4, null) - 1;
-        // ContainerBuilder<TooltipPopup> tooltipPopupBuilder = new ContainerBuilder<>(
-        // new TooltipPopup(tooltipComponent.getTooltipLocation(),
-        // new FormLayout("2dlu, " + tooltipMaxWidth + "px, 2dlu", "2dlu, min(pref;80dlu), 2dlu")));
-        // // In order to have proper preferred size for the popup, we need to set the MultiLineLabel width in advance!
-        // tooltipPopupBuilder.addMultiLineLabel(xy(1, 1)).text(tooltipText)
-        // .color(tooltipPopupBuilder.component.color).component.width.setValue((float) tooltipMaxWidth);
-        // tooltipPopup = tooltipPopupBuilder.component;
-        // tooltipPopup.showRelativeTo(rectangle);
-        // }
+        Pair<Alignment, Orientation> tooltipLocation = tooltipComponent.getTooltipLocation();
+        if (!multiLine) {
+            TooltipPopup tooltipPopup = new TooltipPopup(tooltipLocation.first, tooltipLocation.second,
+                    new FormLayout("2dlu, pref, 2dlu", "1dlu, pref, 1dlu"));
+            tooltipPopup.addComponent(new Label().set("text", tooltipText).set("color", tooltipPopup.getValue("color")),
+                    xy(1, 1));
+            tooltipPopup.showRelativeTo(rectangle);
+        } else {
+            int tooltipMaxWidth = MathUtil.ifloor(getTooltipMaxWidth(rectangle))
+                    - unitConverter().dialogUnitXAsPixel(4, null) - 1;
+            TooltipPopup tooltipPopup = new TooltipPopup(tooltipLocation.first, tooltipLocation.second,
+                    new FormLayout("2dlu, " + tooltipMaxWidth + "px, 2dlu", "2dlu, min(pref;80dlu), 2dlu"));
+            // In order to have proper preferred size for the popup, we need to set the MultiLineLabel width in advance!
+            tooltipPopup.addComponent(new MultiLineLabel().set("text", tooltipText)
+                    .set("color", tooltipPopup.getValue("color")).set("width", (float) tooltipMaxWidth), xy(1, 1));
+            tooltipPopup.showRelativeTo(rectangle);
+        }
     }
 
     private void closeToolTip() {
