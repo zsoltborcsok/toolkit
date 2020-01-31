@@ -42,6 +42,6 @@ public class VerticalContents extends Content {
 
     @Override
     public List<Stone> children() {
-        return Lists.<Stone> newArrayList(topContent, bottomContent);
+        return Lists.newArrayList(topContent, bottomContent);
     }
 }

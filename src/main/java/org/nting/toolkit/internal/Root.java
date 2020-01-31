@@ -52,7 +52,7 @@ public final class Root extends Panel {
         if (duringLayout) {
             return super.getComponents();
         } else {
-            List<Component> components = Lists.<Component> newArrayList(popups);
+            List<Component> components = Lists.newArrayList(popups);
             components.add(notifications());
             components.addAll(super.getComponents());
             return components;
@@ -166,12 +166,7 @@ public final class Root extends Panel {
 
                 if (hasPopups && component.isDirty() && component != this) {
                     // It's needed to repaint the whole root for properly paint the popups by doPaintForeground(...)
-                    toolkitManager().invokeAfterRepaint(new Runnable() {
-                        @Override
-                        public void run() {
-                            repaint();
-                        }
-                    });
+                    toolkitManager().invokeAfterRepaint(this::repaint);
                     break;
                 } else if (component.isDirty()) {
                     canvas.setFillColor(component.getBackgroundColor());

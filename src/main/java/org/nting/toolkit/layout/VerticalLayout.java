@@ -25,7 +25,7 @@ public class VerticalLayout implements LayoutManager {
         float height = 0;
 
         List<Component> children = component.getComponents();
-        List<Float> preferredHeights = new ArrayList<Float>(children.size());
+        List<Float> preferredHeights = new ArrayList<>(children.size());
         for (Component child : children) {
             Dimension preferredSize = child.getPreferredSize();
 

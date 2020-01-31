@@ -43,6 +43,6 @@ public class HorizontalContentsRightAligned extends Content {
 
     @Override
     public List<Stone> children() {
-        return Lists.<Stone> newArrayList(leftContent, rightContent);
+        return Lists.newArrayList(leftContent, rightContent);
     }
 }

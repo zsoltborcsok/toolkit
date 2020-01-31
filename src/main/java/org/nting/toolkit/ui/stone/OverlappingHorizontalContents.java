@@ -45,6 +45,6 @@ public class OverlappingHorizontalContents extends Content {
 
     @Override
     public List<Stone> children() {
-        return Lists.<Stone> newArrayList(contentA, contentB);
+        return Lists.newArrayList(contentA, contentB);
     }
 }

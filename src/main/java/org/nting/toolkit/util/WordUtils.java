@@ -17,7 +17,7 @@ public class WordUtils {
         List<String> words = Lists.newArrayList();
 
         for (String word : PlayN.regularExpression().allMatches(WORDS, text)) {
-            if (word.startsWith(".") || word.startsWith("\'")) {
+            if (word.startsWith(".") || word.startsWith("'")) {
                 word = word.substring(1);
             }
             word = word.toLowerCase();

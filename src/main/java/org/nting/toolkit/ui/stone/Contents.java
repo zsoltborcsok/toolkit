@@ -34,6 +34,6 @@ public class Contents extends Content {
 
     @Override
     public List<Stone> children() {
-        return Lists.<Stone> newArrayList(contents);
+        return Lists.newArrayList(contents);
     }
 }

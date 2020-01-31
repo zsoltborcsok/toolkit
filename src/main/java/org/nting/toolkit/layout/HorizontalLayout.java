@@ -31,7 +31,7 @@ public class HorizontalLayout implements LayoutManager {
         float height = 0;
 
         List<Component> children = component.getComponents();
-        List<Float> preferredWidths = new ArrayList<Float>(children.size());
+        List<Float> preferredWidths = new ArrayList<>(children.size());
         for (Component child : children) {
             Dimension preferredSize = child.getPreferredSize();
 

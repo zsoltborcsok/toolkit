@@ -5,8 +5,6 @@ import static org.nting.toolkit.layout.FormLayout.xy;
 import java.util.List;
 
 import org.nting.data.Property;
-import org.nting.data.ValueChangeEvent;
-import org.nting.data.ValueChangeListener;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.animation.Animation;
 import org.nting.toolkit.animation.Flicker;
@@ -64,9 +62,9 @@ public class ScrollPane extends ScrollComponent {
         this.hsbPolicy.setValue(hsbPolicy);
         this.usePaddingForAntialias.setValue(usePaddingForAntialias);
 
-        vsbVisibleAnimation = new Tween<Boolean>(vsbVisible, true, false, 6000);
+        vsbVisibleAnimation = new Tween<>(vsbVisible, true, false, 6000);
         vsbVisibleAnimation.fastForward();
-        hsbVisibleAnimation = new Tween<Boolean>(hsbVisible, true, false, 6000);
+        hsbVisibleAnimation = new Tween<>(hsbVisible, true, false, 6000);
         hsbVisibleAnimation.fastForward();
         rewindScrollBarVisibilityAnimations();
 
@@ -421,22 +419,16 @@ public class ScrollPane extends ScrollComponent {
                 float velocity = diff.y / duration;
                 final Point originalViewPosition = ScrollPane.this.viewPosition.clone();
 
-                flicker.flick(velocity, new ValueChangeListener<Float>() {
-                    @Override
-                    public void valueChange(ValueChangeEvent<Float> event) {
-                        setViewPosition(originalViewPosition.add(0, MathUtil.round(event.getValue())));
-                    }
-                }).start(ScrollPane.this, true);
+                flicker.flick(velocity,
+                        event -> setViewPosition(originalViewPosition.add(0, MathUtil.round(event.getValue()))))
+                        .start(ScrollPane.this, true);
             } else if (translationY < translationX && isHorizontalScrollSupported()) {
                 float velocity = diff.x / duration;
                 final Point originalViewPosition = ScrollPane.this.viewPosition.clone();
 
-                flicker.flick(velocity, new ValueChangeListener<Float>() {
-                    @Override
-                    public void valueChange(ValueChangeEvent<Float> event) {
-                        setViewPosition(originalViewPosition.add(MathUtil.round(event.getValue()), 0));
-                    }
-                }).start(ScrollPane.this, true);
+                flicker.flick(velocity,
+                        event -> setViewPosition(originalViewPosition.add(MathUtil.round(event.getValue()), 0)))
+                        .start(ScrollPane.this, true);
             }
         }
 

@@ -10,7 +10,7 @@ import org.nting.toolkit.animation.Easing.EasingType;
 public class TweenBuilder<T> {
 
     public static <T> TweenBuilder<T> tween(T fromValue, T toValue, int duration) {
-        return new TweenBuilder<T>(fromValue, toValue, duration);
+        return new TweenBuilder<>(fromValue, toValue, duration);
     }
 
     private Property<T> property;
@@ -33,7 +33,7 @@ public class TweenBuilder<T> {
     }
 
     public TweenBuilder<T> tweenChangeListener(ValueChangeListener<T> tweenChangeListener) {
-        property = new ObjectProperty<T>(fromValue);
+        property = new ObjectProperty<>(fromValue);
         property.addValueChangeListener(tweenChangeListener);
         return this;
     }

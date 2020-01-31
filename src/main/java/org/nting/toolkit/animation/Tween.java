@@ -27,7 +27,7 @@ public class Tween<T> extends Animation {
         this.toValue = toValue;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "RedundantCast" })
     @Override
     protected void updateState(int animationTime) {
         if (getDuration() == 0) {

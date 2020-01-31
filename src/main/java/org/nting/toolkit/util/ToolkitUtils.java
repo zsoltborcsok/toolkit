@@ -208,6 +208,7 @@ public class ToolkitUtils {
         return stones;
     }
 
+    @SuppressWarnings("unchecked")
     public static <C extends Component> C getComponentById(Component parent, String... ids) {
         if (ids.length == 0) {
             return null;

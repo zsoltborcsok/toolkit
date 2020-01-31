@@ -32,6 +32,6 @@ public class ContentAndBackground extends Content {
 
     @Override
     public List<Stone> children() {
-        return Lists.<Stone> newArrayList(background, stone);
+        return Lists.newArrayList(background, stone);
     }
 }
