@@ -1,5 +1,7 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ui.Colors.TRANSPARENT;
+
 import org.nting.data.Property;
 import org.nting.toolkit.event.ActionEvent;
 import org.nting.toolkit.event.KeyEvent;
@@ -16,7 +18,7 @@ public class Panel extends AbstractComponent {
 
     /** If you define backgroundImage, then backgroundColor is ignored */
     public final Property<Image> backgroundImage = createProperty("backgroundImage", null);
-    public final Property<Integer> backgroundColor = createProperty("backgroundColor", 0x00ffffff);
+    public final Property<Integer> backgroundColor = createProperty("backgroundColor", TRANSPARENT);
 
     private Button defaultButton;
 

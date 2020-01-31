@@ -1,5 +1,7 @@
 package org.nting.toolkit.ui.shape;
 
+import static org.nting.toolkit.ui.Colors.WHITE;
+
 import com.google.common.base.MoreObjects;
 
 import playn.core.Canvas;
@@ -21,7 +23,7 @@ public class LineShape extends BasicShape<LineShape> {
         this.x2 = x2;
         this.y2 = y2;
 
-        strokeColor = 0xffffffff;
+        strokeColor = WHITE;
     }
 
     public LineShape lineCap(Canvas.LineCap lineCap) {

@@ -1,5 +1,6 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ui.Colors.DARK_GREY;
 import static org.nting.toolkit.ui.stone.TextContentSingleLine.textContent;
 
 import org.nting.data.Property;
@@ -18,7 +19,7 @@ import playn.core.Key;
 
 public class Button extends AbstractComponent {
 
-    public final Property<Integer> color = createProperty("color", 0xff222222);
+    public final Property<Integer> color = createProperty("color", DARK_GREY);
     public final Property<String> text = createProperty("text", "");
     public final Property<Content> image = createProperty("image", null);
     public final Property<Boolean> pressed = createReadOnlyProperty("pressed", false);

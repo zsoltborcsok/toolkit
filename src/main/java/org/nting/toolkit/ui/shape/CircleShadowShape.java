@@ -1,5 +1,7 @@
 package org.nting.toolkit.ui.shape;
 
+import static org.nting.toolkit.ui.Colors.TRANSPARENT;
+
 import org.nting.toolkit.util.ColorUtils;
 
 import com.google.common.base.MoreObjects;
@@ -26,7 +28,7 @@ public class CircleShadowShape extends BasicShape<CircleShadowShape> {
     }
 
     public CircleShadowShape(int spread, int offsetX, int offsetY, int blur) {
-        this(spread, offsetX, offsetY, blur, 0xFF000000);
+        this(spread, offsetX, offsetY, blur, TRANSPARENT);
     }
 
     public CircleShadowShape(int spread, int offsetX, int offsetY, int blur, int fillColor) {

@@ -1,5 +1,7 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ui.Colors.DARK_GREY;
+
 import org.nting.data.Property;
 import org.nting.toolkit.ui.ComponentUI;
 
@@ -8,7 +10,7 @@ import pythagoras.f.Dimension;
 
 public class Separator extends AbstractComponent {
 
-    public final Property<Integer> color = createProperty("color", 0xff222222);
+    public final Property<Integer> color = createProperty("color", DARK_GREY);
     public final Property<Orientation> orientation = createProperty("orientation", null);
     public final Property<Integer> margin = createProperty("margin", 0);
     public final Property<Integer> padding = createProperty("padding", 0);

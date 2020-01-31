@@ -1,5 +1,7 @@
 package org.nting.toolkit.ui.shape;
 
+import static org.nting.toolkit.ui.Colors.TRANSPARENT;
+
 import org.nting.toolkit.util.ColorUtils;
 
 import com.google.common.base.MoreObjects;
@@ -26,7 +28,7 @@ public class RectangleShadowShape extends BasicShape<RectangleShadowShape> {
     }
 
     public RectangleShadowShape(int offsetX, int offsetY, int blur, int spread) {
-        this(offsetX, offsetY, blur, spread, 0xFF000000);
+        this(offsetX, offsetY, blur, spread, TRANSPARENT);
     }
 
     public RectangleShadowShape(int offsetX, int offsetY, int blur, int spread, int fillColor) {
@@ -59,8 +61,7 @@ public class RectangleShadowShape extends BasicShape<RectangleShadowShape> {
             }
             for (int i = 0; i < kernelSize; i++) {
                 float percent = 1 - sumKernel[i][kernelSize - 1] / (float) sum;
-                colors[i][kernelSize] = colors[kernelSize][i] = ColorUtils.moreTransparent(fillColor,
-                        percent * 100);
+                colors[i][kernelSize] = colors[kernelSize][i] = ColorUtils.moreTransparent(fillColor, percent * 100);
             }
             colors[kernelSize][kernelSize] = fillColor;
         }

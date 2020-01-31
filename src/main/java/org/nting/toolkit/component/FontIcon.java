@@ -1,6 +1,7 @@
 package org.nting.toolkit.component;
 
 import static org.nting.toolkit.ToolkitServices.fontManager;
+import static org.nting.toolkit.ui.Colors.GREY;
 
 import org.nting.data.Property;
 import org.nting.toolkit.FontManager.FontSize;
@@ -180,8 +181,6 @@ public enum FontIcon implements Icon {
     LANGUAGE;
     /* @formatter:on */
 
-    private static final int DEFAULT_COLOR = 0xFF848484;
-
     public Content getContent(FontSize fontSize, int color) {
         Font font = fontManager().getIconFont(fontSize);
         return new IconTextContent(font, color, getCharacter());
@@ -195,7 +194,7 @@ public enum FontIcon implements Icon {
 
     @Override
     public Content getContent(FontSize fontSize) {
-        return getContent(fontSize, DEFAULT_COLOR);
+        return getContent(fontSize, GREY);
     }
 
     @Override
@@ -206,7 +205,7 @@ public enum FontIcon implements Icon {
 
     @Override
     public Content getContent(float size) {
-        return getContent(size, DEFAULT_COLOR);
+        return getContent(size, GREY);
     }
 
     private String getCharacter() {

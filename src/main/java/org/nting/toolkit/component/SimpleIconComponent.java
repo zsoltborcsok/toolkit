@@ -1,6 +1,9 @@
 package org.nting.toolkit.component;
 
 import static org.nting.toolkit.ToolkitServices.fontManager;
+import static org.nting.toolkit.ui.Colors.DARK_GREY;
+import static org.nting.toolkit.ui.Colors.TRANSPARENT;
+import static org.nting.toolkit.ui.Colors.TRN_BLACK;
 import static org.nting.toolkit.util.ColorUtils.isNotTransparent;
 
 import java.util.Set;
@@ -22,12 +25,12 @@ public class SimpleIconComponent extends AbstractComponent {
 
     public final Property<Icon> icon = createProperty("icon", null);
     public final Property<FontSize> fontSize = createProperty("fontSize", FontSize.LARGE_FONT);
-    public final Property<Integer> color = createProperty("color", 0xff222222);
-    public final Property<Integer> disabledColor = createProperty("disabledColor", 0x30000000);
-    public final Property<Integer> hoverColor = createProperty("hoverColor", 0xff222222);
+    public final Property<Integer> color = createProperty("color", DARK_GREY);
+    public final Property<Integer> disabledColor = createProperty("disabledColor", TRN_BLACK(0x30));
+    public final Property<Integer> hoverColor = createProperty("hoverColor", DARK_GREY);
     public final Property<Float> zoom = createProperty("zoom", 1f); // To enable bigger icons
     public final Property<Boolean> enabled = createProperty("enabled", true);
-    public final Property<Integer> backgroundColor = createProperty("backgroundColor", 0x00ffffff);
+    public final Property<Integer> backgroundColor = createProperty("backgroundColor", TRANSPARENT);
 
     private final Property<Content> iconContent = createProperty("iconContent", null);
     private final Set<String> contentBaseProperties = ImmutableSet.of("icon", "fontSize", "color", "disabledColor",

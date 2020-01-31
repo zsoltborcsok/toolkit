@@ -2,6 +2,7 @@ package org.nting.toolkit.component;
 
 import static org.nting.toolkit.ToolkitServices.fontManager;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
+import static org.nting.toolkit.ui.Colors.TRN_BLACK;
 import static playn.core.util.SimpleMessageFormat.format;
 
 import org.nting.data.Property;
@@ -14,7 +15,7 @@ import pythagoras.f.Point;
 
 public class Dialog extends Popup {
 
-    public final Property<Integer> modalityCurtain = createProperty("modalityCurtain", 0x40000000);
+    public final Property<Integer> modalityCurtain = createProperty("modalityCurtain", TRN_BLACK(0x40));
     public final Property<String> title = createProperty("title", "");
 
     private final Component content;

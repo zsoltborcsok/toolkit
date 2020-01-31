@@ -1,5 +1,6 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.ui.Colors.TRN_BLACK;
 import static org.nting.toolkit.ui.stone.ContentBuilder.builderOnContent;
 import static org.nting.toolkit.ui.stone.TextContentSingleLine.textContent;
 
@@ -19,7 +20,7 @@ import pythagoras.f.Dimension;
 public class Label extends AbstractTextComponent {
 
     public final Property<TextAlignment> alignment = createProperty("alignment", TextAlignment.LEFT);
-    public final Property<Integer> selectionBackground = createProperty("selectionBackground", 0x40000000);
+    public final Property<Integer> selectionBackground = createProperty("selectionBackground", TRN_BLACK(0x40));
     public final Property<Boolean> selectionSupported = createProperty("selectionSupported", true);
 
     protected final TextContent textContent = createTextContent();

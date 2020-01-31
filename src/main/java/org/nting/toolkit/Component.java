@@ -1,6 +1,6 @@
 package org.nting.toolkit;
 
-import static org.nting.toolkit.ui.ComponentUI.TRANSPARENT_COLOR;
+import static org.nting.toolkit.ui.Colors.TRANSPARENT;
 import static org.nting.toolkit.util.ColorUtils.isTransparent;
 
 import java.util.List;
@@ -103,7 +103,7 @@ public interface Component {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     default int getBackgroundColor() {
-        int backgroundColor = TRANSPARENT_COLOR;
+        int backgroundColor = TRANSPARENT;
 
         ComponentUI componentUI = getComponentUI();
         if (componentUI != null) {

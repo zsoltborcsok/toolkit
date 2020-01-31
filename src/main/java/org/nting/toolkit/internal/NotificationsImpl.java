@@ -3,6 +3,7 @@ package org.nting.toolkit.internal;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
 import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.PivotAnimationLayout.pivotLayout;
+import static org.nting.toolkit.ui.Colors.WHITE;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -37,7 +38,7 @@ import pythagoras.f.Point;
 
 public class NotificationsImpl extends AbstractComponent implements Notifications {
 
-    public final Property<Integer> successColor = createProperty("successColor", 0xffffffff);
+    public final Property<Integer> successColor = createProperty("successColor", WHITE);
     public final Property<Integer> successBackground = createProperty("successBackground", 0xff2aaba0);
     public final Property<Integer> successBorderColor = createProperty("successBorderColor", 0xff009788);
 
@@ -45,15 +46,15 @@ public class NotificationsImpl extends AbstractComponent implements Notification
     public final Property<Integer> warningBackground = createProperty("warningBackground", 0xfffff1c0);
     public final Property<Integer> warningBorderColor = createProperty("warningBorderColor", 0xfffecd00);
 
-    public final Property<Integer> errorColor = createProperty("errorColor", 0xffffffff);
+    public final Property<Integer> errorColor = createProperty("errorColor", WHITE);
     public final Property<Integer> errorBackground = createProperty("errorBackground", 0xffff7946);
     public final Property<Integer> errorBorderColor = createProperty("errorBorderColor", 0xffff580f);
 
-    public final Property<Integer> noticeColor = createProperty("noticeColor", 0xffffffff);
+    public final Property<Integer> noticeColor = createProperty("noticeColor", WHITE);
     public final Property<Integer> noticeBackground = createProperty("noticeBackground", 0xff47a9f8);
     public final Property<Integer> noticeBorderColor = createProperty("noticeBorderColor", 0xff1694f4);
 
-    public final Property<Integer> infoColor = createProperty("infoColor", 0xffffffff);
+    public final Property<Integer> infoColor = createProperty("infoColor", WHITE);
     public final Property<Integer> infoBackground = createProperty("infoBackground", 0xff7f97a3);
     public final Property<Integer> infoBorderColor = createProperty("infoBorderColor", 0xff5f7d8c);
 

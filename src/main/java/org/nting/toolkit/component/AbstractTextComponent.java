@@ -2,6 +2,7 @@ package org.nting.toolkit.component;
 
 import static org.nting.data.binding.Bindings.transformToPair;
 import static org.nting.toolkit.event.MouseEvent.MouseButton.BUTTON_LEFT;
+import static org.nting.toolkit.ui.Colors.DARK_GREY;
 import static org.nting.toolkit.util.WordUtils.relativePositionOfWordEnd;
 import static org.nting.toolkit.util.WordUtils.relativePositionOfWordStart;
 
@@ -15,7 +16,7 @@ import org.nting.toolkit.event.MouseListener;
 
 public abstract class AbstractTextComponent extends AbstractComponent {
 
-    public final Property<Integer> color = createProperty("color", 0xff222222);
+    public final Property<Integer> color = createProperty("color", DARK_GREY);
     public final Property<String> text = createProperty("text", "");
     public final Property<String> selectedText;
 
