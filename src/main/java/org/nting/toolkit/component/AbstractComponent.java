@@ -9,6 +9,7 @@ import java.util.function.BiConsumer;
 
 import org.nting.data.Property;
 import org.nting.data.Registration;
+import org.nting.data.ValueChangeListener;
 import org.nting.data.bean.RuntimeBean;
 import org.nting.data.property.ListProperty;
 import org.nting.data.property.MapProperty;
@@ -470,4 +471,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
         return (COMPONENT) this;
     }
 
+    public Registration addValueChangeListener(ValueChangeListener<Object> listener) {
+        return properties.addValueChangeListener(listener);
+    }
 }
