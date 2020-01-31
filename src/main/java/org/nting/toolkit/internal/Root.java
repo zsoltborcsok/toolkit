@@ -15,6 +15,7 @@ import org.nting.toolkit.component.ScrollComponent;
 import org.nting.toolkit.component.TooltipPopup;
 import org.nting.toolkit.ui.shape.RectangleShape;
 import org.nting.toolkit.ui.stone.Background;
+import org.nting.toolkit.util.MaterialShadows;
 import org.nting.toolkit.util.ToolkitUtils;
 
 import com.google.common.collect.Lists;
@@ -240,7 +241,7 @@ public final class Root extends Panel {
                     Dimension size = new Dimension(popup.width.getValue(), popup.height.getValue());
 
                     canvas.translate(position.x, position.y);
-                    // TODO MaterialShadows.paintShadow(shadowSize, canvas, size);
+                    MaterialShadows.paintShadow(shadowSize, canvas, size);
                     canvas.translate(-position.x, -position.y);
                 }
             }
