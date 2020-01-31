@@ -1,5 +1,6 @@
 package org.nting.toolkit.event;
 
+import org.nting.data.Property;
 import org.nting.data.Property.ValueChangeListenerSupport;
 import org.nting.data.ValueChangeEvent;
 import org.nting.data.ValueChangeListener;
@@ -15,8 +16,8 @@ public class ClipboardDispatcher implements Clipboard.PasteListener {
 
     private final TextSelectionChangeListener textSelectionChangeListener = new TextSelectionChangeListener();
 
-    public ClipboardDispatcher() {
-        ToolkitUtils.getFocusOwner().addValueChangeListener(new FocusChangeListener());
+    public ClipboardDispatcher(Property<Component> focusOwner) {
+        focusOwner.addValueChangeListener(new FocusChangeListener());
     }
 
     @Override

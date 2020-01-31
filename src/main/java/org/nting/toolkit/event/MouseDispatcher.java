@@ -28,10 +28,6 @@ public class MouseDispatcher implements Listener {
     protected final Point lastMousePosition = new Point(0, 0);
     private boolean updatePopupsConsumesMousePressedAndClicked = false;
 
-    public MouseDispatcher() {
-        currentComponent = toolkitManager().root();
-    }
-
     @Override
     public void onMouseDown(ButtonEvent event) {
         Component source = ToolkitUtils.getDeepestComponentInToolkit(event.x(), event.y());

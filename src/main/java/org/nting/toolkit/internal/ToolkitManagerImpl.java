@@ -49,12 +49,10 @@ public class ToolkitManagerImpl implements ToolkitManager {
         }
         PlayN.keyboard().setListener(keyDispatcher);
 
-        clipboardDispatcher = new ClipboardDispatcher();
+        clipboardDispatcher = new ClipboardDispatcher(keyDispatcher.getFocusOwner());
         PlayN.clipboard().addPasteListener(clipboardDispatcher);
 
         canvasManager = new CanvasManager();
-        updateDluSize();
-
         PlayN.setResizeListener((width, height) -> {
             canvasManager.updateCanvas();
             updateDluSize();
