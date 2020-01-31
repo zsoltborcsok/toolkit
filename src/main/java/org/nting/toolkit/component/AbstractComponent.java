@@ -463,4 +463,11 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public final <T> Property<T> getProperty(String propertyName) {
         return properties.getProperty(propertyName);
     }
+
+    @SuppressWarnings("unchecked")
+    public <COMPONENT extends AbstractComponent> COMPONENT set(String propertyName, Object value) {
+        getProperty(propertyName).setValue(value);
+        return (COMPONENT) this;
+    }
+
 }
