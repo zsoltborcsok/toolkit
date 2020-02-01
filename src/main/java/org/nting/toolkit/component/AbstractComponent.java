@@ -85,6 +85,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
 
     public AbstractComponent(String... reLayoutPropertyNames) {
         properties.addValueChangeListener(event -> {
+            logPropertyChange(event, id);
             String propertyName = event.getPropertyName();
             if ("visible".equals(propertyName)) {
                 reLayout();

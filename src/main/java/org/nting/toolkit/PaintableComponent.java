@@ -9,10 +9,6 @@ import pythagoras.f.Point;
 
 public interface PaintableComponent extends Component {
 
-    default boolean renderingOptimisation() {
-        return true;
-    }
-
     @Override
     default void paint(Canvas canvas) {
         if (!isVisible()) {

@@ -24,7 +24,7 @@ import pythagoras.f.Dimension;
 import pythagoras.f.Point;
 import pythagoras.f.Rectangle;
 
-public interface Component {
+public interface Component extends ToolkitSettings {
 
     // region Position and Size
     void setSize(float width, float height);
