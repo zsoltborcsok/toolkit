@@ -169,7 +169,7 @@ public final class Root extends Panel {
                     toolkitManager().invokeAfterRepaint(this::repaint);
                     break;
                 } else if (component.isDirty()) {
-                    canvas.setFillColor(component.getBackgroundColor());
+                    canvas.setFillColor(component.getCombinedBackgroundColor());
 
                     Point position = ToolkitUtils.getRootPosition(component);
                     Dimension size = component.getSize();

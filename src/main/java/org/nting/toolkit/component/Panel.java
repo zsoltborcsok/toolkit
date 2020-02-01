@@ -52,12 +52,17 @@ public class Panel extends AbstractComponent {
     @Override
     public void doPaintComponent(Canvas canvas) {
         Image backgroundImage = this.backgroundImage.getValue();
-        if (backgroundImage != null) {
+        if (backgroundImage != null) { // No solid background, may conflict with the rendering optimisation.
             canvas.drawImage(backgroundImage, 0, 0, width.getValue(), height.getValue());
         } else {
             canvas.setFillColor(backgroundColor.getValue());
             canvas.fillRect(0, 0, width.getValue(), height.getValue());
         }
+    }
+
+    @Override
+    public int getBackgroundColor() {
+        return backgroundImage.hasValue() ? TRANSPARENT : backgroundColor.getValue();
     }
 
     private class KeyHandler implements KeyListener {

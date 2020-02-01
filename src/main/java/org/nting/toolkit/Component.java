@@ -103,18 +103,22 @@ public interface Component {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     default int getBackgroundColor() {
-        int backgroundColor = TRANSPARENT;
-
         ComponentUI componentUI = getComponentUI();
         if (componentUI != null) {
-            backgroundColor = componentUI.getBackgroundColor(this);
+            return componentUI.getBackgroundColor(this);
+        } else {
+            return TRANSPARENT;
         }
+    }
+
+    default int getCombinedBackgroundColor() {
+        int backgroundColor = getBackgroundColor();
 
         Component parent = getParent();
         if (parent != null && isTransparent(backgroundColor)) {
-            return parent.getBackgroundColor();
+            return parent.getCombinedBackgroundColor();
         } else if (parent != null && backgroundColor >> 24 != 255) {
-            return ColorUtils.drawOver(parent.getBackgroundColor(), backgroundColor);
+            return ColorUtils.drawOver(parent.getCombinedBackgroundColor(), backgroundColor);
         } else {
             return backgroundColor;
         }
