@@ -46,8 +46,8 @@ public class GradientBackground extends Background {
             }
 
             shape.size(size.width, size.height).fillGradient(gradient).paint(canvas);
-        } catch (Exception e) {
-            PlayN.log(getClass()).warn(e.getMessage());
+        } catch (RuntimeException e) {
+            PlayN.log(getClass()).error(e.getMessage(), e);
         }
     }
 }
