@@ -10,6 +10,7 @@ public class AbsoluteLayout implements LayoutManager {
 
     private static final Object CUSTOM_POSITION_CONSTRAINT = new Object();
     private static final Object CUSTOM_POSITION_AND_SIZE_CONSTRAINT = new Object();
+    private static final Object FILL_PARENT_CONSTRAINT = new Object();
 
     private final Dimension preferredLayoutSize;
 
@@ -30,6 +31,8 @@ public class AbsoluteLayout implements LayoutManager {
             Object childConstraints = component.getLayoutConstraints(child);
             if (childConstraints == CUSTOM_POSITION_AND_SIZE_CONSTRAINT) {
                 continue;
+            } else if (childConstraints == FILL_PARENT_CONSTRAINT) {
+                constraints = new PositionConstraints(0, 0, component.getSize().width, component.getSize().height);
             } else if (childConstraints == CUSTOM_POSITION_CONSTRAINT) {
                 Dimension preferredSize = child.getPreferredSize();
                 setComponentSize(child, preferredSize.width, preferredSize.height);
@@ -104,6 +107,10 @@ public class AbsoluteLayout implements LayoutManager {
 
     public static Object customPositionAndSize() {
         return CUSTOM_POSITION_AND_SIZE_CONSTRAINT;
+    }
+
+    public static Object fillParentConstraint() {
+        return FILL_PARENT_CONSTRAINT;
     }
 
     public static class PositionConstraints {
