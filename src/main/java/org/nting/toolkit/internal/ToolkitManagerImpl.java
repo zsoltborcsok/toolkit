@@ -13,13 +13,13 @@ import org.nting.toolkit.Component;
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.ToolkitRunnable;
 import org.nting.toolkit.component.Dialog;
-import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.event.ClipboardDispatcher;
 import org.nting.toolkit.event.KeyDispatcher;
 import org.nting.toolkit.event.MouseDispatcher;
 import org.nting.toolkit.event.PointerDispatcher;
 import org.nting.toolkit.ui.style.AbstractStyleModule;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import playn.core.PlayN;
@@ -183,20 +183,21 @@ public class ToolkitManagerImpl implements ToolkitManager {
             this.dluSizeX = dluSizeX;
             this.dluSizeY = dluSizeY;
 
-            List<Popup> popups = Lists.newArrayList();
             Component focusOwner = null;
             if (root == null) {
                 root = new Root(canvasManager.getCanvas().width(), canvasManager.getCanvas().height());
                 tooltipManager().registerRoot(root);
             } else {
                 focusOwner = keyDispatcher.getFocusOwner().getValue();
-                popups.addAll(root.popups());
-                root.popups().clear();
-                root.removeAllComponents();
+                // Keep only the dialogs from the list of popups; close the others
+                ImmutableList.copyOf(root.popups()).stream().filter(popup -> !(popup instanceof Dialog))
+                        .forEach(popup -> {
+                            root.popups().remove(popup);
+                            popup.closed();
+                        });
                 root.setSize(width, height);
             }
             dluChangeListeners.forEach(listener -> listener.accept(dluSizeX, dluSizeY));
-            popups.stream().filter(popup -> popup instanceof Dialog).forEach(popup -> root.popups().add(popup));
             keyDispatcher.requestFocus(focusOwner);
         }
     }
