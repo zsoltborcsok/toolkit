@@ -115,6 +115,16 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
         return set("backgroundColor", color);
     }
 
+    public ComponentBuilder<COMPONENT, PARENT_BUILDER> setValueOfComponentsAt(Object propertyId, Object value,
+            Object... constraints) {
+        for (Object constraint : constraints) {
+            AbstractComponent component = this.component.componentAt(constraint);
+            component.getProperty(propertyId).setValue(value);
+        }
+
+        return this;
+    }
+
     public ComponentBuilder<COMPONENT, PARENT_BUILDER> set(String propertyName, Object value) {
         component.set(propertyName, value);
         return this;
