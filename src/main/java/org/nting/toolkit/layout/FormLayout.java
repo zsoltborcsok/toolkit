@@ -6,6 +6,7 @@ import static org.nting.toolkit.ToolkitServices.unitConverter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
@@ -804,6 +805,11 @@ public class FormLayout implements LayoutManager {
         }
 
         @Override
+        public int hashCode() {
+            return Objects.hash(x, y, width, height);
+        }
+
+        @Override
         public boolean equals(Object o) {
             if (this == o) {
                 return true;
@@ -828,6 +834,11 @@ public class FormLayout implements LayoutManager {
             this.y = y;
             this.width = width;
             this.height = height;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y, width, height);
         }
 
         @Override
