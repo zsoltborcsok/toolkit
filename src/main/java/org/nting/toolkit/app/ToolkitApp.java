@@ -2,11 +2,7 @@ package org.nting.toolkit.app;
 
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
 
-import javax.annotation.Nullable;
-
-import org.nting.toolkit.Component;
 import org.nting.toolkit.ToolkitManager;
-import org.nting.toolkit.layout.AbsoluteLayout;
 import org.nting.toolkit.ui.style.AbstractStyleModule;
 import org.nting.toolkit.ui.style.material.MaterialStyleModule;
 
@@ -15,17 +11,15 @@ import playn.core.PlayN;
 
 public class ToolkitApp extends Game.Default {
 
-    public static void startApp(@Nullable Component content) {
-        startApp(new MaterialStyleModule(), content);
+    public static ToolkitManager startApp() {
+        return startApp(new MaterialStyleModule());
     }
 
-    public static void startApp(AbstractStyleModule styleModule, @Nullable Component content) {
+    public static ToolkitManager startApp(AbstractStyleModule styleModule) {
         ToolkitManager toolkitManager = toolkitManager();
         toolkitManager.setStyleModule(styleModule);
-        if (content != null) {
-            toolkitManager.root().addComponent(content, AbsoluteLayout.fillParentConstraint());
-        }
         PlayN.run(new ToolkitApp(33, toolkitManager));
+        return toolkitManager;
     }
 
     private final ToolkitManager toolkitManager;

@@ -5,6 +5,7 @@ import static org.nting.toolkit.ToolkitServices.toolkitManager;
 import static org.nting.toolkit.util.GwtCompatibleUtils.collectImplementedTypes;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -104,15 +105,19 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     }
 
     /** Inject style properties at the latest time; toolkitManager() is properly initialized by then. */
-    private void injectStyleProperties() {
+    protected void injectStyleProperties() {
         createBeanProperty("componentUI", AbstractComponent::getComponentUI, AbstractComponent::setComponentUI);
 
         Registration[] registration = new Registration[1];
-        registration[0] = attached.addValueChangeListener(event -> {
-            if (event.getValue()) {
+        registration[0] = properties.addValueChangeListener(event -> {
+            if (event.getPrevValue() != null) {
+                if (loggingPropertyChanges()) {
+                    PlayN.log(getClass()).info("InjectStyleProperties@{}",
+                            Optional.ofNullable(id).orElseGet(this::hashCode));
+                }
+                registration[0].remove();
                 collectImplementedTypes(this)
                         .forEach(type -> toolkitManager().getStyleInjector().injectProperties(this, type.getName()));
-                registration[0].remove();
             }
         });
     }

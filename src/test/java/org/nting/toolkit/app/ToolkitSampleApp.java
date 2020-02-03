@@ -14,6 +14,7 @@ import org.nting.toolkit.Component;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.Panel;
+import org.nting.toolkit.layout.AbsoluteLayout;
 import org.nting.toolkit.layout.FormLayout;
 
 import playn.core.PlayN;
@@ -34,7 +35,7 @@ public class ToolkitSampleApp {
         platform.graphics().registerFont("IconFont", "fonts/IconFont.ttf");
         ((JavaGraphics) PlayN.graphics()).setSize(1024, 800);
 
-        ToolkitApp.startApp(createContent());
+        ToolkitApp.startApp().root().addComponent(createContent(), AbsoluteLayout.fillParentConstraint());
     }
 
     private static Image getIconImage() {
