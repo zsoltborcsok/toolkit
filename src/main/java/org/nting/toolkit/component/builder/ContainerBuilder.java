@@ -12,6 +12,7 @@ import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.SimpleIconComponent;
 import org.nting.toolkit.component.TextAlignment;
 import org.nting.toolkit.component.TextField;
+import org.nting.toolkit.layout.FormLayout;
 import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.stone.Content;
 
@@ -97,6 +98,22 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
                 childPanel, this);
         componentBuilders.add(containerBuilder);
         return containerBuilder;
+    }
+
+    public FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addForm(FormLayout layoutManager,
+            Object constraints) {
+        FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> formBuilder = new FormBuilder<>(layoutManager);
+        getComponent().addComponent(formBuilder.getComponent(), constraints);
+        componentBuilders.add(formBuilder);
+        return formBuilder;
+    }
+
+    public FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addForm(String columns, String rows,
+            Object constraints) {
+        FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> formBuilder = new FormBuilder<>(columns, rows);
+        getComponent().addComponent(formBuilder.getComponent(), constraints);
+        componentBuilders.add(formBuilder);
+        return formBuilder;
     }
 
     @Override
