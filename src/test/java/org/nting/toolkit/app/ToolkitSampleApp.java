@@ -1,18 +1,11 @@
 package org.nting.toolkit.app;
 
-import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
-import static org.nting.toolkit.ToolkitServices.fontManager;
 import static org.nting.toolkit.layout.FormLayout.xy;
-import static org.nting.toolkit.layout.FormLayout.xyw;
-import static playn.core.Font.Style.BOLD;
 
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
-import org.nting.toolkit.component.Button;
-import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.layout.AbsoluteLayout;
 import org.nting.toolkit.layout.FormLayout;
@@ -43,15 +36,8 @@ public class ToolkitSampleApp {
     }
 
     private static Component createContent() {
-        FormLayout formLayout = new FormLayout("7dlu, 0px:grow, 7dlu, 0px:grow, 7dlu, 0px:grow, 7dlu",
-                "4dlu, pref, 4dlu, pref, 4dlu");
-        Panel panel = new Panel(formLayout);
-        panel.addComponent(new Label().set("text", "Buttons").set("font", fontManager().getFont(LARGE_FONT, BOLD)),
-                xyw(1, 1, 5));
-        panel.addComponent(new Button().set("text", "NORMAL / DISABLED").set("enabled", false), xy(1, 3));
-        panel.addComponent(new Button().set("text", "NORMAL / ENABLED"), xy(3, 3));
-        panel.addComponent(new Button().set("text", "NORMAL / FOCUSED")
-                .process(c -> ((ObjectProperty<Boolean>) c.focused).forceValue(true)), xy(5, 3));
+        Panel panel = new Panel(new FormLayout("7dlu, 0px:grow, 7dlu", "4dlu, 0px:grow, 4dlu"));
+        panel.addComponent(new ButtonTestView().createPane(), xy(1, 1));
         return panel;
     }
 }
