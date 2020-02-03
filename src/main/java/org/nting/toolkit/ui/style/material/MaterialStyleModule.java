@@ -1,0 +1,90 @@
+package org.nting.toolkit.ui.style.material;
+
+import static org.nting.toolkit.FontManager.FontSize.SMALL_FONT;
+import static org.nting.toolkit.ToolkitServices.fontManager;
+import static org.nting.toolkit.ui.Colors.WHITE;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
+import static playn.core.Font.Style.BOLD;
+
+import org.nting.toolkit.Component;
+import org.nting.toolkit.component.AbstractComponent;
+import org.nting.toolkit.component.Button;
+import org.nting.toolkit.component.Dialog;
+import org.nting.toolkit.component.ScrollPane;
+import org.nting.toolkit.component.SplitPane;
+import org.nting.toolkit.component.StandardPopup;
+import org.nting.toolkit.component.TextField;
+import org.nting.toolkit.component.TooltipPopup;
+import org.nting.toolkit.component.WindowPopup;
+import org.nting.toolkit.internal.Root;
+import org.nting.toolkit.ui.ComponentUI;
+import org.nting.toolkit.ui.style.AbstractStyleModule;
+
+import playn.core.Canvas;
+import pythagoras.f.Dimension;
+
+// See: https://github.com/PolymerElements/paper-styles/blob/master/default-theme.html
+// https://www.webcomponents.org/element/PolymerElements/paper-styles
+public class MaterialStyleModule extends AbstractStyleModule {
+
+    @Override
+    protected void doConfigureUIs() {
+        EmptyComponentUI emptyComponentUI = new EmptyComponentUI();
+        toType(Button.class).bind("componentUI", new MaterialButtonUI());
+        toType(TextField.class).bind("componentUI", emptyComponentUI);
+        toType(ScrollPane.class).bind("componentUI", emptyComponentUI);
+        toType(Dialog.class).bind("componentUI", emptyComponentUI);
+        toType(StandardPopup.class).bind("componentUI", emptyComponentUI);
+        toType(TooltipPopup.class).bind("componentUI", emptyComponentUI);
+        toType(WindowPopup.class).bind("componentUI", emptyComponentUI);
+        toType(SplitPane.class).bind("componentUI", emptyComponentUI);
+    }
+
+    @Override
+    protected void doConfigureComponents() {
+        toType(Root.class).bind("backgroundColor", WHITE);
+
+        toType(AbstractComponent.class).bind("font", font);
+
+        toType(Button.class).bind("color", PRIMARY_TEXT_COLOR);
+        toType(Button.class).bind("padding", dluY(3));
+        toType(Button.class).bind("font", fontManager().getFont(SMALL_FONT, BOLD));
+    }
+
+    @Override
+    protected void doConfigureStyles() {
+    }
+
+    private static class EmptyComponentUI implements ComponentUI<Component> {
+
+        @Override
+        public void initialize(Component component) {
+
+        }
+
+        @Override
+        public void terminate(Component component) {
+
+        }
+
+        @Override
+        public void paintComponent(Component component, Canvas canvas) {
+
+        }
+
+        @Override
+        public Dimension getPreferredSize(Component component) {
+            return new Dimension(200, 80);
+        }
+
+        @Override
+        public void paintForeground(Component component, Canvas canvas) {
+
+        }
+
+        @Override
+        public boolean isComponentSupported(Component c) {
+            return true;
+        }
+    }
+}
