@@ -2,19 +2,15 @@ package org.nting.toolkit.component.builder;
 
 import java.util.List;
 
-import org.nting.toolkit.FontManager.FontSize;
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
-import org.nting.toolkit.component.Icon;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.SimpleIconComponent;
-import org.nting.toolkit.component.TextAlignment;
 import org.nting.toolkit.component.TextField;
 import org.nting.toolkit.layout.FormLayout;
 import org.nting.toolkit.layout.LayoutManager;
-import org.nting.toolkit.ui.stone.Content;
 
 import com.google.common.collect.Lists;
 
@@ -46,49 +42,24 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
         return componentBuilder;
     }
 
-    public ComponentBuilder<Label, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addLabel(String text,
-            Object constraints) {
-        return addComponent(new Label(), constraints).text(text);
+    public LabelMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addLabel(Object constraints) {
+        return new LabelMiddleBuilder<>(addComponent(new Label(), constraints));
     }
 
-    public ComponentBuilder<Label, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addLabel(String text,
-            TextAlignment alignment, Object constraints) {
-        return addComponent(new Label(), constraints).text(text).process(l -> l.alignment.setValue(alignment));
+    public LabelMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addMultiLineLabel(Object constraints) {
+        return new LabelMiddleBuilder<>(addComponent(new MultiLineLabel(), constraints));
     }
 
-    public ComponentBuilder<MultiLineLabel, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addMultiLineLabel(String text,
-            Object constraints) {
-        return addComponent(new MultiLineLabel(), constraints).text(text);
+    public ButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addButton(Object constraints) {
+        return new ButtonMiddleBuilder<>(addComponent(new Button(), constraints));
     }
 
-    public ComponentBuilder<Button, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addButton(String text,
-            Object constraints) {
-        return addComponent(new Button(), constraints).text(text);
+    public TextFieldMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addTextField(Object constraints) {
+        return new TextFieldMiddleBuilder<>(addComponent(new TextField(), constraints));
     }
 
-    public ComponentBuilder<Button, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addButton(Content image,
-            Object constraints) {
-        return addComponent(new Button(), constraints).process(b -> b.image.setValue(image));
-    }
-
-    public ComponentBuilder<Button, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addButton(String text, Content image,
-            Object constraints) {
-        return addComponent(new Button(), constraints).text(text).process(b -> b.image.setValue(image));
-    }
-
-    public ComponentBuilder<TextField, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addTextField(String caption,
-            Object constraints) {
-        return addComponent(new TextField(), constraints).process(tf -> tf.caption.setValue(caption));
-    }
-
-    public ComponentBuilder<SimpleIconComponent, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addIcon(Icon icon,
-            Object constraints) {
-        return addComponent(new SimpleIconComponent(icon), constraints);
-    }
-
-    public ComponentBuilder<SimpleIconComponent, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addIcon(Icon icon,
-            FontSize fontSize, Object constraints) {
-        return addComponent(new SimpleIconComponent(icon), constraints).process(sic -> sic.fontSize.setValue(fontSize));
+    public SimpleIconComponentMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addIcon(Object constraints) {
+        return new SimpleIconComponentMiddleBuilder<>(addComponent(new SimpleIconComponent(null), constraints));
     }
 
     public ContainerBuilder<Panel, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addPanel(Object constraints) {
@@ -100,20 +71,8 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
         return containerBuilder;
     }
 
-    public FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addForm(FormLayout layoutManager,
-            Object constraints) {
-        FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> formBuilder = new FormBuilder<>(layoutManager);
-        getComponent().addComponent(formBuilder.getComponent(), constraints);
-        componentBuilders.add(formBuilder);
-        return formBuilder;
-    }
-
-    public FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addForm(String columns, String rows,
-            Object constraints) {
-        FormBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> formBuilder = new FormBuilder<>(columns, rows);
-        getComponent().addComponent(formBuilder.getComponent(), constraints);
-        componentBuilders.add(formBuilder);
-        return formBuilder;
+    public FormLayoutMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> formLayout() {
+        return new FormLayoutMiddleBuilder<>(this, (FormLayout) getComponent().getLayoutManager());
     }
 
     @Override

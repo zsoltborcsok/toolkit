@@ -1,11 +1,16 @@
 package org.nting.toolkit.component.builder;
 
+import static org.nting.data.binding.Bindings.BindingStrategy.READ;
+import static org.nting.data.binding.Bindings.BindingStrategy.READ_WRITE;
 import static org.nting.toolkit.ToolkitServices.fontManager;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
+import org.nting.data.Property;
 import org.nting.data.binding.Binding;
 import org.nting.data.binding.BindingList;
+import org.nting.data.binding.Bindings;
 import org.nting.toolkit.FontManager.FontSize;
 import org.nting.toolkit.animation.Behavior;
 import org.nting.toolkit.component.AbstractComponent;
@@ -13,6 +18,8 @@ import org.nting.toolkit.component.Alignment;
 import org.nting.toolkit.component.Orientation;
 import org.nting.toolkit.event.KeyListener;
 import org.nting.toolkit.event.MouseListener;
+
+import com.google.common.base.Converter;
 
 import playn.core.Font;
 
@@ -49,6 +56,11 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
         return this;
     }
 
+    public ComponentBuilder<COMPONENT, PARENT_BUILDER> visible(Property<Boolean> visible) {
+        addBinding(Bindings.bind(READ, visible, component.visible));
+        return this;
+    }
+
     public ComponentBuilder<COMPONENT, PARENT_BUILDER> focusable(boolean focusable) {
         component.setFocusable(focusable);
         return this;
@@ -60,12 +72,12 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
     }
 
     public ComponentBuilder<COMPONENT, PARENT_BUILDER> adKeyListener(KeyListener keyListener) {
-        component.addKeyListener(keyListener);
+        addBinding(Bindings.asBinding(component.addKeyListener(keyListener)));
         return this;
     }
 
     public ComponentBuilder<COMPONENT, PARENT_BUILDER> addMouseListener(MouseListener mouseListener) {
-        component.addMouseListener(mouseListener);
+        addBinding(Bindings.asBinding(component.addMouseListener(mouseListener)));
         return this;
     }
 
@@ -103,18 +115,60 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
         return set("backgroundColor", color);
     }
 
-    /** May not be defined for the current component */
-    public ComponentBuilder<COMPONENT, PARENT_BUILDER> enabled(boolean enabled) {
-        return set("enabled", enabled);
-    }
-
-    /** May not be defined for the current component */
-    public ComponentBuilder<COMPONENT, PARENT_BUILDER> text(String text) {
-        return set("text", text);
-    }
-
     public ComponentBuilder<COMPONENT, PARENT_BUILDER> set(String propertyName, Object value) {
         component.set(propertyName, value);
+        return this;
+    }
+
+    public <T> ComponentBuilder<COMPONENT, PARENT_BUILDER> set(Function<COMPONENT, Property<T>> propertyFunction,
+            T value) {
+        propertyFunction.apply(component).setValue(value);
+        return this;
+    }
+
+    public <T> ComponentBuilder<COMPONENT, PARENT_BUILDER> set(String propertyName, Property<T> source) {
+        addBinding(Bindings.bind(READ, source, component.getProperty(propertyName)));
+        return this;
+    }
+
+    public <T> ComponentBuilder<COMPONENT, PARENT_BUILDER> set(Function<COMPONENT, Property<T>> propertyFunction,
+            Property<T> source) {
+        addBinding(Bindings.bind(READ, source, propertyFunction.apply(component)));
+        return this;
+    }
+
+    public <T> ComponentBuilder<COMPONENT, PARENT_BUILDER> bind(String propertyName, Property<T> source) {
+        addBinding(Bindings.bind(READ_WRITE, source, component.getProperty(propertyName)));
+        return this;
+    }
+
+    public <T> ComponentBuilder<COMPONENT, PARENT_BUILDER> bind(Function<COMPONENT, Property<T>> propertyFunction,
+            Property<T> source) {
+        addBinding(Bindings.bind(READ_WRITE, source, propertyFunction.apply(component)));
+        return this;
+    }
+
+    public <F, T> ComponentBuilder<COMPONENT, PARENT_BUILDER> bind(String propertyName, Property<F> source,
+            Converter<F, T> converter) {
+        addBinding(Bindings.bind(READ_WRITE, source, component.getProperty(propertyName), converter));
+        return this;
+    }
+
+    public <F, T> ComponentBuilder<COMPONENT, PARENT_BUILDER> bind(Function<COMPONENT, Property<T>> propertyFunction,
+            Property<F> source, Converter<F, T> converter) {
+        addBinding(Bindings.bind(READ_WRITE, source, propertyFunction.apply(component), converter));
+        return this;
+    }
+
+    public <F, T> ComponentBuilder<COMPONENT, PARENT_BUILDER> bind(String propertyName, Property<F> source,
+            Function<F, T> transform) {
+        addBinding(Bindings.bind(source, component.getProperty(propertyName), transform));
+        return this;
+    }
+
+    public <F, T> ComponentBuilder<COMPONENT, PARENT_BUILDER> bind(Function<COMPONENT, Property<T>> propertyFunction,
+            Property<F> source, Function<F, T> transform) {
+        addBinding(Bindings.bind(source, propertyFunction.apply(component), transform));
         return this;
     }
 
