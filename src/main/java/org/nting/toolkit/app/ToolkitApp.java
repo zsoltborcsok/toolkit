@@ -1,6 +1,9 @@
 package org.nting.toolkit.app;
 
+import static org.nting.toolkit.ToolkitRunnable.createOneTimeRunnable;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
+
+import java.util.function.Consumer;
 
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.ui.style.AbstractStyleModule;
@@ -11,15 +14,22 @@ import playn.core.PlayN;
 
 public class ToolkitApp extends Game.Default {
 
-    public static ToolkitManager startApp() {
+    @FunctionalInterface
+    interface InitPromise {
+
+        void then(Consumer<ToolkitManager> initConsumer);
+    }
+
+    public static InitPromise startApp() {
         return startApp(new MaterialStyleModule());
     }
 
-    public static ToolkitManager startApp(AbstractStyleModule styleModule) {
+    public static InitPromise startApp(AbstractStyleModule styleModule) {
         ToolkitManager toolkitManager = toolkitManager();
         toolkitManager.setStyleModule(styleModule);
         PlayN.run(new ToolkitApp(33, toolkitManager));
-        return toolkitManager;
+        return initConsumer -> toolkitManager
+                .schedule(createOneTimeRunnable(0, () -> initConsumer.accept(toolkitManager)));
     }
 
     private final ToolkitManager toolkitManager;

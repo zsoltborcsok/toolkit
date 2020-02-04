@@ -28,7 +28,8 @@ public class ToolkitSampleApp {
         platform.graphics().registerFont("IconFont", "fonts/IconFont.ttf");
         ((JavaGraphics) PlayN.graphics()).setSize(1024, 800);
 
-        ToolkitApp.startApp().root().addComponent(createContent(), AbsoluteLayout.fillParentConstraint());
+        ToolkitApp.startApp().then(toolkitManager -> toolkitManager.root().addComponent(createContent(),
+                AbsoluteLayout.fillParentConstraint()));
     }
 
     private static Image getIconImage() {
