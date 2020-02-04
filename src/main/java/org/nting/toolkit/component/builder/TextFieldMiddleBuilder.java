@@ -11,6 +11,10 @@ public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> {
 
     private final ComponentBuilder<TextField, T> componentBuilder;
 
+    public TextFieldMiddleBuilder() {
+        this(new ComponentBuilder<>(new TextField()));
+    }
+
     public TextFieldMiddleBuilder(ComponentBuilder<TextField, T> componentBuilder) {
         this.componentBuilder = componentBuilder;
     }

@@ -18,6 +18,10 @@ public class ButtonMiddleBuilder<T extends ContainerBuilder<?, ?>> {
 
     private final ComponentBuilder<Button, T> componentBuilder;
 
+    public ButtonMiddleBuilder() {
+        this(new ComponentBuilder<>(new Button()));
+    }
+
     public ButtonMiddleBuilder(ComponentBuilder<Button, T> componentBuilder) {
         this.componentBuilder = componentBuilder;
     }

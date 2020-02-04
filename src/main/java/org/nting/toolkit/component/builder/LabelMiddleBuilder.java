@@ -10,6 +10,10 @@ public class LabelMiddleBuilder<T extends ContainerBuilder<?, ?>> {
 
     private final ComponentBuilder<Label, T> componentBuilder;
 
+    public LabelMiddleBuilder() {
+        this(new ComponentBuilder<>(new Label()));
+    }
+
     public LabelMiddleBuilder(ComponentBuilder<Label, T> componentBuilder) {
         this.componentBuilder = componentBuilder;
     }

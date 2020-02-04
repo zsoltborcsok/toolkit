@@ -11,6 +11,10 @@ public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>> 
 
     private final ComponentBuilder<SimpleIconComponent, T> componentBuilder;
 
+    public SimpleIconComponentMiddleBuilder() {
+        this(new ComponentBuilder<>(new SimpleIconComponent(null)));
+    }
+
     public SimpleIconComponentMiddleBuilder(ComponentBuilder<SimpleIconComponent, T> componentBuilder) {
         this.componentBuilder = componentBuilder;
     }
