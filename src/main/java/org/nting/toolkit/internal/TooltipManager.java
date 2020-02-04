@@ -88,19 +88,19 @@ public class TooltipManager {
     private void showToolTip(String tooltipText, Rectangle rectangle, boolean multiLine) {
         Pair<Alignment, Orientation> tooltipLocation = tooltipComponent.getTooltipLocation();
         if (!multiLine) {
-            TooltipPopup tooltipPopup = new TooltipPopup(tooltipLocation.first, tooltipLocation.second,
+            tooltipPopup = new TooltipPopup(tooltipLocation.first, tooltipLocation.second,
                     new FormLayout("2dlu, pref, 2dlu", "1dlu, pref, 1dlu"));
-            tooltipPopup.addComponent(new Label().set("text", tooltipText).set("color", tooltipPopup.getValue("color")),
+            tooltipPopup.addComponent(new Label().set("text", tooltipText).set("color", tooltipPopup.color),
                     xy(1, 1));
             tooltipPopup.showRelativeTo(rectangle);
         } else {
             int tooltipMaxWidth = MathUtil.ifloor(getTooltipMaxWidth(rectangle))
                     - unitConverter().dialogUnitXAsPixel(4, null) - 1;
-            TooltipPopup tooltipPopup = new TooltipPopup(tooltipLocation.first, tooltipLocation.second,
+            tooltipPopup = new TooltipPopup(tooltipLocation.first, tooltipLocation.second,
                     new FormLayout("2dlu, " + tooltipMaxWidth + "px, 2dlu", "2dlu, min(pref;80dlu), 2dlu"));
             // In order to have proper preferred size for the popup, we need to set the MultiLineLabel width in advance!
             tooltipPopup.addComponent(new MultiLineLabel().set("text", tooltipText)
-                    .set("color", tooltipPopup.getValue("color")).set("width", (float) tooltipMaxWidth), xy(1, 1));
+                    .set("color", tooltipPopup.color).set("width", (float) tooltipMaxWidth), xy(1, 1));
             tooltipPopup.showRelativeTo(rectangle);
         }
     }

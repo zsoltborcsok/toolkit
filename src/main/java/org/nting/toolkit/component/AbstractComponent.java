@@ -1,7 +1,9 @@
 package org.nting.toolkit.component;
 
+import static org.nting.data.binding.Bindings.BindingStrategy.READ;
 import static org.nting.toolkit.ToolkitRunnable.createLoopedRunnable;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
+import static org.nting.toolkit.ToolkitServices.tooltipManager;
 import static org.nting.toolkit.util.GwtCompatibleUtils.collectImplementedTypes;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import org.nting.data.Property;
 import org.nting.data.Registration;
 import org.nting.data.ValueChangeListener;
 import org.nting.data.bean.RuntimeBean;
+import org.nting.data.binding.Bindings;
 import org.nting.data.property.BeanProperty;
 import org.nting.data.property.ListProperty;
 import org.nting.data.property.MapProperty;
@@ -35,6 +38,7 @@ import org.nting.toolkit.layout.LayoutManager;
 import org.nting.toolkit.ui.ComponentUI;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
@@ -100,12 +104,19 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
             }
             repaint();
         });
+        tooltipText.addValueChangeListener(event -> {
+            if (Strings.isNullOrEmpty(event.getValue())) {
+                tooltipManager().unRegisterComponent(AbstractComponent.this);
+            } else {
+                tooltipManager().registerComponent(AbstractComponent.this);
+            }
+        });
 
         injectStyleProperties();
     }
 
     /** Inject style properties at the latest time; toolkitManager() is properly initialized by then. */
-    protected void injectStyleProperties() {
+    private void injectStyleProperties() {
         createBeanProperty("componentUI", AbstractComponent::getComponentUI, AbstractComponent::setComponentUI);
 
         Registration[] registration = new Registration[1];
@@ -499,6 +510,12 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     @SuppressWarnings("unchecked")
     public <COMPONENT extends AbstractComponent> COMPONENT set(String propertyName, Object value) {
         getProperty(propertyName).setValue(value);
+        return (COMPONENT) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <COMPONENT extends AbstractComponent, T> COMPONENT set(String propertyName, Property<T> source) {
+        Bindings.bind(READ, source, getProperty(propertyName));
         return (COMPONENT) this;
     }
 
