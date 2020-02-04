@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.nting.toolkit.util.SimpleMap;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 
 /**
@@ -33,8 +32,11 @@ public class Actions {
 
     public void fireActionPerformed(ActionEvent actionEvent) {
         for (Map.Entry<ActionListener, Object> listener : actionListeners.entries()) {
-            Object actionId = MoreObjects.firstNonNull(listener.getValue(), actionEvent.getActionId());
-            listener.getKey().actionPerformed(actionEvent.withActionId(actionId));
+            if (listener.getValue() != null) {
+                listener.getKey().actionPerformed(actionEvent.withActionId(listener.getValue()));
+            } else {
+                listener.getKey().actionPerformed(actionEvent);
+            }
         }
     }
 }
