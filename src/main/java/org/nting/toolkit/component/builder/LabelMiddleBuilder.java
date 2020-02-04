@@ -6,16 +6,14 @@ import org.nting.data.Property;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.TextAlignment;
 
-public class LabelMiddleBuilder<T extends ContainerBuilder<?, ?>> {
-
-    private final ComponentBuilder<Label, T> componentBuilder;
+public class LabelMiddleBuilder<T extends ContainerBuilder<?, ?>> extends AbstractMiddleBuilder<Label, T> {
 
     public LabelMiddleBuilder() {
         this(new ComponentBuilder<>(new Label()));
     }
 
     public LabelMiddleBuilder(ComponentBuilder<Label, T> componentBuilder) {
-        this.componentBuilder = componentBuilder;
+        super(componentBuilder);
     }
 
     public LabelMiddleBuilder<T> alignment(TextAlignment alignment) {
@@ -36,9 +34,5 @@ public class LabelMiddleBuilder<T extends ContainerBuilder<?, ?>> {
     public <F> LabelMiddleBuilder<T> text(Property<F> source, Function<F, String> transform) {
         componentBuilder.bind(label -> label.text, source, transform);
         return this;
-    }
-
-    public ComponentBuilder<Label, T> pass() {
-        return componentBuilder;
     }
 }

@@ -7,16 +7,15 @@ import org.nting.toolkit.FontManager.FontSize;
 import org.nting.toolkit.component.Icon;
 import org.nting.toolkit.component.SimpleIconComponent;
 
-public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>> {
-
-    private final ComponentBuilder<SimpleIconComponent, T> componentBuilder;
+public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>>
+        extends AbstractMiddleBuilder<SimpleIconComponent, T> {
 
     public SimpleIconComponentMiddleBuilder() {
         this(new ComponentBuilder<>(new SimpleIconComponent(null)));
     }
 
     public SimpleIconComponentMiddleBuilder(ComponentBuilder<SimpleIconComponent, T> componentBuilder) {
-        this.componentBuilder = componentBuilder;
+        super(componentBuilder);
     }
 
     public SimpleIconComponentMiddleBuilder<T> icon(Icon icon) {
@@ -72,9 +71,5 @@ public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>> 
     public SimpleIconComponentMiddleBuilder<T> zoom(Property<Float> zoom) {
         componentBuilder.<Float> set(simpleIconComponent -> simpleIconComponent.zoom, zoom);
         return this;
-    }
-
-    public ComponentBuilder<SimpleIconComponent, T> pass() {
-        return componentBuilder;
     }
 }

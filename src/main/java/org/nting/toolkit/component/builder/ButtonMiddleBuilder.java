@@ -14,16 +14,14 @@ import org.nting.toolkit.event.ActionListener;
 import org.nting.toolkit.event.Actions;
 import org.nting.toolkit.ui.stone.Content;
 
-public class ButtonMiddleBuilder<T extends ContainerBuilder<?, ?>> {
-
-    private final ComponentBuilder<Button, T> componentBuilder;
+public class ButtonMiddleBuilder<T extends ContainerBuilder<?, ?>> extends AbstractMiddleBuilder<Button, T> {
 
     public ButtonMiddleBuilder() {
         this(new ComponentBuilder<>(new Button()));
     }
 
     public ButtonMiddleBuilder(ComponentBuilder<Button, T> componentBuilder) {
-        this.componentBuilder = componentBuilder;
+        super(componentBuilder);
     }
 
     public ButtonMiddleBuilder<T> color(int color) {
@@ -99,9 +97,5 @@ public class ButtonMiddleBuilder<T extends ContainerBuilder<?, ?>> {
     public <F> ButtonMiddleBuilder<T> text(Property<F> source, Function<F, String> transform) {
         componentBuilder.bind(button -> button.text, source, transform);
         return this;
-    }
-
-    public ComponentBuilder<Button, T> pass() {
-        return componentBuilder;
     }
 }

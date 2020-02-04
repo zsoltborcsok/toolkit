@@ -7,16 +7,14 @@ import org.nting.toolkit.component.TextField;
 
 import com.google.common.base.Converter;
 
-public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> {
-
-    private final ComponentBuilder<TextField, T> componentBuilder;
+public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> extends AbstractMiddleBuilder<TextField, T> {
 
     public TextFieldMiddleBuilder() {
         this(new ComponentBuilder<>(new TextField()));
     }
 
     public TextFieldMiddleBuilder(ComponentBuilder<TextField, T> componentBuilder) {
-        this.componentBuilder = componentBuilder;
+        super(componentBuilder);
     }
 
     public TextFieldMiddleBuilder<T> color(int color) {
@@ -77,9 +75,5 @@ public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> {
     public <F> TextFieldMiddleBuilder<T> text(Property<F> source, Converter<F, String> converter) {
         componentBuilder.bind(textField -> textField.text, source, converter);
         return this;
-    }
-
-    public ComponentBuilder<TextField, T> pass() {
-        return componentBuilder;
     }
 }
