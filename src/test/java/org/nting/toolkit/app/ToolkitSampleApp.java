@@ -40,7 +40,8 @@ public class ToolkitSampleApp {
         Panel panel = new Panel(new FormLayout("7dlu, 0px:grow, 7dlu", "4dlu, 0px:grow, 4dlu"));
         // panel.addComponent(new ButtonTestView().createPane(), xy(1, 1));
         // panel.addComponent(new ScrollPaneTestView().createPane(), xy(1, 1));
-        panel.addComponent(new SplitPaneTestView().createPane(), xy(1, 1));
+        // panel.addComponent(new SplitPaneTestView().createPane(), xy(1, 1));
+        panel.addComponent(new PopupTestView().createPane(), xy(1, 1));
         return panel;
     }
 }
