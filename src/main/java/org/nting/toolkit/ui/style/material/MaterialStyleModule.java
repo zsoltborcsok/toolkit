@@ -32,7 +32,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         EmptyComponentUI emptyComponentUI = new EmptyComponentUI();
         toType(Button.class).bind("componentUI", new MaterialButtonUI());
         toType(TextField.class).bind("componentUI", emptyComponentUI);
-        toType(ScrollPane.class).bind("componentUI", emptyComponentUI);
+        toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
         toType(Dialog.class).bind("componentUI", emptyComponentUI);
         toType(StandardPopup.class).bind("componentUI", emptyComponentUI);
         toType(TooltipPopup.class).bind("componentUI", emptyComponentUI);
@@ -49,6 +49,9 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(Button.class).bind("color", PRIMARY_TEXT_COLOR);
         toType(Button.class).bind("padding", dluY(3));
         toType(Button.class).bind("font", fontManager().getFont(SMALL_FONT, BOLD));
+
+        toType(ScrollPane.class).bind("scrollBarWidth", dluY(3));
+        toType(ScrollPane.class).bind("gridSize", dluY(8));
     }
 
     @Override
