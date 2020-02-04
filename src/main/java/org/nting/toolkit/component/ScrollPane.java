@@ -1,6 +1,7 @@
 package org.nting.toolkit.component;
 
 import static org.nting.toolkit.layout.FormLayout.xy;
+import static org.nting.toolkit.util.ToolkitUtils.getAllComponents;
 
 import java.util.List;
 
@@ -74,6 +75,18 @@ public class ScrollPane extends ScrollComponent {
         addMouseListener(new MouseHandler(font));
         addKeyListener(new KeyHandler());
         setFocusable(false);
+    }
+
+    @Override
+    public boolean isDirty() {
+        if (!super.isDirty() && (vsbVisible.getValue() || hsbVisible.getValue())) {
+            Component view = getView();
+            if (view != null && getAllComponents(view).stream().anyMatch(Component::isDirty)) {
+                repaint(); // Repaint the whole ScrollPane if any child component is dirty when showing scrollbars.
+            }
+        }
+
+        return super.isDirty();
     }
 
     @Override
