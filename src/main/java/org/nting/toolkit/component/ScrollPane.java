@@ -1,5 +1,8 @@
 package org.nting.toolkit.component;
 
+import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.ALWAYS;
+import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.AS_NEEDED;
+import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.NEVER;
 import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.util.ToolkitUtils.getAllComponents;
 
@@ -50,7 +53,7 @@ public class ScrollPane extends ScrollComponent {
     }
 
     public ScrollPane(Component view) {
-        this(view, ScrollBarPolicy.AS_NEEDED, ScrollBarPolicy.AS_NEEDED);
+        this(view, AS_NEEDED, AS_NEEDED);
     }
 
     public ScrollPane(Component view, ScrollBarPolicy vsbPolicy, ScrollBarPolicy hsbPolicy) {
@@ -171,11 +174,11 @@ public class ScrollPane extends ScrollComponent {
     }
 
     private boolean isVerticalScrollSupported() {
-        return vsbPolicy.getValue() != ScrollBarPolicy.NEVER && height.getValue() < viewPrefSize.height;
+        return vsbPolicy.getValue() != NEVER && height.getValue() < viewPrefSize.height;
     }
 
     private boolean isHorizontalScrollSupported() {
-        return hsbPolicy.getValue() != ScrollBarPolicy.NEVER && width.getValue() < viewPrefSize.width;
+        return hsbPolicy.getValue() != NEVER && width.getValue() < viewPrefSize.width;
     }
 
     public void scroll(float velocity) {
@@ -291,16 +294,26 @@ public class ScrollPane extends ScrollComponent {
 
     private void rewindScrollBarVisibilityAnimations() {
         if (isVerticalScrollSupported()) {
-            if (vsbVisibleAnimation.isFinished()) {
+            if (vsbVisibleAnimation.isFinished() && vsbPolicy.valueEquals(AS_NEEDED)) {
                 addBehavior(vsbVisibleAnimation);
             }
             vsbVisibleAnimation.rewind();
         }
         if (isHorizontalScrollSupported()) {
-            if (hsbVisibleAnimation.isFinished()) {
+            if (hsbVisibleAnimation.isFinished() && hsbPolicy.valueEquals(AS_NEEDED)) {
                 addBehavior(hsbVisibleAnimation);
             }
             hsbVisibleAnimation.rewind();
+        }
+    }
+
+    // Always visible scrollbars should appear or disappear on layout change as well.
+    private void updateVisibilityOfAlwaysVisibleScrollbars() {
+        if (vsbPolicy.valueEquals(ALWAYS)) {
+            vsbVisible.setValue(height.getValue() < viewPrefSize.height);
+        }
+        if (hsbPolicy.valueEquals(ALWAYS)) {
+            hsbVisible.setValue(width.getValue() < viewPrefSize.width);
         }
     }
 
@@ -311,7 +324,7 @@ public class ScrollPane extends ScrollComponent {
             ScrollPane scrollPane = (ScrollPane) component;
 
             Component view = scrollPane.getView();
-            if (scrollPane.getView() != null) {
+            if (view != null) {
                 scrollPane.viewPrefSize = view.getPreferredSize();
                 // Layout should fix the view position (sizes might have changed)!
                 scrollPane.setViewPosition(scrollPane.viewPosition.addLocal(-scrollPane.overdriveX.getValue(),
@@ -322,6 +335,8 @@ public class ScrollPane extends ScrollComponent {
 
                 Dimension size = scrollPane.getSize();
                 setComponentSize(view, size.width, size.height);
+
+                scrollPane.updateVisibilityOfAlwaysVisibleScrollbars();
             }
         }
 
@@ -334,10 +349,10 @@ public class ScrollPane extends ScrollComponent {
             }
 
             ScrollPane scrollPane = (ScrollPane) component;
-            if (scrollPane.hsbPolicy.getValue() == ScrollBarPolicy.NEVER || prefSize.width == 0) {
+            if (scrollPane.hsbPolicy.getValue() == NEVER || prefSize.width == 0) {
                 prefSize.width = scrollPane.getView().getPreferredSize().width;
             }
-            if (scrollPane.vsbPolicy.getValue() == ScrollBarPolicy.NEVER || prefSize.height == 0) {
+            if (scrollPane.vsbPolicy.getValue() == NEVER || prefSize.height == 0) {
                 prefSize.height = scrollPane.getView().getPreferredSize().height;
             }
 
