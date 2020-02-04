@@ -48,7 +48,7 @@ public class LayeredPane extends AbstractComponent {
     @Override
     public boolean isDirty() {
         if (!super.isDirty()) {
-            if (getAllComponents(this).stream().anyMatch(Component::isDirty)) {
+            if (getAllComponents(this).stream().filter(c -> c != this).anyMatch(Component::isDirty)) {
                 repaint(); // Repaint the whole LayeredPane if any child component is dirty.
             }
         }
