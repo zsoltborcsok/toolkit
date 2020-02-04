@@ -33,6 +33,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
         return this;
     }
 
+    public ContainerBuilder<CONTAINER, PARENT_BUILDER> layoutManager(String columns, String rows) {
+        getComponent().setLayoutManager(new FormLayout(columns, rows));
+        return this;
+    }
+
     public <T extends AbstractComponent> ComponentBuilder<T, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addComponent(
             T child, Object constraints) {
         getComponent().addComponent(child, constraints);
