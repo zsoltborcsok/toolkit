@@ -18,6 +18,7 @@ import org.nting.toolkit.layout.FormLayout;
 import org.nting.toolkit.layout.LayoutManager;
 
 import playn.core.Canvas;
+import playn.core.Font;
 import playn.core.Key;
 import pythagoras.f.Dimension;
 import pythagoras.f.MathUtil;
@@ -70,7 +71,7 @@ public class ScrollPane extends ScrollComponent {
 
         setView(view);
         setLayoutManager(new ScrollLayout());
-        addMouseListener(new MouseHandler());
+        addMouseListener(new MouseHandler(font));
         addKeyListener(new KeyHandler());
         setFocusable(false);
     }
@@ -333,7 +334,7 @@ public class ScrollPane extends ScrollComponent {
 
     private class MouseHandler implements MouseListener {
 
-        private final Flicker flicker = new Flicker().minFlickDelta(font.getValue().size());
+        private final Flicker flicker = new Flicker();
 
         private Point viewPosition;
         private Dimension startSize;
@@ -341,6 +342,10 @@ public class ScrollPane extends ScrollComponent {
         private Point vScrollStartPoint;
         private Point hScrollStartPoint;
         private Point viewStartPoint;
+
+        public MouseHandler(Property<Font> font) {
+            font.addValueChangeListener(f -> flicker.minFlickDelta(f.getValue().size()));
+        }
 
         @Override
         public void mousePressed(MouseEvent e) {
