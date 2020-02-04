@@ -37,7 +37,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(StandardPopup.class).bind("componentUI", emptyComponentUI);
         toType(TooltipPopup.class).bind("componentUI", emptyComponentUI);
         toType(WindowPopup.class).bind("componentUI", emptyComponentUI);
-        toType(SplitPane.class).bind("componentUI", emptyComponentUI);
+        toType(SplitPane.class).bind("componentUI", new MaterialSplitPaneUI());
     }
 
     @Override
@@ -52,6 +52,8 @@ public class MaterialStyleModule extends AbstractStyleModule {
 
         toType(ScrollPane.class).bind("scrollBarWidth", dluY(3));
         toType(ScrollPane.class).bind("gridSize", dluY(8));
+
+        toType(SplitPane.class).bind("mouseOverSize", 6);
     }
 
     @Override
