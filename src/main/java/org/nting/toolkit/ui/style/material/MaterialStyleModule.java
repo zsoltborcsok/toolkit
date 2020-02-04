@@ -4,18 +4,21 @@ import static org.nting.toolkit.FontManager.FontSize.SMALL_FONT;
 import static org.nting.toolkit.ToolkitServices.fontManager;
 import static org.nting.toolkit.ui.Colors.WHITE;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.TOOLTIP_COLOR;
 import static playn.core.Font.Style.BOLD;
 
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Dialog;
+import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.SplitPane;
 import org.nting.toolkit.component.StandardPopup;
 import org.nting.toolkit.component.TextField;
 import org.nting.toolkit.component.TooltipPopup;
 import org.nting.toolkit.component.WindowPopup;
+import org.nting.toolkit.internal.NotificationsImpl;
 import org.nting.toolkit.internal.Root;
 import org.nting.toolkit.ui.ComponentUI;
 import org.nting.toolkit.ui.style.AbstractStyleModule;
@@ -34,9 +37,8 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(TextField.class).bind("componentUI", emptyComponentUI);
         toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
         toType(Dialog.class).bind("componentUI", emptyComponentUI);
-        toType(StandardPopup.class).bind("componentUI", emptyComponentUI);
-        toType(TooltipPopup.class).bind("componentUI", emptyComponentUI);
-        toType(WindowPopup.class).bind("componentUI", emptyComponentUI);
+        toType(StandardPopup.class).bind("componentUI", new MaterialStandardPopupUI<>());
+        toType(TooltipPopup.class).bind("componentUI", new MaterialTooltipPopupUI());
         toType(SplitPane.class).bind("componentUI", new MaterialSplitPaneUI());
     }
 
@@ -54,6 +56,17 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(ScrollPane.class).bind("gridSize", dluY(8));
 
         toType(SplitPane.class).bind("mouseOverSize", 6);
+
+        toType(Popup.class).bind("shadowSize", 1);
+
+        toType(StandardPopup.class).bind("padding", dluY(3));
+
+        toType(TooltipPopup.class).bind("color", TOOLTIP_COLOR);
+        toType(TooltipPopup.class).bind("shadowSize", 0);
+
+        toType(WindowPopup.class).bind("shadowSize", 4);
+
+        toType(NotificationsImpl.Notification.class).bind("shadowSize", 2);
     }
 
     @Override
