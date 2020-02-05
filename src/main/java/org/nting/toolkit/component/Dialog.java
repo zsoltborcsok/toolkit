@@ -81,8 +81,7 @@ public class Dialog extends Popup {
 
     public Dialog showAt(float xPos, float yPos) {
         Dimension preferredSize = checkSize(getPreferredSize(), toolkitManager().root().getSize());
-        showAt(xPos, yPos, preferredSize.width, preferredSize.height);
-        return this;
+        return showAt(xPos, yPos, preferredSize.width, preferredSize.height);
     }
 
     public Dialog showAt(float xPos, float yPos, float w, float h) {
