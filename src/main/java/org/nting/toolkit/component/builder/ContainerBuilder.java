@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
+import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
@@ -73,6 +74,10 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public SimpleIconComponentMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addIcon(Object constraints) {
         return new SimpleIconComponentMiddleBuilder<>(addComponent(new SimpleIconComponent(null), constraints));
+    }
+
+    public CheckBoxMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addCheckBox(Object constraints) {
+        return new CheckBoxMiddleBuilder<>(addComponent(new CheckBox(), constraints));
     }
 
     public ContainerBuilder<Panel, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addPanel(Object constraints) {
