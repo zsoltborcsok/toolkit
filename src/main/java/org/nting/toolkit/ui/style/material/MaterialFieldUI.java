@@ -34,7 +34,7 @@ import pythagoras.f.MathUtil;
 public abstract class MaterialFieldUI<C extends FieldComponent> implements ComponentUI<C> {
 
     private static final Map<FieldComponent, Registration> registrations = Maps.newHashMap();
-    protected static final String FOCUS_PERCENT = "focusPercent";
+    protected static final String FOCUS_PERCENT = "FOCUS_PERCENT";
 
     @Override
     public void initialize(C component) {

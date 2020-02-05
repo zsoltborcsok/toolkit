@@ -88,6 +88,14 @@ public class ButtonTestView {
                 .addRadioButton(xy(2, 2), radioButtonGroup).text("NORMAL / DISABLED").enabled(false).end()
                 .addRadioButton(xy(4, 2), radioButtonGroup).text("TEXT / ENABLED");
 
+        panelBuilder.formLayout().addRow("7dlu").addRow("pref");
+        nextPanelBuilder = panelBuilder.addPanel(xyw(0, panelBuilder.formLayout().lastRow(), 5))
+                .layoutManager("pref, 7dlu, pref, 7dlu, pref", "pref, 4dlu, pref");
+        nextPanelBuilder.addLabel(xyw(0, 0, 2)).text("SwitchButtons").pass().font(LARGE_FONT, BOLD).end() //
+                .addSwitchButton(xy(0, 2)).captionLeft("NORMAL").captionRight("normal").end() //
+                .addSwitchButton(xy(2, 2)).captionLeft("DISABLED").captionRight("disabled").enabled(false).end() //
+                .addSwitchButton(xy(4, 2)).captionLeft("SWITCHED").captionRight("switched").switched(true);
+
         return panelBuilder.build();
     }
 
