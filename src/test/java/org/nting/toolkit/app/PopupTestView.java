@@ -1,6 +1,7 @@
 package org.nting.toolkit.app;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
+import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
 import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.FormLayout.xyw;
 import static playn.core.Font.Style.BOLD;
@@ -43,8 +44,8 @@ public class PopupTestView {
         panel.addComponent(newButton("6", popupActionHandler), xy(1, 5));
         panel.addComponent(newButton("7", popupActionHandler), xy(1, 4));
 
-        ContainerBuilder<Panel, ?> popupTypeBuilder = new ContainerBuilder<>(new Panel())
-                .layoutManager("7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu", "7dlu, pref, 4dlu, pref, 7dlu");
+        ContainerBuilder<Panel, ?> popupTypeBuilder = panelBuilder("7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu",
+                "7dlu, pref, 4dlu, pref, 7dlu");
         popupTypeBuilder.addLabel(xyw(1, 1, 5)).text("Select popup type").pass().font(LARGE_FONT, BOLD)
                 .process(l -> l.tooltipText.setValue("Label tooltip test..."));
 

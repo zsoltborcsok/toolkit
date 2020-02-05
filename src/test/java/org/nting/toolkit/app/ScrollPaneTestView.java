@@ -5,6 +5,7 @@ import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.ALWAYS
 import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.AS_NEEDED;
 import static org.nting.toolkit.component.TextAlignment.CENTER;
 import static org.nting.toolkit.component.TextAlignment.RIGHT;
+import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
 import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.FormLayout.xyw;
 
@@ -18,9 +19,9 @@ import org.nting.toolkit.component.builder.FormLayoutMiddleBuilder;
 public class ScrollPaneTestView {
 
     public Component createPane() {
-        ContainerBuilder<Panel, ?> formBuilder = new ContainerBuilder<>(new Panel())
-                .layoutManager("7dlu, pref, 4dlu, max(pref;120dlu), 10dlu, pref, 4dlu, max(pref;120dlu), 7dlu", "7dlu");
-        FormLayoutMiddleBuilder<? extends ContainerBuilder<Panel, ?>> layoutBuilder = formBuilder.formLayout();
+        ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(
+                "7dlu, pref, 4dlu, max(pref;120dlu), 10dlu, pref, 4dlu, max(pref;120dlu), 7dlu", "7dlu");
+        FormLayoutMiddleBuilder<? extends ContainerBuilder<Panel, ?>> layoutBuilder = panelBuilder.formLayout();
 
         layoutBuilder.addRow("pref").done() //
                 .addComponent(new Separator(HORIZONTAL), xyw(1, layoutBuilder.lastRow(), 7));
@@ -63,6 +64,6 @@ public class ScrollPaneTestView {
         layoutBuilder.addRow("7dlu");
 
         // return new SplitPane(HORIZONTAL, new ScrollPane(formBuilder.build()), null); TODO shrink -> viewPosition.x
-        return new ScrollPane(formBuilder.build(), ALWAYS, AS_NEEDED);
+        return new ScrollPane(panelBuilder.build(), ALWAYS, AS_NEEDED);
     }
 }

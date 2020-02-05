@@ -2,6 +2,7 @@ package org.nting.toolkit.app;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
 import static org.nting.toolkit.component.FontIcon.FOLDER_OPEN;
+import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
 import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.FormLayout.xyw;
 import static org.nting.toolkit.ui.Colors.WHITE;
@@ -22,7 +23,7 @@ public class ButtonTestView {
     public Panel createPane() {
         FormLayout formLayout = new FormLayout("0px:grow, 7dlu, 0px:grow, 7dlu, 0px:grow",
                 "pref, 4dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
-        ContainerBuilder<Panel, ?> panelBuilder = new ContainerBuilder<>(new Panel(formLayout)) //
+        ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout) //
                 .addLabel(xyw(0, 0, 5)).text("Buttons").pass().font(LARGE_FONT, BOLD).end() //
                 .addButton(xy(0, 2)).text("NORMAL / DISABLED").enabled(false).pass().end() //
                 .addButton(xy(2, 2)).text("NORMAL / ENABLED").pass().end() //

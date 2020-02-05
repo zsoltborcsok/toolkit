@@ -17,6 +17,14 @@ import com.google.common.collect.Lists;
 public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDER extends ContainerBuilder<?, ?>>
         extends ComponentBuilder<CONTAINER, PARENT_BUILDER> {
 
+    public static ContainerBuilder<Panel, ?> panelBuilder(String columns, String rows) {
+        return new ContainerBuilder<>(new Panel()).layoutManager(columns, rows);
+    }
+
+    public static ContainerBuilder<Panel, ?> panelBuilder(LayoutManager layoutManager) {
+        return new ContainerBuilder<>(new Panel()).layoutManager(layoutManager);
+    }
+
     private final List<ComponentBuilder<?, ContainerBuilder<CONTAINER, PARENT_BUILDER>>> componentBuilders = Lists
             .newLinkedList();
 
