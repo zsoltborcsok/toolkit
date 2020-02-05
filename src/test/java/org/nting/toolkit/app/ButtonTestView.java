@@ -15,6 +15,7 @@ import static playn.core.Font.Style.BOLD;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Panel;
+import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
@@ -69,6 +70,23 @@ public class ButtonTestView {
         nextPanelBuilder.addButton(xy(4, 8)).text("RED / FOCUSED").color(red_500).pass().process(this::setFocused);
         nextPanelBuilder.setValueOfComponentsAt(RAISED, true, xy(0, 2), xy(2, 2), xy(4, 2), xy(0, 4), xy(2, 4),
                 xy(4, 4), xy(0, 6), xy(2, 6), xy(4, 6), xy(0, 8), xy(2, 8), xy(4, 8));
+
+        panelBuilder.formLayout().addRow("7dlu").addRow("pref");
+        nextPanelBuilder = panelBuilder.addPanel(xyw(0, panelBuilder.formLayout().lastRow(), 5))
+                .layoutManager("pref, 7dlu, 0px:grow, 7dlu, 0px:grow", "pref, 4dlu, pref");
+        nextPanelBuilder.addLabel(xyw(0, 0, 5)).text("CheckBoxes").pass().font(LARGE_FONT, BOLD).end() //
+                .addCheckBox(xy(0, 2)).text("TEXT SAVE CANCEL REMOVE").end() //
+                .addCheckBox(xy(2, 2)).text("NORMAL / DISABLED").enabled(false).end() //
+                .addCheckBox(xy(4, 2)).selected((Boolean) null).text("TEXT / ENABLED");
+
+        RadioButtonGroup radioButtonGroup = new RadioButtonGroup();
+        panelBuilder.formLayout().addRow("7dlu").addRow("pref");
+        nextPanelBuilder = panelBuilder.addPanel(xyw(0, panelBuilder.formLayout().lastRow(), 5))
+                .layoutManager("pref, 7dlu, 0px:grow, 7dlu, 0px:grow", "pref, 4dlu, pref");
+        nextPanelBuilder.addLabel(xyw(0, 0, 5)).text("RadioButtons").pass().font(LARGE_FONT, BOLD).end() //
+                .addRadioButton(xy(0, 2), radioButtonGroup).text("TEXT SAVE CANCEL REMOVE").end()
+                .addRadioButton(xy(2, 2), radioButtonGroup).text("NORMAL / DISABLED").enabled(false).end()
+                .addRadioButton(xy(4, 2), radioButtonGroup).text("TEXT / ENABLED");
 
         return panelBuilder.build();
     }

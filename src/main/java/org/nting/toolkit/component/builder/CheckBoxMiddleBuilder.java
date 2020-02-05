@@ -45,7 +45,7 @@ public class CheckBoxMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
         return this;
     }
 
-    public CheckBoxMiddleBuilder<T> selected(boolean selected) {
+    public CheckBoxMiddleBuilder<T> selected(Boolean selected) {
         componentBuilder.set(checkBox -> checkBox.selected, selected);
         return this;
     }
