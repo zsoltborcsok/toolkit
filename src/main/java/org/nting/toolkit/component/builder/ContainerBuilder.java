@@ -8,6 +8,8 @@ import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
+import org.nting.toolkit.component.RadioButton;
+import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.SimpleIconComponent;
 import org.nting.toolkit.component.TextField;
 import org.nting.toolkit.layout.FormLayout;
@@ -78,6 +80,13 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public CheckBoxMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addCheckBox(Object constraints) {
         return new CheckBoxMiddleBuilder<>(addComponent(new CheckBox(), constraints));
+    }
+
+    public CheckBoxMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addRadioButton(Object constraints,
+            RadioButtonGroup radioButtonGroup) {
+        RadioButton radioButton = new RadioButton();
+        radioButtonGroup.add(radioButton);
+        return new CheckBoxMiddleBuilder<>(addComponent(radioButton, constraints));
     }
 
     public ContainerBuilder<Panel, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addPanel(Object constraints) {
