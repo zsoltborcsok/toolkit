@@ -1,7 +1,5 @@
 package org.nting.toolkit.ui.stone;
 
-import org.nting.data.Property;
-
 import com.google.common.base.Strings;
 
 import playn.core.Canvas;
@@ -12,7 +10,7 @@ import pythagoras.f.Dimension;
 
 public class TextContentWithEllipsis extends TextContentSingleLine {
 
-    public TextContentWithEllipsis(Font font, Property<Integer> color, String text) {
+    public TextContentWithEllipsis(Font font, int color, String text) {
         super(font, color, text);
     }
 
