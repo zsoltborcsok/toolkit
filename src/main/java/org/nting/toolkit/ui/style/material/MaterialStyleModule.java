@@ -3,6 +3,7 @@ package org.nting.toolkit.ui.style.material;
 import static org.nting.toolkit.FontManager.FontSize.MEDIUM_FONT;
 import static org.nting.toolkit.FontManager.FontSize.SMALL_FONT;
 import static org.nting.toolkit.ToolkitServices.fontManager;
+import static org.nting.toolkit.ui.style.material.CheckBoxPropertyIds.CHECK_BOX_SIZE;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
@@ -12,8 +13,10 @@ import static playn.core.Font.Style.BOLD;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
+import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Dialog;
 import org.nting.toolkit.component.Popup;
+import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.SplitPane;
 import org.nting.toolkit.component.StandardPopup;
@@ -34,7 +37,6 @@ public class MaterialStyleModule extends AbstractStyleModule {
 
     @Override
     protected void doConfigureUIs() {
-        EmptyComponentUI emptyComponentUI = new EmptyComponentUI();
         toType(Button.class).bind("componentUI", new MaterialButtonUI());
         toType(TextField.class).bind("componentUI", new MaterialTextFieldUI<>());
         toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
@@ -42,6 +44,8 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(StandardPopup.class).bind("componentUI", new MaterialStandardPopupUI<>());
         toType(TooltipPopup.class).bind("componentUI", new MaterialTooltipPopupUI());
         toType(SplitPane.class).bind("componentUI", new MaterialSplitPaneUI());
+        toType(CheckBox.class).bind("componentUI", new MaterialCheckBoxUI<>());
+        toType(RadioButton.class).bind("componentUI", new MaterialRadioButtonUI());
     }
 
     @Override
@@ -75,6 +79,10 @@ public class MaterialStyleModule extends AbstractStyleModule {
 
         toType(TextField.class).bind("hPadding", 0);
         toType(TextField.class).bind("vPadding", dluY(3));
+
+        toType(CheckBox.class).bind("padding", dluY(3));
+        toType(CheckBox.class).bind(CHECK_BOX_SIZE, 2 * dluY(4));
+        toType(RadioButton.class).bind(CHECK_BOX_SIZE, 2 * dluY(4));
     }
 
     @Override
