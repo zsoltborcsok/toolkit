@@ -40,7 +40,7 @@ public class MaterialScrollPaneUI implements ComponentUI<ScrollPane> {
         Dimension size = scrollPane.getSize();
         int scrollBarWidth = scrollPane.scrollBarWidth.getValue();
 
-        if (scrollPane.vsbVisible.getValue()) {
+        if (scrollPane.isVsbVisible()) {
             float vScrollBarHeight = scrollPane.vScrollBarHeight(size);
             new RectangleShape(size.width - scrollBarWidth, 0, scrollBarWidth, size.height)
                     .fillColor(SCROLLBAR_COLOR.getValueOf(scrollPane)).paint(canvas);
@@ -51,7 +51,7 @@ public class MaterialScrollPaneUI implements ComponentUI<ScrollPane> {
                     scrollBarWidth, scrollPane.vSliderHeight(vScrollBarHeight)).fillColor(SLIDER_COLORValue)
                             .paint(canvas);
         }
-        if (scrollPane.hsbVisible.getValue()) {
+        if (scrollPane.isHsbVisible()) {
             float hScrollBarWidth = scrollPane.hScrollBarWidth(size);
             new RectangleShape(0, size.height - scrollBarWidth, size.width, scrollBarWidth)
                     .fillColor(SCROLLBAR_COLOR.getValueOf(scrollPane)).paint(canvas);

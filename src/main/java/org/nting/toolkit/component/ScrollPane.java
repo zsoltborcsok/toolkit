@@ -33,15 +33,15 @@ public class ScrollPane extends ScrollComponent {
 
     public final Property<ScrollBarPolicy> vsbPolicy = createProperty("vsbPolicy", null);
     public final Property<ScrollBarPolicy> hsbPolicy = createProperty("hsbPolicy", null);
-    public final Property<Boolean> vsbVisible = createProperty("vsbVisible", false);
-    public final Property<Boolean> hsbVisible = createProperty("hsbVisible", false);
     public final Property<Integer> gridSize = createProperty("gridSize", 1);
+    public final Property<Integer> scrollBarWidth = createProperty("scrollBarWidth", 10);
+    public final Property<Boolean> usePaddingForAntialias = createProperty("usePaddingForAntialias", true);
+
+    private final Property<Boolean> vsbVisible = createProperty("vsbVisible", false);
+    private final Property<Boolean> hsbVisible = createProperty("hsbVisible", false);
 
     private final Point viewPosition = new Point(0, 0);
     private Dimension viewPrefSize = new Dimension(0, 0);
-
-    public final Property<Integer> scrollBarWidth = createProperty("scrollBarWidth", 10);
-    public final Property<Boolean> usePaddingForAntialias = createProperty("usePaddingForAntialias", true);
 
     // +1/-1: vSlider/hSlider
     private final Property<Integer> hoverIndex = createProperty("hoverIndex", 0);
@@ -256,6 +256,14 @@ public class ScrollPane extends ScrollComponent {
                 setViewPosition(new Point(contentRect.x + contentRect.width - widthValue, viewPosition.y));
             }
         }
+    }
+
+    public boolean isVsbVisible() {
+        return vsbVisible.getValue();
+    }
+
+    public boolean isHsbVisible() {
+        return hsbVisible.getValue();
     }
 
     public float vScrollBarHeight(Dimension size) {
