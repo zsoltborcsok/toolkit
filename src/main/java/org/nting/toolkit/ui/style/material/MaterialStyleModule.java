@@ -1,8 +1,10 @@
 package org.nting.toolkit.ui.style.material;
 
+import static org.nting.toolkit.FontManager.FontSize.MEDIUM_FONT;
 import static org.nting.toolkit.FontManager.FontSize.SMALL_FONT;
 import static org.nting.toolkit.ToolkitServices.fontManager;
-import static org.nting.toolkit.ui.Colors.WHITE;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_COLOR;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.TOOLTIP_COLOR;
 import static playn.core.Font.Style.BOLD;
@@ -36,7 +38,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(Button.class).bind("componentUI", new MaterialButtonUI());
         toType(TextField.class).bind("componentUI", emptyComponentUI);
         toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
-        toType(Dialog.class).bind("componentUI", emptyComponentUI);
+        toType(Dialog.class).bind("componentUI", new MaterialDialogUI());
         toType(StandardPopup.class).bind("componentUI", new MaterialStandardPopupUI<>());
         toType(TooltipPopup.class).bind("componentUI", new MaterialTooltipPopupUI());
         toType(SplitPane.class).bind("componentUI", new MaterialSplitPaneUI());
@@ -44,7 +46,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
 
     @Override
     protected void doConfigureComponents() {
-        toType(Root.class).bind("backgroundColor", WHITE);
+        toType(Root.class).bind("backgroundColor", PRIMARY_BACKGROUND_COLOR);
 
         toType(AbstractComponent.class).bind("font", font);
 
@@ -67,6 +69,9 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(WindowPopup.class).bind("shadowSize", 4);
 
         toType(NotificationsImpl.Notification.class).bind("shadowSize", 2);
+
+        toType(Dialog.class).bind("modalityCurtain", DISABLED_OPACITY_COLOR);
+        toType(Dialog.class).bind("font", fontManager().getFont(MEDIUM_FONT, BOLD));
     }
 
     @Override

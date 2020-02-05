@@ -1,6 +1,6 @@
 package org.nting.toolkit.ui.style.material;
 
-import static org.nting.toolkit.ui.Colors.WHITE;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
 
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.StandardPopup;
@@ -23,7 +23,7 @@ public class MaterialStandardPopupUI<T extends StandardPopup> implements Compone
     @Override
     public void paintComponent(T standardPopup, Canvas canvas) {
         Dimension size = standardPopup.getSize();
-        new RectangleShape(0, 0, size.width, size.height).fillColor(WHITE).paint(canvas);
+        new RectangleShape(0, 0, size.width, size.height).fillColor(PRIMARY_BACKGROUND_COLOR).paint(canvas);
     }
 
     @Override
