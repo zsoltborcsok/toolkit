@@ -41,7 +41,8 @@ public class ToolkitSampleApp {
         // panel.addComponent(new ButtonTestView().createPane(), xy(1, 1));
         // panel.addComponent(new ScrollPaneTestView().createPane(), xy(1, 1));
         // panel.addComponent(new SplitPaneTestView().createPane(), xy(1, 1));
-        panel.addComponent(new PopupTestView().createPane(), xy(1, 1));
+        // panel.addComponent(new PopupTestView().createPane(), xy(1, 1));
+        panel.addComponent(new DialogTestView().createPane(), xy(1, 1));
         return panel;
     }
 }
