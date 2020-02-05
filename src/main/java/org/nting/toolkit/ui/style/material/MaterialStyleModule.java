@@ -36,7 +36,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
     protected void doConfigureUIs() {
         EmptyComponentUI emptyComponentUI = new EmptyComponentUI();
         toType(Button.class).bind("componentUI", new MaterialButtonUI());
-        toType(TextField.class).bind("componentUI", emptyComponentUI);
+        toType(TextField.class).bind("componentUI", new MaterialTextFieldUI<>());
         toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
         toType(Dialog.class).bind("componentUI", new MaterialDialogUI());
         toType(StandardPopup.class).bind("componentUI", new MaterialStandardPopupUI<>());
@@ -72,6 +72,9 @@ public class MaterialStyleModule extends AbstractStyleModule {
 
         toType(Dialog.class).bind("modalityCurtain", DISABLED_OPACITY_COLOR);
         toType(Dialog.class).bind("font", fontManager().getFont(MEDIUM_FONT, BOLD));
+
+        toType(TextField.class).bind("hPadding", 0);
+        toType(TextField.class).bind("vPadding", dluY(3));
     }
 
     @Override
