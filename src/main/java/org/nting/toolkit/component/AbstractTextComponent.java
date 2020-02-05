@@ -52,7 +52,7 @@ public abstract class AbstractTextComponent extends AbstractComponent {
 
         @Override
         public String apply(String text, Pair<Integer, Integer> selectionStartAndLength) {
-            if (0 < selectionStartAndLength.first) {
+            if (0 < selectionStartAndLength.second) {
                 int selectionStart = Math.max(0, selectionStartAndLength.first);
                 int selectionLength = Math.min(text.length() - selectionStart, selectionStartAndLength.second);
                 return text.substring(selectionStart, selectionStart + selectionLength);
