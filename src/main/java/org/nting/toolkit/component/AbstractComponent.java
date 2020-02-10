@@ -447,6 +447,10 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
         }
     }
 
+    protected List<Behavior> getBehaviors() {
+        return behaviors;
+    }
+
     @Override
     public void removeBehaviorOnAnyConsumedEvent(Behavior behavior) {
         toolkitManager().schedule(createLoopedRunnable(1, 0, () -> behaviorsToRemove.add(behavior)));
