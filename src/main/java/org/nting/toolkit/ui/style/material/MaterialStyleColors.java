@@ -62,23 +62,14 @@ public class MaterialStyleColors {
     public static final int DISABLED_OPACITY_COLOR = ColorUtils.adjustAlpha(DISABLED_OPACITY, BASE_COLOR);
     public static final int SECONDARY_OPACITY_COLOR = ColorUtils.adjustAlpha(SECONDARY_OPACITY, BASE_COLOR);
     public static final int PRIMARY_OPACITY_COLOR = ColorUtils.adjustAlpha(PRIMARY_OPACITY, BASE_COLOR);
-    // public static final int SLIDER_HOVER_COLOR = ColorUtils.adjustAlpha(PRIMARY_OPACITY, ACCENT_COLOR);
-    // public static final int SLIDER_COLOR = ColorUtils.adjustAlpha(SECONDARY_OPACITY, ACCENT_COLOR);
 
     public static final int DIALOG_TITLE_COLOR = ColorUtils.adjustAlpha(222, BASE_COLOR);
     public static final int TOOLTIP_BACKGROUND = ColorUtils.adjustAlpha(230, grey_700);
     public static final int TOOLTIP_COLOR = PRIMARY_BACKGROUND_COLOR;
 
     public static final int SELECTION_BACKGROUND = 0xFF81C7EB;
-    public static final int UNFOCUSED_SELECTION_BACKGROUND = 0xFFBADEEE;
-    public static final int DARK_HOVER_COLOR = 0xFF2B7899;
-    public static final int ICON_COLOR = 0xFF556070;
-    public static final int TEXT_FIELD_BORDER_COLOR = 0xFFD7D7D7;
     public static final int BORDER_COLOR = 0xFFCCCCCC;
-    public static final int FOCUSED_BORDER_COLOR = 0xFF459BC9;
-    public static final int GRADIENT0 = 0xFFEEEEEE;
-    public static final int GRADIENT1 = 0xFFE6E6E6;
-    public static final int GRADIENT2 = 0xFFDEDEDE;
+
 
     public static int disabledColor(int color) {
         int opacity = IS_LIGHT ? MaterialLightTheme.LIGHT_DISABLED_OPACITY : MaterialDarkTheme.DARK_DISABLED_OPACITY;
