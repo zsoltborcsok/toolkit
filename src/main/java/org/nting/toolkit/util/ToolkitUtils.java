@@ -133,13 +133,14 @@ public class ToolkitUtils {
     }
 
     public static List<Component> getAllComponents(Component root) {// Depth-first
-        List<Component> components = Lists.newLinkedList();
+        List<Component> components = Lists.newArrayList();
         components.add(root);
         for (int i = 0; i < components.size(); i++) {
-            if (!components.get(i).isVisible()) {
+            Component component = components.get(i);
+            if (!component.isVisible()) {
                 components.remove(i--);
             } else {
-                components.addAll(i + 1, components.get(i).getComponents());
+                components.addAll(i + 1, component.getComponents());
             }
         }
 
