@@ -63,6 +63,9 @@ public class MaterialStyleColors {
     public static final int SECONDARY_OPACITY_COLOR = ColorUtils.adjustAlpha(SECONDARY_OPACITY, BASE_COLOR);
     public static final int PRIMARY_OPACITY_COLOR = ColorUtils.adjustAlpha(PRIMARY_OPACITY, BASE_COLOR);
 
+    public static final int DIVIDER_OPACITY_PRIMARY = ColorUtils.adjustAlpha(DIVIDER_OPACITY, PRIMARY_COLOR);
+    public static final int DISABLED_OPACITY_PRIMARY = ColorUtils.adjustAlpha(DISABLED_OPACITY, PRIMARY_COLOR);
+
     public static final int DIALOG_TITLE_COLOR = ColorUtils.adjustAlpha(222, BASE_COLOR);
     public static final int TOOLTIP_BACKGROUND = ColorUtils.adjustAlpha(230, grey_700);
     public static final int TOOLTIP_COLOR = PRIMARY_BACKGROUND_COLOR;

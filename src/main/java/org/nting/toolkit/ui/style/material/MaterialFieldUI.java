@@ -7,6 +7,7 @@ import static org.nting.toolkit.ui.style.material.FieldComponentPropertyIds.ERRO
 import static org.nting.toolkit.ui.style.material.FieldComponentPropertyIds.FOCUSED_COLOR;
 import static org.nting.toolkit.ui.style.material.FieldComponentPropertyIds.SECONDARY_COLOR;
 import static org.nting.toolkit.ui.style.material.FieldComponentPropertyIds.SELECTION_BACKGROUND;
+import static org.nting.toolkit.ui.style.material.MaterialContentUtil.paintFocusedLine;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.SECONDARY_TEXT_COLOR;
 
@@ -18,18 +19,12 @@ import org.nting.data.Registration;
 import org.nting.toolkit.animation.Tween;
 import org.nting.toolkit.component.FieldComponent;
 import org.nting.toolkit.ui.ComponentUI;
-import org.nting.toolkit.ui.shape.DashLineShape;
-import org.nting.toolkit.ui.shape.LineShape;
-import org.nting.toolkit.ui.stone.Content;
 import org.nting.toolkit.ui.stone.ContentBuilder;
-import org.nting.toolkit.ui.stone.FixShapeContent;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
 import playn.core.Canvas;
-import pythagoras.f.Dimension;
-import pythagoras.f.MathUtil;
 
 public abstract class MaterialFieldUI<C extends FieldComponent> implements ComponentUI<C> {
 
@@ -59,6 +54,7 @@ public abstract class MaterialFieldUI<C extends FieldComponent> implements Compo
 
     @Override
     public void terminate(C component) {
+        component.removeProperty(BACKGROUND_COLOR);
         component.removeProperty(SECONDARY_COLOR);
         component.removeProperty(DIVIDER_COLOR);
         component.removeProperty(FOCUSED_COLOR);
@@ -70,36 +66,9 @@ public abstract class MaterialFieldUI<C extends FieldComponent> implements Compo
 
     // Preferred height: 2px
     protected ContentBuilder paintLine(C component) {
-        boolean hasErrorMessage = !Strings.isNullOrEmpty(component.errorMessage.getValue());
-        float focusPercent = component.getValue(FOCUS_PERCENT);
-        float width = component.width.getValue();
-        if (!component.enabled.getValue()) {
-            int color = DIVIDER_COLOR.getValueOf(component);
-            Content content = new FixShapeContent(new Dimension(width, 1),
-                    new DashLineShape(0, 0, width, 0).strokeColor(color));
-            return ContentBuilder.builderOnContent(content).topPaddedContent(1);
-        } else if (focusPercent == 0) {
-            int color = hasErrorMessage ? ERROR_COLOR.getValueOf(component) : DIVIDER_COLOR.getValueOf(component);
-            Content content = new FixShapeContent(new Dimension(width, 1),
-                    new LineShape(0, 0, width, 0).strokeColor(color));
-            return ContentBuilder.builderOnContent(content).topPaddedContent(1);
-        } else if (focusPercent == 100) {
-            int color = hasErrorMessage ? ERROR_COLOR.getValueOf(component) : FOCUSED_COLOR.getValueOf(component);
-            Content content = new FixShapeContent(new Dimension(width, 2),
-                    new LineShape(0, 1, width, 1).strokeWidth(2).strokeColor(color));
-            return ContentBuilder.builderOnContent(content);
-        } else {
-            int color = hasErrorMessage ? ERROR_COLOR.getValueOf(component) : DIVIDER_COLOR.getValueOf(component);
-            Content content = new FixShapeContent(new Dimension(width, 1),
-                    new LineShape(0, 0, width, 0).strokeColor(color));
-            ContentBuilder contentBuilder = ContentBuilder.builderOnContent(content).topPaddedContent(1);
-
-            color = hasErrorMessage ? ERROR_COLOR.getValueOf(component) : FOCUSED_COLOR.getValueOf(component);
-            width = MathUtil.round(width * focusPercent / 100f);
-            Content overContent = new FixShapeContent(new Dimension(width, 2),
-                    new LineShape(0, 1, width, 1).strokeWidth(2).strokeColor(color));
-            return contentBuilder.addOverContent(overContent, 0, 1, 0, 1);
-        }
+        return paintFocusedLine(component.enabled.getValue(), !Strings.isNullOrEmpty(component.errorMessage.getValue()),
+                component.getValue(FOCUS_PERCENT), component.width.getValue(), DIVIDER_COLOR.getValueOf(component),
+                ERROR_COLOR.getValueOf(component), FOCUSED_COLOR.getValueOf(component));
     }
 
     protected int getCaretColor(C component) {

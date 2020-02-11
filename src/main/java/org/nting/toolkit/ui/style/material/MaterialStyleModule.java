@@ -5,6 +5,9 @@ import static org.nting.toolkit.FontManager.FontSize.SMALL_FONT;
 import static org.nting.toolkit.ToolkitServices.fontManager;
 import static org.nting.toolkit.ui.style.material.CheckBoxPropertyIds.CHECK_BOX_SIZE;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_COLOR;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_PRIMARY;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_COLOR;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_PRIMARY;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.TOOLTIP_COLOR;
@@ -15,6 +18,7 @@ import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Dialog;
+import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.ScrollPane;
@@ -48,6 +52,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(CheckBox.class).bind("componentUI", new MaterialCheckBoxUI<>());
         toType(RadioButton.class).bind("componentUI", new MaterialRadioButtonUI());
         toType(SwitchButton.class).bind("componentUI", new MaterialSwitchButtonUI());
+        toType(DropDownList.class).bind("componentUI", new MaterialDropDownListUI());
     }
 
     @Override
@@ -79,7 +84,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(Dialog.class).bind("modalityCurtain", DISABLED_OPACITY_COLOR);
         toType(Dialog.class).bind("font", fontManager().getFont(MEDIUM_FONT, BOLD));
 
-        toType(TextField.class).bind("hPadding", 0);
+        toType(TextField.class).bind("hPadding", dluX(3));
         toType(TextField.class).bind("vPadding", dluY(3));
 
         toType(CheckBox.class).bind("padding", dluY(3));
@@ -87,6 +92,13 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(RadioButton.class).bind(CHECK_BOX_SIZE, 2 * dluY(4));
 
         toType(SwitchButton.class).bind("padding", dluY(4));
+
+        toType(DropDownList.class).bind("hPadding", dluX(3));
+        toType(DropDownList.class).bind("vPadding", dluY(3));
+        toType(DropDownList.class).bind("visibleItemCount", 6);
+        toType(DropDownList.DropDownListPopup.class).bind("focusedBackgroundColor", DIVIDER_OPACITY_COLOR);
+        toType(DropDownList.DropDownListPopup.class).bind("selectedBackgroundColor", DIVIDER_OPACITY_PRIMARY);
+        toType(DropDownList.DropDownListPopup.class).bind("focusedSelectedBackgroundColor", DISABLED_OPACITY_PRIMARY);
     }
 
     @Override
