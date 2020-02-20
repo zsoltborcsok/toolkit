@@ -5,6 +5,7 @@ import java.util.List;
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.CheckBox;
+import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
@@ -92,6 +93,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public SwitchButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addSwitchButton(Object constraints) {
         return new SwitchButtonMiddleBuilder<>(addComponent(new SwitchButton(), constraints));
+    }
+
+    public <SELECTION> DropDownListMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>, SELECTION> addDropDownList(
+            Object constraints) {
+        return new DropDownListMiddleBuilder<>(addComponent(new DropDownList<>(), constraints));
     }
 
     public ContainerBuilder<Panel, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addPanel(Object constraints) {
