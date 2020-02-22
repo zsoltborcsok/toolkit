@@ -367,6 +367,13 @@ public class DropDownList<T> extends AbstractTextComponent {
                         closePopup();
                     }
                 }
+
+                @SuppressWarnings("unchecked")
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    T item = (T) e.getSource().getId();
+                    focusedIndex.setValue(items.indexOf(item));
+                }
             };
 
             for (int i = 0; i < items.size(); i++) {
