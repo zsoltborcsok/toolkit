@@ -342,7 +342,8 @@ public class ScrollPane extends ScrollComponent {
                 setComponentPosition(view, -position.x, -position.y);
 
                 Dimension size = scrollPane.getSize();
-                setComponentSize(view, size.width, size.height);
+                setComponentSize(view, Math.max(size.width, scrollPane.viewPrefSize.width),
+                        Math.max(size.height, scrollPane.viewPrefSize.height));
 
                 scrollPane.updateVisibilityOfAlwaysVisibleScrollbars();
             }
