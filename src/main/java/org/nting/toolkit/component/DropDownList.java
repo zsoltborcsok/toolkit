@@ -103,6 +103,7 @@ public class DropDownList<T> extends AbstractTextComponent {
     }
 
     public void setDataProvider(DataProvider<T> dataProvider) {
+        DataProvider<T> prevDataProvider = this.dataProvider;
         this.dataProvider = dataProvider;
 
         if (dataProvider == null) {
@@ -122,7 +123,7 @@ public class DropDownList<T> extends AbstractTextComponent {
                 } else { // Refresh the selected item from the fetched items
                     T selectedItemValue = selectedItem.getValue();
                     selectedItem.setValue(items.stream().filter(
-                            item -> Objects.equals(dataProvider.getId(item), dataProvider.getId(selectedItemValue)))
+                            item -> Objects.equals(dataProvider.getId(item), prevDataProvider.getId(selectedItemValue)))
                             .findFirst().orElse(this.items.get(0)));
                 }
             }
