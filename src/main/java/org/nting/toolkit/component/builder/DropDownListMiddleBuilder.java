@@ -18,83 +18,83 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> color(int color) {
-        componentBuilder.set(textField -> textField.color, color);
+        componentBuilder.set(dropDownList -> dropDownList.color, color);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> caption(String caption) {
-        componentBuilder.set(textField -> textField.caption, caption);
+        componentBuilder.set(dropDownList -> dropDownList.caption, caption);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> caption(Property<String> caption) {
-        componentBuilder.<String> set(textField -> textField.caption, caption);
+        componentBuilder.<String> set(dropDownList -> dropDownList.caption, caption);
         return this;
     }
 
     public <F> DropDownListMiddleBuilder<T, S> caption(Property<F> source, Function<F, String> transform) {
-        componentBuilder.bind(textField -> textField.caption, source, transform);
+        componentBuilder.bind(dropDownList -> dropDownList.caption, source, transform);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> enabled(boolean enabled) {
-        componentBuilder.set(textField -> textField.enabled, enabled);
+        componentBuilder.set(dropDownList -> dropDownList.enabled, enabled);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(textField -> textField.enabled, enabled);
+        componentBuilder.<Boolean> set(dropDownList -> dropDownList.enabled, enabled);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> emptySelectionAllowed(boolean emptySelectionAllowed) {
-        componentBuilder.set(textField -> textField.emptySelectionAllowed, emptySelectionAllowed);
+        componentBuilder.set(dropDownList -> dropDownList.emptySelectionAllowed, emptySelectionAllowed);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> emptySelectionAllowed(Property<Boolean> emptySelectionAllowed) {
-        componentBuilder.<Boolean> set(textField -> textField.emptySelectionAllowed, emptySelectionAllowed);
+        componentBuilder.<Boolean> set(dropDownList -> dropDownList.emptySelectionAllowed, emptySelectionAllowed);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> emptySelectionCaption(String emptySelectionCaption) {
-        componentBuilder.set(textField -> textField.emptySelectionCaption, emptySelectionCaption);
+        componentBuilder.set(dropDownList -> dropDownList.emptySelectionCaption, emptySelectionCaption);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> emptySelectionCaption(Property<String> emptySelectionCaption) {
-        componentBuilder.<String> set(textField -> textField.emptySelectionCaption, emptySelectionCaption);
+        componentBuilder.<String> set(dropDownList -> dropDownList.emptySelectionCaption, emptySelectionCaption);
         return this;
     }
 
     public <F> DropDownListMiddleBuilder<T, S> emptySelectionCaption(Property<F> source,
             Function<F, String> transform) {
-        componentBuilder.bind(textField -> textField.emptySelectionCaption, source, transform);
+        componentBuilder.bind(dropDownList -> dropDownList.emptySelectionCaption, source, transform);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> visibleItemCount(Integer visibleItemCount) {
-        componentBuilder.set(textField -> textField.visibleItemCount, visibleItemCount);
+        componentBuilder.set(dropDownList -> dropDownList.visibleItemCount, visibleItemCount);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> visibleItemCount(Property<Integer> visibleItemCount) {
-        componentBuilder.<Integer> set(textField -> textField.visibleItemCount, visibleItemCount);
+        componentBuilder.<Integer> set(dropDownList -> dropDownList.visibleItemCount, visibleItemCount);
         return this;
     }
 
     public <F> DropDownListMiddleBuilder<T, S> visibleItemCount(Property<F> source, Function<F, Integer> transform) {
-        componentBuilder.bind(textField -> textField.visibleItemCount, source, transform);
+        componentBuilder.bind(dropDownList -> dropDownList.visibleItemCount, source, transform);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> selectedItem(S selectedItem) {
-        componentBuilder.set(textField -> textField.selectedItem, selectedItem);
+        componentBuilder.set(dropDownList -> dropDownList.selectedItem, selectedItem);
         return this;
     }
 
     public DropDownListMiddleBuilder<T, S> selectedItem(Property<S> selectedItem) {
-        componentBuilder.<S> set(textField -> textField.selectedItem, selectedItem);
+        componentBuilder.<S> set(dropDownList -> dropDownList.selectedItem, selectedItem);
         return this;
     }
 

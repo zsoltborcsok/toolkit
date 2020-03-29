@@ -1,12 +1,14 @@
 package org.nting.toolkit.component.builder;
 
 import java.util.List;
+import java.util.function.Function;
 
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.Label;
+import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.RadioButton;
@@ -14,6 +16,8 @@ import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.SimpleIconComponent;
 import org.nting.toolkit.component.SwitchButton;
 import org.nting.toolkit.component.TextField;
+import org.nting.toolkit.component.renderer.BasicItemRenderer;
+import org.nting.toolkit.component.renderer.ItemRenderer;
 import org.nting.toolkit.layout.FormLayout;
 import org.nting.toolkit.layout.LayoutManager;
 
@@ -98,6 +102,17 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
     public <SELECTION> DropDownListMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>, SELECTION> addDropDownList(
             Object constraints) {
         return new DropDownListMiddleBuilder<>(addComponent(new DropDownList<>(), constraints));
+    }
+
+    public <ITEM> ListComponentMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>, ITEM> addListComponent(
+            Object constraints, Function<ITEM, String> textPropertyGetter) {
+        return new ListComponentMiddleBuilder<>(
+                addComponent(new ListComponent<>(new BasicItemRenderer<>(textPropertyGetter)), constraints));
+    }
+
+    public <ITEM> ListComponentMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>, ITEM> addListComponent(
+            Object constraints, ItemRenderer<ITEM> itemRenderer) {
+        return new ListComponentMiddleBuilder<>(addComponent(new ListComponent<>(itemRenderer), constraints));
     }
 
     public ContainerBuilder<Panel, ContainerBuilder<CONTAINER, PARENT_BUILDER>> addPanel(Object constraints) {
