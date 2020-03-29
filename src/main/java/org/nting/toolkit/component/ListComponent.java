@@ -51,7 +51,8 @@ public class ListComponent<T> extends Panel {
     private static Query EMPTY_QUERY = new Query(null, null);
 
     public final Property<Selection> selection = createProperty("selection", Selection.SINGLE);
-    public final Property<Integer> pageLength = createProperty("pageLength", 15);
+    /** The pageLength defines the preferred height. If height is configured by the layout then it's better to set 0. */
+    public final Property<Integer> pageLength = createProperty("pageLength", 8);
     public final Property<String> noItemsInfo = createProperty("noItemsInfo", "");
     public final ListProperty<T> selectedItems = createListProperty("selectedItems");
     public final Property<Boolean> enabled = createProperty("enabled", true);
@@ -423,15 +424,24 @@ public class ListComponent<T> extends Panel {
         }
 
         private void focusNextPage() {
-            if (0 < pageLength.getValue()) {
-                focusedIndex.setValue(Math.min(items.size() - 1, focusedIndex.getValue() + pageLength.getValue() - 1));
+            int currentPageLength = calculateCurrentPageLength();
+            if (1 < currentPageLength) {
+                focusedIndex.setValue(Math.min(items.size() - 1, focusedIndex.getValue() + currentPageLength - 1));
             }
         }
 
         private void focusPrevPage() {
-            if (0 < pageLength.getValue()) {
-                focusedIndex.setValue(Math.max(0, focusedIndex.getValue() - pageLength.getValue() + 1));
+            int currentPageLength = calculateCurrentPageLength();
+            if (1 < currentPageLength) {
+                focusedIndex.setValue(Math.max(0, focusedIndex.getValue() - currentPageLength + 1));
             }
+        }
+
+        @SuppressWarnings("unchecked")
+        private int calculateCurrentPageLength() {
+            ListScrollView listScrollView = (ListScrollView) scrollPane.getView();
+            return listScrollView.getItemIndex(height.getValue() + font.getValue().size())
+                    - listScrollView.getItemIndex(0);
         }
     }
 }
