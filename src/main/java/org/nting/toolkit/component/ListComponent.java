@@ -6,8 +6,8 @@ import static org.nting.toolkit.component.ListComponent.Selection.SINGLE;
 import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.AS_NEEDED;
 import static org.nting.toolkit.event.MouseEvent.MouseButton.BUTTON_LEFT;
 import static org.nting.toolkit.ui.Colors.DARK_GREY;
+import static org.nting.toolkit.ui.Colors.GREY;
 import static org.nting.toolkit.ui.stone.TextContentSingleLine.textContent;
-import static org.nting.toolkit.ui.style.material.MaterialStyleColors.disabledColor;
 import static playn.core.util.SimpleMessageFormat.format;
 
 import java.util.Arrays;
@@ -58,6 +58,7 @@ public class ListComponent<T> extends Panel {
 
     // Styleable properties
     public final Property<Integer> color = createProperty("color", DARK_GREY);
+    public final Property<Integer> secondaryColor = createProperty("secondaryColor", GREY);
     public final Property<ListCellRenderer> listCellRenderer = createProperty("listCellRenderer", null);
 
     private final Property<Integer> focusedIndex = createProperty("focusedIndex", -1);
@@ -172,7 +173,7 @@ public class ListComponent<T> extends Panel {
     }
 
     public int getColor() {
-        return enabled.getValue() ? color.getValue() : disabledColor(color.getValue());
+        return enabled.getValue() ? color.getValue() : secondaryColor.getValue();
     }
 
     private void fetchItems(int limit, DataProvider<T> prevDataProvider) {
@@ -289,7 +290,7 @@ public class ListComponent<T> extends Panel {
             super.doPaintComponent(canvas);
 
             if (itemCount.getValue() == 0) {
-                TextContent textContent = textContent(font.getValue(), color.getValue(), noItemsInfo.getValue());
+                TextContent textContent = textContent(font.getValue(), getColor(), noItemsInfo.getValue());
                 new PaddedContent(textContent, 1, 1, 1, 1).paint(canvas, getSize());
             } else {
                 itemPositions.clear();
