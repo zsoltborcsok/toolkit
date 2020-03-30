@@ -351,14 +351,20 @@ public class ListComponent<T> extends Panel {
                             lastSelectedItemIndex = itemIndex;
                         }
                     } else if (e.isShiftPressed() && lastSelectedItemIndex != null) {
-                        handleMultiSelect(e.isShiftPressed());
+                        handleSelection(e.isShiftPressed());
                     } else {
                         selectedItems.clear();
                         selectItem(items.get(itemIndex));
                         lastSelectedItemIndex = itemIndex;
                     }
-                } else if (selection.valueEqualsAny(SINGLE, NEEDS_ONE)) {
-                    invertSelection(items.get(itemIndex));
+                } else if (selection.getValue() == SINGLE) {
+                    if (e.isControlPressed()) {
+                        invertSelection(items.get(itemIndex));
+                    } else {
+                        selectItem(items.get(itemIndex));
+                    }
+                } else if (selection.getValue() == NEEDS_ONE) {
+                    selectItem(items.get(itemIndex));
                 }
             }
         }
@@ -381,22 +387,20 @@ public class ListComponent<T> extends Panel {
                 return;
             } else if (keyEvent.isKeyCode(Key.DOWN)) {
                 focusNext();
-                handleMultiSelect(keyEvent.isShiftPressed());
+                handleSelection(keyEvent.isShiftPressed());
             } else if (keyEvent.isKeyCode(Key.UP)) {
                 focusPrev();
-                handleMultiSelect(keyEvent.isShiftPressed());
+                handleSelection(keyEvent.isShiftPressed());
             } else if (keyEvent.isKeyCode(Key.PAGE_DOWN)) {
                 focusNextPage();
-                handleMultiSelect(keyEvent.isShiftPressed());
+                handleSelection(keyEvent.isShiftPressed());
             } else if (keyEvent.isKeyCode(Key.PAGE_UP)) {
                 focusPrevPage();
-                handleMultiSelect(keyEvent.isShiftPressed());
-            } else if (keyEvent.isKeyCode(Key.SPACE)) {
-                invertSelection(items.get(focusedIndex.getValue()));
+                handleSelection(keyEvent.isShiftPressed());
             }
         }
 
-        private void handleMultiSelect(boolean isShiftPressed) {
+        private void handleSelection(boolean isShiftPressed) {
             if (selection.getValue() == MULTI && isShiftPressed) {
                 int from = lastSelectedItemIndex;
                 int to = focusedIndex.getValue();
@@ -411,6 +415,10 @@ public class ListComponent<T> extends Panel {
                     selectItem(items.get(i));
                 }
             } else {
+                if (selection.getValue() == MULTI) {
+                    selectedItems.clear();
+                }
+                selectItem(items.get(focusedIndex.getValue()));
                 lastSelectedItemIndex = focusedIndex.getValue();
             }
         }
