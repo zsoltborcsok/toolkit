@@ -44,7 +44,8 @@ public class ToolkitSampleApp {
         // panel.addComponent(new PopupTestView().createPane(), xy(1, 1));
         // panel.addComponent(new DialogTestView().createPane(), xy(1, 1));
         // panel.addComponent(new TextFieldTestView().createPane(), xy(1, 1));
-        panel.addComponent(new DropDownListTestView().createPane(), xy(1, 1));
+        // panel.addComponent(new DropDownListTestView().createPane(), xy(1, 1));
+        panel.addComponent(new ListComponentTestView().createPane(), xy(1, 1));
         return panel;
     }
 }
