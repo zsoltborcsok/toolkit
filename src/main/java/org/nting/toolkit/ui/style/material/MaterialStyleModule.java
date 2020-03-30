@@ -29,6 +29,7 @@ import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.SplitPane;
 import org.nting.toolkit.component.StandardPopup;
 import org.nting.toolkit.component.SwitchButton;
+import org.nting.toolkit.component.TextArea;
 import org.nting.toolkit.component.TextField;
 import org.nting.toolkit.component.TooltipPopup;
 import org.nting.toolkit.component.WindowPopup;
@@ -49,6 +50,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
     protected void doConfigureUIs() {
         toType(Button.class).bind("componentUI", new MaterialButtonUI());
         toType(TextField.class).bind("componentUI", new MaterialTextFieldUI<>());
+        toType(TextArea.class).bind("componentUI", new MaterialTextAreaUI<>());
         toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
         toType(Dialog.class).bind("componentUI", new MaterialDialogUI());
         toType(StandardPopup.class).bind("componentUI", new MaterialStandardPopupUI<>());
@@ -91,6 +93,9 @@ public class MaterialStyleModule extends AbstractStyleModule {
 
         toType(TextField.class).bind("hPadding", dluX(3));
         toType(TextField.class).bind("vPadding", dluY(3));
+
+        toType(TextArea.class).bind("hPadding", dluX(3));
+        toType(TextArea.class).bind("vPadding", dluY(3));
 
         toType(CheckBox.class).bind("padding", dluY(3));
         toType(CheckBox.class).bind(CHECK_BOX_SIZE, 2 * dluY(4));
