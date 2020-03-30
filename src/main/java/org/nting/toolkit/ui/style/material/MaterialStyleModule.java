@@ -4,21 +4,25 @@ import static org.nting.toolkit.FontManager.FontSize.MEDIUM_FONT;
 import static org.nting.toolkit.FontManager.FontSize.SMALL_FONT;
 import static org.nting.toolkit.ToolkitServices.fontManager;
 import static org.nting.toolkit.ui.style.material.CheckBoxPropertyIds.CHECK_BOX_SIZE;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.ACCENT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_PRIMARY;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_PRIMARY;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.SECONDARY_TEXT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.TOOLTIP_COLOR;
 import static playn.core.Font.Style.BOLD;
 
+import org.nting.data.inject.Provider;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Dialog;
 import org.nting.toolkit.component.DropDownList;
+import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.ScrollPane;
@@ -32,6 +36,7 @@ import org.nting.toolkit.internal.NotificationsImpl;
 import org.nting.toolkit.internal.Root;
 import org.nting.toolkit.ui.ComponentUI;
 import org.nting.toolkit.ui.style.AbstractStyleModule;
+import org.nting.toolkit.util.ColorUtils;
 
 import playn.core.Canvas;
 import pythagoras.f.Dimension;
@@ -99,10 +104,26 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(DropDownList.DropDownListPopup.class).bind("focusedBackgroundColor", DIVIDER_OPACITY_COLOR);
         toType(DropDownList.DropDownListPopup.class).bind("selectedBackgroundColor", DIVIDER_OPACITY_PRIMARY);
         toType(DropDownList.DropDownListPopup.class).bind("focusedSelectedBackgroundColor", DISABLED_OPACITY_PRIMARY);
+
+        toType(ListComponent.class).bind("color", PRIMARY_TEXT_COLOR);
+        toType(ListComponent.class).bind("secondaryColor", SECONDARY_TEXT_COLOR);
+        toType(ListComponent.class).bind("listCellRenderer", listCellRenderer());
     }
 
     @Override
     protected void doConfigureStyles() {
+    }
+
+    private Provider<ListComponent.ListCellRenderer> listCellRenderer() {
+        final int sliderColorLighter = ColorUtils.moreTransparentAbsolute(DIVIDER_OPACITY_COLOR, 15);
+        return new Provider<ListComponent.ListCellRenderer>() {
+
+            @Override
+            public ListComponent.ListCellRenderer get() {
+                return new MaterialListCellRenderer(DIVIDER_OPACITY_COLOR, sliderColorLighter, sliderColorLighter,
+                        ACCENT_COLOR);
+            }
+        };
     }
 
     private static class EmptyComponentUI implements ComponentUI<Component> {
