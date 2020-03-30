@@ -15,6 +15,7 @@ import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.SimpleIconComponent;
 import org.nting.toolkit.component.SwitchButton;
+import org.nting.toolkit.component.TextArea;
 import org.nting.toolkit.component.TextField;
 import org.nting.toolkit.component.renderer.BasicItemRenderer;
 import org.nting.toolkit.component.renderer.ItemRenderer;
@@ -78,6 +79,10 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public TextFieldMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addTextField(Object constraints) {
         return new TextFieldMiddleBuilder<>(addComponent(new TextField(), constraints));
+    }
+
+    public TextAreaMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addTextArea(Object constraints) {
+        return new TextAreaMiddleBuilder<>(addComponent(new TextArea(), constraints));
     }
 
     public SimpleIconComponentMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addIcon(Object constraints) {
