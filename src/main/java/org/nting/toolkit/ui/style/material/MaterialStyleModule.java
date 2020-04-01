@@ -7,6 +7,7 @@ import static org.nting.toolkit.ui.style.material.CheckBoxPropertyIds.CHECK_BOX_
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.ACCENT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DISABLED_OPACITY_PRIMARY;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_PRIMARY;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
@@ -26,6 +27,7 @@ import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.ScrollPane;
+import org.nting.toolkit.component.Separator;
 import org.nting.toolkit.component.SplitPane;
 import org.nting.toolkit.component.StandardPopup;
 import org.nting.toolkit.component.SwitchButton;
@@ -76,6 +78,10 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(ScrollPane.class).bind("gridSize", dluY(8));
 
         toType(SplitPane.class).bind("mouseOverSize", 6);
+
+        toType(Separator.class).bind("color", DIVIDER_COLOR);
+        toType(Separator.class).bind("margin", 0);
+        toType(Separator.class).bind("padding", 0);
 
         toType(Popup.class).bind("shadowSize", 1);
 
