@@ -1,4 +1,4 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
 import static org.nting.toolkit.FontManager.FontSize.MEDIUM_FONT;
@@ -10,12 +10,20 @@ import static playn.core.Font.Style.BOLD;
 import static playn.core.Font.Style.BOLD_ITALIC;
 import static playn.core.Font.Style.ITALIC;
 
+import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 
-public class TextFieldTestView {
+public class TextFieldTestPage implements ITestPage {
 
-    public Panel createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("0px:grow",
                 "pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu");
 

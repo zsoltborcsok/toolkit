@@ -1,4 +1,4 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.component.ListComponent.Selection.SINGLE;
 import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
@@ -13,6 +13,8 @@ import org.nting.data.ValueChangeListener;
 import org.nting.data.bean.BeanDescriptor;
 import org.nting.data.property.ObjectProperty;
 import org.nting.data.query.ListDataProvider;
+import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.FontIcon;
 import org.nting.toolkit.component.Icon;
 import org.nting.toolkit.component.ListComponent;
@@ -29,7 +31,7 @@ import org.nting.toolkit.util.UUID;
 
 import com.google.common.collect.Lists;
 
-public class ListComponentTestView implements ValueChangeListener<List<ListComponentTestView.Data>> {
+public class ListComponentTestPage implements ITestPage, ValueChangeListener<List<ListComponentTestPage.Data>> {
 
     public static class Data extends Properties {
 
@@ -54,7 +56,13 @@ public class ListComponentTestView implements ValueChangeListener<List<ListCompo
 
     private ListComponent<Data> listComponent;
 
-    public Panel createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(new FormLayout("0px:grow", "0px:grow"));
         listComponent = panelBuilder.<Data> addListComponent(xy(0, 0), item -> item.name.getValue()).selection(SINGLE)
                 .dataProvider(new ListDataProvider<>(createBackendCollection(), new BeanDescriptor<>(Data.class),

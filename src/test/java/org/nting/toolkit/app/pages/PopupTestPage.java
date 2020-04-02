@@ -1,4 +1,4 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
 import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
@@ -9,6 +9,7 @@ import static playn.core.Font.Style.BOLD;
 import org.nting.data.Property;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Alignment;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Orientation;
@@ -21,13 +22,19 @@ import org.nting.toolkit.event.ActionEvent;
 import org.nting.toolkit.event.ActionListener;
 import org.nting.toolkit.layout.FormLayout;
 
-public class PopupTestView {
+public class PopupTestPage implements ITestPage {
 
     private enum PopupType {
         STANDARD, TOOLTIP, WINDOW
     }
 
-    public Component createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         FormLayout layout = new FormLayout("0px:grow, pref, 20dlu, pref, 0px:grow",
                 "100dlu, pref, pref, 20dlu, pref, pref, 0px:grow");
         Panel panel = new Panel(layout);

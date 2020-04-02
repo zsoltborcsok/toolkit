@@ -1,4 +1,4 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
 import static org.nting.toolkit.component.FontIcon.FOLDER_OPEN;
@@ -13,15 +13,24 @@ import static org.nting.toolkit.ui.style.material.MaterialColorPalette.red_500;
 import static playn.core.Font.Style.BOLD;
 
 import org.nting.data.property.ObjectProperty;
+import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.RadioButtonGroup;
+import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
-public class ButtonTestView {
+public class ButtonTestPage implements ITestPage {
 
-    public Panel createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         FormLayout formLayout = new FormLayout("0px:grow, 7dlu, 0px:grow, 7dlu, 0px:grow",
                 "pref, 4dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout) //
@@ -96,10 +105,10 @@ public class ButtonTestView {
                 .addSwitchButton(xy(2, 2)).captionLeft("DISABLED").captionRight("disabled").enabled(false).end() //
                 .addSwitchButton(xy(4, 2)).captionLeft("SWITCHED").captionRight("switched").switched(true);
 
-        return panelBuilder.build();
+        return new ScrollPane(panelBuilder.build());
     }
 
-    public void setFocused(Button b) {
+    private void setFocused(Button b) {
         ((ObjectProperty<Boolean>) b.focused).forceValue(true);
     }
 }

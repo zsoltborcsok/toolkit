@@ -1,4 +1,4 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
 import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
@@ -12,6 +12,8 @@ import java.util.UUID;
 import org.nting.data.bean.BeanDescriptor;
 import org.nting.data.query.ListDataProvider;
 import org.nting.data.util.Pair;
+import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
@@ -19,7 +21,7 @@ import org.nting.toolkit.layout.FormLayout;
 
 import com.google.common.collect.Lists;
 
-public class DropDownListTestView {
+public class DropDownListTestPage implements ITestPage {
 
     private static String[] languageNames = new String[] { "Afrikaans", "Albanian", "Arabic", "Armenian", "Azerbaijani",
             "Basque", "Belarusian", "Bengali", "Bulgarian", "Catalan", "Chinese", "Croatian", "Czech", "Danish",
@@ -35,7 +37,13 @@ public class DropDownListTestView {
             "ro", "ru", "sr", "sk", "sl", "es", "sw", "sv", "tl", "ta", "te", "th", "tr", "uk", "ur", "vi", "cy",
             "yi" };
 
-    public Panel createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         FormLayout formLayout = new FormLayout("pref, 7dlu, 0px:grow(2), 7dlu, 0px:grow(1)",
                 "pref, 4dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 4dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout);

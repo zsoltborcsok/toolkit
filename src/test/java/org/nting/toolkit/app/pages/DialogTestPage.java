@@ -1,4 +1,4 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.FontManager.FontSize.LARGE_FONT;
 import static org.nting.toolkit.component.Orientation.HORIZONTAL;
@@ -7,15 +7,23 @@ import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.FormLayout.xyw;
 import static playn.core.Font.Style.PLAIN;
 
+import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.Separator;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.component.builder.DialogBuilder;
 import org.nting.toolkit.component.builder.FormLayoutMiddleBuilder;
 
-public class DialogTestView {
+public class DialogTestPage implements ITestPage {
 
-    public Panel createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("7dlu, pref, 7dlu", "7dlu");
         FormLayoutMiddleBuilder<? extends ContainerBuilder<Panel, ?>> layoutBuilder = panelBuilder.formLayout();
 

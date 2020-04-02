@@ -1,13 +1,15 @@
-package org.nting.toolkit.app;
+package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
 import static org.nting.toolkit.layout.FormLayout.xy;
 
+import org.nting.toolkit.Component;
+import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
-public class TextAreaTestView {
+public class TextAreaTestPage implements ITestPage {
 
     private static final String TEST = "0\n-------------------\nTextAreaTestView\n-------------------\n"
             + "1\n-------------------\nTextAreaTestView\n-------------------\n"
@@ -19,7 +21,13 @@ public class TextAreaTestView {
             + "7\n-------------------\nTextAreaTestView\n-------------------\n"
             + "8\n-------------------\nTextAreaTestView\n-------------------\n9";
 
-    public Panel createPane() {
+    @Override
+    public PageSize getPageSize() {
+        return PageSize.DOUBLE_COLUMN;
+    }
+
+    @Override
+    public Component createContent() {
         FormLayout formLayout = new FormLayout("7dlu, 0px:grow, 7dlu", "7dlu, pref, 4dlu, pref, 7dlu:grow");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout);
 
