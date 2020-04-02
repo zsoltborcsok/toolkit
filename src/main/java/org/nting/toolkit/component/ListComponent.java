@@ -343,28 +343,30 @@ public class ListComponent<T> extends Panel {
             if (e.getButton() == BUTTON_LEFT) {
                 int itemIndex = ((ListScrollView) scrollPane.getView())
                         .getItemIndex(e.getY() - scrollPane.getPosition().y);
-                focusedIndex.setValue(itemIndex);
+                if (itemIndex < items.size()) {
+                    focusedIndex.setValue(itemIndex);
 
-                if (selection.getValue() == MULTI) {
-                    if (e.isControlPressed()) {
-                        if (invertSelection(items.get(itemIndex))) {
+                    if (selection.getValue() == MULTI) {
+                        if (e.isControlPressed()) {
+                            if (invertSelection(items.get(itemIndex))) {
+                                lastSelectedItemIndex = itemIndex;
+                            }
+                        } else if (e.isShiftPressed() && lastSelectedItemIndex != null) {
+                            handleSelection(e.isShiftPressed());
+                        } else {
+                            selectedItems.clear();
+                            selectItem(items.get(itemIndex));
                             lastSelectedItemIndex = itemIndex;
                         }
-                    } else if (e.isShiftPressed() && lastSelectedItemIndex != null) {
-                        handleSelection(e.isShiftPressed());
-                    } else {
-                        selectedItems.clear();
-                        selectItem(items.get(itemIndex));
-                        lastSelectedItemIndex = itemIndex;
-                    }
-                } else if (selection.getValue() == SINGLE) {
-                    if (e.isControlPressed()) {
-                        invertSelection(items.get(itemIndex));
-                    } else {
+                    } else if (selection.getValue() == SINGLE) {
+                        if (e.isControlPressed()) {
+                            invertSelection(items.get(itemIndex));
+                        } else {
+                            selectItem(items.get(itemIndex));
+                        }
+                    } else if (selection.getValue() == NEEDS_ONE) {
                         selectItem(items.get(itemIndex));
                     }
-                } else if (selection.getValue() == NEEDS_ONE) {
-                    selectItem(items.get(itemIndex));
                 }
             }
         }
