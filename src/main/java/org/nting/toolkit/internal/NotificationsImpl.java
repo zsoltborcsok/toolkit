@@ -104,7 +104,7 @@ public class NotificationsImpl extends AbstractComponent implements Notification
 
     private void show(final Notification notification) {
         List<Component> components = Lists.reverse(getComponents());
-        for (int i = 0; i < components.size(); i++) {
+        for (int i = components.size() - 1; i >= 0; i--) {
             Notification child = (Notification) components.get(i);
             if (i < 2) {
                 addComponent(child, xy(0, (i + 1) * 2));
