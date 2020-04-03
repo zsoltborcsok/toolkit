@@ -26,6 +26,6 @@ public class FlowLayoutTestPage implements ITestPage {
             panelBuilder.addButton(null).text("Split button " + i).image(FontIcon.CLOSE, LARGE_FONT).pass()
                     .color(blue_500).set(RAISED.toString(), true);
         }
-        return panelBuilder.build();
+        return wrap(panelBuilder.build());
     }
 }

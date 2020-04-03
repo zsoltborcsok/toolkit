@@ -58,7 +58,7 @@ public class DropDownListTestPage implements ITestPage {
                 .addLabel(xy(0, 22)).text("Disabled").end() //
                 .addComponent(createDropDownList(20, false), xy(2, 22));
 
-        return panelBuilder.build();
+        return wrap(panelBuilder.build());
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

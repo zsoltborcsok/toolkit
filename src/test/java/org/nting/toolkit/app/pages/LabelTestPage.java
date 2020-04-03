@@ -17,7 +17,6 @@ import static playn.core.Font.Style.PLAIN;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
-import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
@@ -83,6 +82,6 @@ public class LabelTestPage implements ITestPage {
                         + "\tat Unknown.eval(oncanvas-0.js@5)\n")
                 .end().backgroundColor(0x10FF0000);
 
-        return new ScrollPane(panelBuilder.build());
+        return wrap(panelBuilder.build());
     }
 }

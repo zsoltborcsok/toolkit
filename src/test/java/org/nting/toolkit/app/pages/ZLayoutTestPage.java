@@ -2,6 +2,8 @@ package org.nting.toolkit.app.pages;
 
 import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.AS_NEEDED;
 import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.NEVER;
+import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
+import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.ui.style.material.MaterialColorPalette.blue_grey_100;
 import static org.nting.toolkit.ui.style.material.MaterialColorPalette.blue_grey_200;
 import static org.nting.toolkit.ui.style.material.MaterialColorPalette.blue_grey_300;
@@ -41,11 +43,8 @@ public class ZLayoutTestPage implements ITestPage {
         panel.addComponent(newComponent(150, 30, blue_grey_100));
         panel.addComponent(newComponent(150, 15, blue_grey_50));
 
-        // ContainerBuilder<Panel, ?> wrappingPanelBuilder = panelBuilder("0px:grow", "0px:grow");
-        // wrappingPanelBuilder.addComponent(new ScrollPane(panel, AS_NEEDED, NEVER)
-        // .<ScrollPane> process(s -> s.usePaddingForAntialias.setValue(false)), xy(0, 0));
-        // return wrappingPanelBuilder.build();
-        return new ScrollPane(panel, AS_NEEDED, NEVER);
+        return new ScrollPane(panelBuilder("7dlu, pref:grow, 7dlu", "7dlu, pref:grow, 7dlu")
+                .addComponent(panel, xy(1, 1)).end().build(), AS_NEEDED, NEVER);
     }
 
     private Component newComponent(int width, int height, int backgroundColor) {

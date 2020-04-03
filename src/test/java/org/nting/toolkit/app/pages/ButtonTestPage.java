@@ -18,7 +18,6 @@ import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.RadioButtonGroup;
-import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
@@ -105,7 +104,7 @@ public class ButtonTestPage implements ITestPage {
                 .addSwitchButton(xy(2, 2)).captionLeft("DISABLED").captionRight("disabled").enabled(false).end() //
                 .addSwitchButton(xy(4, 2)).captionLeft("SWITCHED").captionRight("switched").switched(true);
 
-        return new ScrollPane(panelBuilder.build());
+        return wrap(panelBuilder.build());
     }
 
     private void setFocused(Button b) {

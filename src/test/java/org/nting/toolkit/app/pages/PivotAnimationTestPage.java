@@ -39,6 +39,6 @@ public class PivotAnimationTestPage implements ITestPage {
         pivotAnimationLayout.translateChildX(getComponentById(panelBuilder.build(), "L3"), 200f, 400,
                 Easing.REGULAR_IN);
 
-        return panelBuilder.build();
+        return wrap(panelBuilder.build());
     }
 }

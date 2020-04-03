@@ -38,6 +38,6 @@ public class TextFieldTestPage implements ITestPage {
                 .addTextField(xy(0, 10)).text("Large and bold").pass().font(LARGE_FONT, BOLD)
                 .set(BACKGROUND_COLOR.toString(), 0xFFFFE0E0);
 
-        return panelBuilder.build();
+        return wrap(panelBuilder.build());
     }
 }
