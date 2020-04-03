@@ -33,17 +33,17 @@ public class TestsPage implements ITestPage {
         testPages.add(Pair.of("ScrollPane", ScrollPaneTestPage::new));
         testPages.add(Pair.of("SplitPane", SplitPaneTestPage::new));
         testPages.add(Pair.of("Dialog", DialogTestPage::new));
-        // testPages.add(Pair.of("ZLayout (+GWT 2.8)", ZLayoutTestView::new));
-        // testPages.add(Pair.of("FlowLayout", FlowLayoutTestView::new));
-        // testPages.add(Pair.of("Pivot animation", PivotAnimationTestView::new));
-        // testPages.add(Pair.of("Read-only form", ReadOnlyFormBuilderTestView::new));
-        // testPages.add(Pair.of("Notifications", NotificationsTestView::new));
-        // testPages.add(Pair.of("Easing", EasingTestView::new));
-        // testPages.add(Pair.of("Shapes", ShapesTestView::new));
-        // testPages.add(Pair.of("FontIcons", FontIconTestView::new));
-        // testPages.add(Pair.of("FontSizes", FontSizesTestView::new));
-        // testPages.add(Pair.of("Curves", CurvesTestView::new));
-        // testPages.add(Pair.of("Triangles", TrianglesTestView::new));
+        testPages.add(Pair.of("ZLayout (+GWT 2.8)", ZLayoutTestPage::new));
+        testPages.add(Pair.of("FlowLayout", FlowLayoutTestPage::new));
+        testPages.add(Pair.of("Pivot animation", PivotAnimationTestPage::new));
+        // testPages.add(Pair.of("Read-only form", ReadOnlyFormBuilderTestPage::new));
+        // testPages.add(Pair.of("Notifications", NotificationsTestPage::new));
+        // testPages.add(Pair.of("Easing", EasingTestPage::new));
+        // testPages.add(Pair.of("Shapes", ShapesTestPage::new));
+        // testPages.add(Pair.of("FontIcons", FontIconTestPage::new));
+        // testPages.add(Pair.of("FontSizes", FontSizesTestPage::new));
+        // testPages.add(Pair.of("Curves", CurvesTestPage::new));
+        // testPages.add(Pair.of("Triangles", TrianglesTestPage::new));
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
