@@ -225,7 +225,11 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     @Override
     public void addComponent(Component child, Object constraints) {
         addComponent(child);
-        layoutConstraintsMap.put(child, constraints);
+        if (constraints == null) {
+            layoutConstraintsMap.remove(child);
+        } else {
+            layoutConstraintsMap.put(child, constraints);
+        }
     }
 
     @SuppressWarnings("unchecked")
