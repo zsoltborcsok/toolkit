@@ -57,7 +57,7 @@ public class ZLayout implements LayoutManager {
         float gap = isDLU ? unitConverter().dialogUnitXAsPixel(this.gap, component) : this.gap;
         if (width <= component.getSize().width) {
             columnCount = (int) ((component.getSize().width + gap) / (width + gap));
-            width = component.getSize().width;
+            width = columnCount * width; // component.getSize().width;
         }
 
         float[] heights = new float[columnCount];
