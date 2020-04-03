@@ -101,6 +101,10 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
         return this;
     }
 
+    public ComponentBuilder<COMPONENT, PARENT_BUILDER> font(FontSize fontSize) {
+        return font(fontManager().getFont(fontSize));
+    }
+
     public ComponentBuilder<COMPONENT, PARENT_BUILDER> font(FontSize fontSize, Font.Style style) {
         return font(fontManager().getFont(fontSize, style));
     }
