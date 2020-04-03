@@ -14,7 +14,7 @@ import org.nting.toolkit.component.renderer.BasicItemRenderer;
 
 import com.google.common.collect.Lists;
 
-// Some missing widgets: ComboBox, Table, PasswordField, LabelWithEllipsis
+// Some missing widgets: ComboBox, Table, PasswordField, LabelWithEllipsis, MultiLineLabel, StoneComponent
 public class TestsPage implements ITestPage {
 
     private final List<Pair<String, Supplier<ITestPage>>> testPages = Lists.newLinkedList();
@@ -36,14 +36,13 @@ public class TestsPage implements ITestPage {
         testPages.add(Pair.of("ZLayout (+GWT 2.8)", ZLayoutTestPage::new));
         testPages.add(Pair.of("FlowLayout", FlowLayoutTestPage::new));
         testPages.add(Pair.of("Pivot animation", PivotAnimationTestPage::new));
+        testPages.add(Pair.of("Notifications", NotificationsTestPage::new));
+        testPages.add(Pair.of("Shapes", ShapesTestPage::new));
+        testPages.add(Pair.of("FontIcons", FontIconTestPage::new));
+        testPages.add(Pair.of("FontSizes", FontSizesTestPage::new));
+
         // testPages.add(Pair.of("Read-only form", ReadOnlyFormBuilderTestPage::new));
-        // testPages.add(Pair.of("Notifications", NotificationsTestPage::new));
         // testPages.add(Pair.of("Easing", EasingTestPage::new));
-        // testPages.add(Pair.of("Shapes", ShapesTestPage::new));
-        // testPages.add(Pair.of("FontIcons", FontIconTestPage::new));
-        // testPages.add(Pair.of("FontSizes", FontSizesTestPage::new));
-        // testPages.add(Pair.of("Curves", CurvesTestPage::new));
-        // testPages.add(Pair.of("Triangles", TrianglesTestPage::new));
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
