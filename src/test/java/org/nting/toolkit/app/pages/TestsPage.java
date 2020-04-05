@@ -14,7 +14,6 @@ import org.nting.toolkit.component.renderer.BasicItemRenderer;
 
 import com.google.common.collect.Lists;
 
-// Some missing widgets: ComboBox, Table, PasswordField, LabelWithEllipsis, MultiLineLabel, StoneComponent
 public class TestsPage implements ITestPage {
 
     private final List<Pair<String, Supplier<ITestPage>>> testPages = Lists.newLinkedList();
@@ -26,7 +25,7 @@ public class TestsPage implements ITestPage {
         testPages.add(Pair.of("Button | CheckBox | RadioButton | ToggleButton", ButtonTestPage::new));
         testPages.add(Pair.of("DropDownList", DropDownListTestPage::new));
         testPages.add(Pair.of("ListComponent", ListComponentTestPage::new));
-        testPages.add(Pair.of("Label", LabelTestPage::new));
+        testPages.add(Pair.of("Label | LabelWithEllipsis", LabelTestPage::new));
         testPages.add(Pair.of("TextField", TextFieldTestPage::new));
         testPages.add(Pair.of("TextArea", TextAreaTestPage::new));
         testPages.add(Pair.of("Popup", PopupTestPage::new));

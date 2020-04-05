@@ -30,7 +30,7 @@ public class LabelTestPage implements ITestPage {
     @Override
     public Component createContent() {
         FormLayout formLayout = new FormLayout("pref, 7dlu, 0px:grow",
-                "pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
+                "pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout);
         panelBuilder.addLabel(xy(0, 0)).text("Label Alignments (large and bold)").pass().font(LARGE_FONT, BOLD);
         panelBuilder.addLabel(xy(0, 2)).text("Left (italic)").alignment(LEFT).pass().font(SMALL_FONT, ITALIC)
@@ -39,14 +39,20 @@ public class LabelTestPage implements ITestPage {
                 .font(MEDIUM_FONT, PLAIN).color(0xFFC22F24);
         panelBuilder.addLabel(xy(0, 6)).text("Right (bold+italic)").alignment(RIGHT).pass()
                 .font(SMALL_FONT, BOLD_ITALIC).color(0xFFDBC103);
-        panelBuilder.addPanel(xy(0, 8)).layoutManager("0px:grow", "pref").addMultiLineLabel(xy(0, 0))
+        panelBuilder.addPanel(xy(0, 8)).layoutManager("0px:grow", "pref").addLabelWithEllipsis(xy(0, 0))
+                .text("Lorem ipsum dolor sit amet.");
+        panelBuilder.addPanel(xy(0, 10)).layoutManager("0px:grow", "pref").addLabelWithEllipsis(xy(0, 0))
+                .text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+        panelBuilder.addPanel(xy(0, 12)).layoutManager("0px:grow", "pref").addLabelWithEllipsis(xy(0, 0)).text(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        panelBuilder.addPanel(xy(0, 14)).layoutManager("0px:grow", "pref").addMultiLineLabel(xy(0, 0))
                 .text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut "
                         + "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco "
                         + "laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in "
                         + "voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat "
                         + "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
                 .end().backgroundColor(0x10FF0000);
-        panelBuilder.addPanel(xyw(0, 10, 3)).layoutManager("0px:grow", "pref").addMultiLineLabel(xy(0, 0))
+        panelBuilder.addPanel(xyw(0, 16, 3)).layoutManager("0px:grow", "pref").addMultiLineLabel(xy(0, 0))
                 .text("Can't get element 0\n" + "java.lang.IndexOutOfBoundsException: Can't get element 0\n"
                         + "\tat Unknown.Exception_0(oncanvas-0.js@3)\n"
                         + "\tat Unknown.RuntimeException_1(oncanvas-0.js@15)\n"
