@@ -296,7 +296,7 @@ public class DropDownList<T> extends AbstractTextComponent {
         }
     }
 
-    public class DropDownListPopup extends WindowPopup {
+    public final class DropDownListPopup extends WindowPopup {
 
         private final Property<Integer> backgroundColor = createProperty("backgroundColor", WHITE);
         private final Property<Integer> focusedBackgroundColor = createProperty("focusedBackgroundColor",
@@ -322,7 +322,7 @@ public class DropDownList<T> extends AbstractTextComponent {
                 }
             });
 
-            shadowSize.setValue(4); // Injects style properties
+            forceInjectStyleProperties();
         }
 
         public void show() {

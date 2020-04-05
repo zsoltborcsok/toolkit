@@ -67,6 +67,7 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
     public final Property<Point> mousePosition = new MousePositionProperty(this);
     public final Property<Font> font = createProperty("font", null);
 
+    private final Property<Boolean> injectStyleProperties = createProperty("injectStyleProperties", false);
     private Pair<Alignment, Orientation> tooltipLocation = Pair.of(Alignment.TOP_LEFT, Orientation.VERTICAL);
 
     private Component parent;
@@ -131,6 +132,11 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
                         .forEach(type -> toolkitManager().getStyleInjector().injectProperties(this, type.getName()));
             }
         });
+    }
+
+    /** We should call it after each constructor is called on the type hierarchy. */
+    public void forceInjectStyleProperties() {
+        injectStyleProperties.setValue(true);
     }
 
     @Override
