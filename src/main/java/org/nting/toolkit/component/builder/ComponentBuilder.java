@@ -208,7 +208,7 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
         bindingList.unbind();
     }
 
-    protected COMPONENT getComponent() {
+    public COMPONENT getComponent() {
         return component;
     }
 }

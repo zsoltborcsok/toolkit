@@ -8,6 +8,7 @@ import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.Label;
+import org.nting.toolkit.component.LabelWithEllipsis;
 import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
@@ -71,6 +72,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public LabelMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addMultiLineLabel(Object constraints) {
         return new LabelMiddleBuilder<>(addComponent(new MultiLineLabel(), constraints));
+    }
+
+    public LabelWithEllipsisMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addLabelWithEllipsis(
+            Object constraints) {
+        return new LabelWithEllipsisMiddleBuilder<>(addComponent(new LabelWithEllipsis(), constraints));
     }
 
     public ButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addButton(Object constraints) {
@@ -137,5 +143,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
     public void unbind() {
         super.unbind();
         componentBuilders.forEach(ComponentBuilder::unbind);
+    }
+
+    public void removeAllComponents() {
+        getComponent().removeAllComponents();
+        componentBuilders.forEach(ComponentBuilder::unbind);
+        componentBuilders.clear();
     }
 }
