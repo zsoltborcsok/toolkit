@@ -43,21 +43,21 @@ public class MaterialCheckBoxUI<T extends CheckBox> implements ComponentUI<T> {
     @Override
     public void paintComponent(T checkBox, Canvas canvas) {
         float thePadding = checkBox.padding.getValue();
+        int checkBoxSize = CHECK_BOX_SIZE.getValueOf(checkBox);
 
         if (checkBox.enabled.getValue() && (checkBox.focused.getValue() || checkBox.mouseOver.getValue())) {
             int hoverColor = checkBox.selected.getValue() == TRUE ? CHECK_BOX_CHECKED_COLOR.getValueOf(checkBox)
                     : checkBox.color.getValue();
             hoverColor = dividerColor(hoverColor);
-            new CircleShape(thePadding * 2 + 2, checkBox.height.getValue() / 2,
-                    (int) CHECK_BOX_SIZE.getValueOf(checkBox) * 1.15f).fillColor(hoverColor).paint(canvas);
+            new CircleShape(thePadding + checkBoxSize * 0.5f, checkBox.height.getValue() / 2, checkBoxSize * 1.15f)
+                    .fillColor(hoverColor).paint(canvas);
         }
 
         ContentBuilder contentBuilder = new ContentBuilder();
         Property<Integer> checkBoxColor = checkBox.enabled.getValue() ? checkBox.color : disabledColor(checkBox.color);
-        contentBuilder.content(checkBox.getTextContent(), checkBoxColor).leftPaddedContent(thePadding * 2 - 2)
-                .horizontalContentsLeft(
-                        boxContent(checkBox, (int) CHECK_BOX_SIZE.getValueOf(checkBox), checkBoxColor.getValue()))
-                .paddedContent(thePadding - 1, thePadding - 2, thePadding - 1, thePadding - 1).rightPaddedContent(1)
+        contentBuilder.content(checkBox.getTextContent(), checkBoxColor).leftPaddedContent(thePadding * 2)
+                .horizontalContentsLeft(boxContent(checkBox, checkBoxSize, checkBoxColor.getValue()))
+                .paddedContent(thePadding, thePadding, thePadding, thePadding).rightPaddedContent(1)
                 .contentAndBackground().paint(canvas, checkBox.getSize());
     }
 
