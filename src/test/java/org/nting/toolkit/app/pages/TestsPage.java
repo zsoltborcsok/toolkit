@@ -39,8 +39,8 @@ public class TestsPage implements ITestPage {
         testPages.add(Pair.of("Shapes", ShapesTestPage::new));
         testPages.add(Pair.of("FontIcons", FontIconTestPage::new));
         testPages.add(Pair.of("FontSizes", FontSizesTestPage::new));
+        testPages.add(Pair.of("Read-only form", ReadOnlyFormBuilderTestPage::new));
 
-        // testPages.add(Pair.of("Read-only form", ReadOnlyFormBuilderTestPage::new));
         // testPages.add(Pair.of("Easing", EasingTestPage::new));
     }
 

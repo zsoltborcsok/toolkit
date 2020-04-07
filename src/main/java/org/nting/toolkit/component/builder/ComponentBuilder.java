@@ -41,8 +41,13 @@ public class ComponentBuilder<COMPONENT extends AbstractComponent, PARENT_BUILDE
         this.parentBuilder = parentBuilder;
     }
 
-    public ComponentBuilder<COMPONENT, PARENT_BUILDER> tooltipText(String text) {
-        component.setTooltipText(text);
+    public ComponentBuilder<COMPONENT, PARENT_BUILDER> tooltipText(String tooltipText) {
+        component.setTooltipText(tooltipText);
+        return this;
+    }
+
+    public ComponentBuilder<COMPONENT, PARENT_BUILDER> tooltipText(Property<String> tooltipText) {
+        addBinding(Bindings.bind(READ, tooltipText, component.tooltipText));
         return this;
     }
 
