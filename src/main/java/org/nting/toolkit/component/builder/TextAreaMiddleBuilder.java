@@ -28,7 +28,7 @@ public class TextAreaMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
     }
 
     public TextAreaMiddleBuilder<T> errorMessage(Property<String> errorMessage) {
-        componentBuilder.<String> set(textArea -> textArea.errorMessage, errorMessage);
+        componentBuilder.bind(textArea -> textArea.errorMessage, errorMessage);
         return this;
     }
 
@@ -43,7 +43,7 @@ public class TextAreaMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
     }
 
     public TextAreaMiddleBuilder<T> caption(Property<String> caption) {
-        componentBuilder.<String> set(textArea -> textArea.caption, caption);
+        componentBuilder.bind(textArea -> textArea.caption, caption);
         return this;
     }
 
@@ -58,7 +58,7 @@ public class TextAreaMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
     }
 
     public TextAreaMiddleBuilder<T> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(textArea -> textArea.enabled, enabled);
+        componentBuilder.bind(textArea -> textArea.enabled, enabled);
         return this;
     }
 

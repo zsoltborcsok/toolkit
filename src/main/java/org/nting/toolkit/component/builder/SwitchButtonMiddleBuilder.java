@@ -42,7 +42,7 @@ public class SwitchButtonMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SwitchButtonMiddleBuilder<T> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(switchButton -> switchButton.enabled, enabled);
+        componentBuilder.bind(switchButton -> switchButton.enabled, enabled);
         return this;
     }
 
@@ -52,7 +52,7 @@ public class SwitchButtonMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SwitchButtonMiddleBuilder<T> switched(Property<Boolean> switched) {
-        componentBuilder.<Boolean> set(switchButton -> switchButton.switched, switched);
+        componentBuilder.bind(switchButton -> switchButton.switched, switched);
         return this;
     }
 
@@ -62,7 +62,7 @@ public class SwitchButtonMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SwitchButtonMiddleBuilder<T> captionLeft(Property<String> captionLeftProperty) {
-        componentBuilder.<String> set(switchButton -> switchButton.captionLeft, captionLeftProperty);
+        componentBuilder.bind(switchButton -> switchButton.captionLeft, captionLeftProperty);
         return this;
     }
 
@@ -77,7 +77,7 @@ public class SwitchButtonMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SwitchButtonMiddleBuilder<T> captionRight(Property<String> captionRightProperty) {
-        componentBuilder.<String> set(switchButton -> switchButton.captionRight, captionRightProperty);
+        componentBuilder.bind(switchButton -> switchButton.captionRight, captionRightProperty);
         return this;
     }
 

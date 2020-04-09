@@ -28,7 +28,7 @@ public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Ab
     }
 
     public TextFieldMiddleBuilder<T> errorMessage(Property<String> errorMessage) {
-        componentBuilder.<String> set(textField -> textField.errorMessage, errorMessage);
+        componentBuilder.bind(textField -> textField.errorMessage, errorMessage);
         return this;
     }
 
@@ -43,7 +43,7 @@ public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Ab
     }
 
     public TextFieldMiddleBuilder<T> caption(Property<String> caption) {
-        componentBuilder.<String> set(textField -> textField.caption, caption);
+        componentBuilder.bind(textField -> textField.caption, caption);
         return this;
     }
 
@@ -58,7 +58,7 @@ public class TextFieldMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Ab
     }
 
     public TextFieldMiddleBuilder<T> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(textField -> textField.enabled, enabled);
+        componentBuilder.bind(textField -> textField.enabled, enabled);
         return this;
     }
 

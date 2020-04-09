@@ -24,7 +24,7 @@ public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SimpleIconComponentMiddleBuilder<T> icon(Property<Icon> icon) {
-        componentBuilder.<Icon> set(simpleIconComponent -> simpleIconComponent.icon, icon);
+        componentBuilder.bind(simpleIconComponent -> simpleIconComponent.icon, icon);
         return this;
     }
 
@@ -59,7 +59,7 @@ public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SimpleIconComponentMiddleBuilder<T> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(simpleIconComponent -> simpleIconComponent.enabled, enabled);
+        componentBuilder.bind(simpleIconComponent -> simpleIconComponent.enabled, enabled);
         return this;
     }
 
@@ -69,7 +69,7 @@ public class SimpleIconComponentMiddleBuilder<T extends ContainerBuilder<?, ?>>
     }
 
     public SimpleIconComponentMiddleBuilder<T> zoom(Property<Float> zoom) {
-        componentBuilder.<Float> set(simpleIconComponent -> simpleIconComponent.zoom, zoom);
+        componentBuilder.bind(simpleIconComponent -> simpleIconComponent.zoom, zoom);
         return this;
     }
 }

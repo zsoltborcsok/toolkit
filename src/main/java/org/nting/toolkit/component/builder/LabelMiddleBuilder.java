@@ -27,7 +27,7 @@ public class LabelMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abstra
     }
 
     public LabelMiddleBuilder<T> text(Property<String> textProperty) {
-        componentBuilder.<String> set(label -> label.text, textProperty);
+        componentBuilder.bind(label -> label.text, textProperty);
         return this;
     }
 

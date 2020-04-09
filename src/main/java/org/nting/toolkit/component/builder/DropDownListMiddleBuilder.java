@@ -28,7 +28,7 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> caption(Property<String> caption) {
-        componentBuilder.<String> set(dropDownList -> dropDownList.caption, caption);
+        componentBuilder.bind(dropDownList -> dropDownList.caption, caption);
         return this;
     }
 
@@ -43,7 +43,7 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(dropDownList -> dropDownList.enabled, enabled);
+        componentBuilder.bind(dropDownList -> dropDownList.enabled, enabled);
         return this;
     }
 
@@ -53,7 +53,7 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> emptySelectionAllowed(Property<Boolean> emptySelectionAllowed) {
-        componentBuilder.<Boolean> set(dropDownList -> dropDownList.emptySelectionAllowed, emptySelectionAllowed);
+        componentBuilder.bind(dropDownList -> dropDownList.emptySelectionAllowed, emptySelectionAllowed);
         return this;
     }
 
@@ -63,7 +63,7 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> emptySelectionCaption(Property<String> emptySelectionCaption) {
-        componentBuilder.<String> set(dropDownList -> dropDownList.emptySelectionCaption, emptySelectionCaption);
+        componentBuilder.bind(dropDownList -> dropDownList.emptySelectionCaption, emptySelectionCaption);
         return this;
     }
 
@@ -79,7 +79,7 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> visibleItemCount(Property<Integer> visibleItemCount) {
-        componentBuilder.<Integer> set(dropDownList -> dropDownList.visibleItemCount, visibleItemCount);
+        componentBuilder.bind(dropDownList -> dropDownList.visibleItemCount, visibleItemCount);
         return this;
     }
 
@@ -94,7 +94,7 @@ public class DropDownListMiddleBuilder<T extends ContainerBuilder<?, ?>, S>
     }
 
     public DropDownListMiddleBuilder<T, S> selectedItem(Property<S> selectedItem) {
-        componentBuilder.<S> set(dropDownList -> dropDownList.selectedItem, selectedItem);
+        componentBuilder.bind(dropDownList -> dropDownList.selectedItem, selectedItem);
         return this;
     }
 

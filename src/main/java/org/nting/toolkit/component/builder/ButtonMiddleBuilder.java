@@ -48,7 +48,7 @@ public class ButtonMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abstr
     }
 
     public ButtonMiddleBuilder<T> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(button -> button.enabled, enabled);
+        componentBuilder.bind(button -> button.enabled, enabled);
         return this;
     }
 
@@ -90,7 +90,7 @@ public class ButtonMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abstr
     }
 
     public ButtonMiddleBuilder<T> text(Property<String> textProperty) {
-        componentBuilder.<String> set(button -> button.text, textProperty);
+        componentBuilder.bind(button -> button.text, textProperty);
         return this;
     }
 

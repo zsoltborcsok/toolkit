@@ -41,7 +41,7 @@ public class CheckBoxMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
     }
 
     public CheckBoxMiddleBuilder<T> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(checkBox -> checkBox.enabled, enabled);
+        componentBuilder.bind(checkBox -> checkBox.enabled, enabled);
         return this;
     }
 
@@ -51,7 +51,7 @@ public class CheckBoxMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
     }
 
     public CheckBoxMiddleBuilder<T> selected(Property<Boolean> selected) {
-        componentBuilder.<Boolean> set(checkBox -> checkBox.selected, selected);
+        componentBuilder.bind(checkBox -> checkBox.selected, selected);
         return this;
     }
 
@@ -61,7 +61,7 @@ public class CheckBoxMiddleBuilder<T extends ContainerBuilder<?, ?>> extends Abs
     }
 
     public CheckBoxMiddleBuilder<T> text(Property<String> textProperty) {
-        componentBuilder.<String> set(checkBox -> checkBox.text, textProperty);
+        componentBuilder.bind(checkBox -> checkBox.text, textProperty);
         return this;
     }
 

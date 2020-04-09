@@ -38,7 +38,7 @@ public class ListComponentMiddleBuilder<T extends ContainerBuilder<?, ?>, I>
     }
 
     public ListComponentMiddleBuilder<T, I> enabled(Property<Boolean> enabled) {
-        componentBuilder.<Boolean> set(listComponent -> listComponent.enabled, enabled);
+        componentBuilder.bind(listComponent -> listComponent.enabled, enabled);
         return this;
     }
 
@@ -48,7 +48,7 @@ public class ListComponentMiddleBuilder<T extends ContainerBuilder<?, ?>, I>
     }
 
     public ListComponentMiddleBuilder<T, I> selection(Property<Selection> selection) {
-        componentBuilder.<Selection> set(listComponent -> listComponent.selection, selection);
+        componentBuilder.bind(listComponent -> listComponent.selection, selection);
         return this;
     }
 
@@ -58,7 +58,7 @@ public class ListComponentMiddleBuilder<T extends ContainerBuilder<?, ?>, I>
     }
 
     public ListComponentMiddleBuilder<T, I> noItemsInfo(Property<String> noItemsInfo) {
-        componentBuilder.<String> set(listComponent -> listComponent.noItemsInfo, noItemsInfo);
+        componentBuilder.bind(listComponent -> listComponent.noItemsInfo, noItemsInfo);
         return this;
     }
 
@@ -73,7 +73,7 @@ public class ListComponentMiddleBuilder<T extends ContainerBuilder<?, ?>, I>
     }
 
     public ListComponentMiddleBuilder<T, I> pageLength(Property<Integer> pageLength) {
-        componentBuilder.<Integer> set(listComponent -> listComponent.pageLength, pageLength);
+        componentBuilder.bind(listComponent -> listComponent.pageLength, pageLength);
         return this;
     }
 
