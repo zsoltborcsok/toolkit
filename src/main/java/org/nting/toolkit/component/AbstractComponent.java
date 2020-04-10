@@ -51,6 +51,8 @@ import pythagoras.f.Point;
 
 public abstract class AbstractComponent implements PaintableComponent, RuntimeBean {
 
+    private static final List<String> BOUND_PROPERTY_NAMES = Lists.newArrayList("x", "y", "width", "height");
+
     private final Properties properties = new Properties();
 
     public final Property<Float> x = createProperty("x", 0f);
@@ -103,7 +105,11 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
                     return;
                 }
             }
-            repaint();
+            if (getParent() != null && BOUND_PROPERTY_NAMES.contains(propertyName)) {
+                getParent().repaint();
+            } else {
+                repaint();
+            }
         });
         tooltipText.addValueChangeListener(event -> {
             if (Strings.isNullOrEmpty(event.getValue())) {
