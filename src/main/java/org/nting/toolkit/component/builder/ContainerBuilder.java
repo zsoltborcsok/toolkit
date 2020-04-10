@@ -12,6 +12,7 @@ import org.nting.toolkit.component.LabelWithEllipsis;
 import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
+import org.nting.toolkit.component.PasswordField;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.SimpleIconComponent;
@@ -85,6 +86,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public TextFieldMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addTextField(Object constraints) {
         return new TextFieldMiddleBuilder<>(addComponent(new TextField(), constraints));
+    }
+
+    public PasswordFieldMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addPasswordField(
+            Object constraints) {
+        return new PasswordFieldMiddleBuilder<>(addComponent(new PasswordField(), constraints));
     }
 
     public TextAreaMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addTextArea(Object constraints) {
