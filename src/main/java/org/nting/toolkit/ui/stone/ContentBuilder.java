@@ -5,6 +5,7 @@ import static org.nting.toolkit.ToolkitServices.fontManager;
 import org.nting.data.Property;
 import org.nting.toolkit.FontManager.FontSize;
 import org.nting.toolkit.component.Icon;
+import org.nting.toolkit.component.StoneComponent;
 import org.nting.toolkit.ui.shape.BasicShape;
 import org.nting.toolkit.ui.shape.CircleShadowShape;
 import org.nting.toolkit.ui.shape.CircleShape;
@@ -366,5 +367,9 @@ public class ContentBuilder {
 
     public Background getBackground() {
         return background;
+    }
+
+    public StoneComponent asComponent() {
+        return new StoneComponent(content);
     }
 }
