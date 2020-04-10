@@ -104,7 +104,7 @@ public class TextField extends FieldComponent {
         return new MouseHandler();
     }
 
-    private class MouseHandler implements MouseListener {
+    protected class MouseHandler implements MouseListener {
 
         private double lastPressTime = -1000.0;
         private int lastCaretPosition = -1;
