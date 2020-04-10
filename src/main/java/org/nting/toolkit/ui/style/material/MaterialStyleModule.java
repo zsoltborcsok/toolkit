@@ -24,6 +24,7 @@ import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Dialog;
 import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.ListComponent;
+import org.nting.toolkit.component.PasswordField;
 import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.ScrollPane;
@@ -52,6 +53,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
     protected void doConfigureUIs() {
         toType(Button.class).bind("componentUI", new MaterialButtonUI());
         toType(TextField.class).bind("componentUI", new MaterialTextFieldUI<>());
+        toType(PasswordField.class).bind("componentUI", new MaterialPasswordFieldUI());
         toType(TextArea.class).bind("componentUI", new MaterialTextAreaUI<>());
         toType(ScrollPane.class).bind("componentUI", new MaterialScrollPaneUI());
         toType(Dialog.class).bind("componentUI", new MaterialDialogUI());
