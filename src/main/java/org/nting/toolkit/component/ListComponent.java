@@ -1,9 +1,9 @@
 package org.nting.toolkit.component;
 
-import static org.nting.toolkit.component.ListComponent.Selection.MULTI;
-import static org.nting.toolkit.component.ListComponent.Selection.NEEDS_ONE;
-import static org.nting.toolkit.component.ListComponent.Selection.SINGLE;
 import static org.nting.toolkit.component.ScrollComponent.ScrollBarPolicy.AS_NEEDED;
+import static org.nting.toolkit.component.Selection.MULTI;
+import static org.nting.toolkit.component.Selection.NEEDS_ONE;
+import static org.nting.toolkit.component.Selection.SINGLE;
 import static org.nting.toolkit.event.MouseEvent.MouseButton.BUTTON_LEFT;
 import static org.nting.toolkit.ui.Colors.DARK_GREY;
 import static org.nting.toolkit.ui.Colors.GREY;
@@ -42,10 +42,6 @@ import pythagoras.f.MathUtil;
 import pythagoras.f.Rectangle;
 
 public class ListComponent<T> extends Panel {
-
-    public enum Selection {
-        MULTI, SINGLE, NEEDS_ONE
-    }
 
     @SuppressWarnings("rawtypes")
     private static Query EMPTY_QUERY = new Query(null, null);

@@ -1,6 +1,6 @@
 package org.nting.toolkit.app.pages;
 
-import static org.nting.toolkit.component.ListComponent.Selection.SINGLE;
+import static org.nting.toolkit.component.Selection.SINGLE;
 import static org.nting.toolkit.component.builder.ContainerBuilder.panelBuilder;
 import static org.nting.toolkit.layout.FormLayout.xy;
 

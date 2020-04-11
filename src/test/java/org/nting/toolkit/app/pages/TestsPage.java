@@ -10,6 +10,7 @@ import org.nting.toolkit.Component;
 import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.ListComponent;
+import org.nting.toolkit.component.Selection;
 import org.nting.toolkit.component.renderer.BasicItemRenderer;
 
 import com.google.common.collect.Lists;
@@ -60,7 +61,7 @@ public class TestsPage implements ITestPage {
         // Trigger the selection of the first item when this Page is already added, as it also add a page to the pages.
         listComponent.attached.addValueChangeListener(event -> {
             if (event.getValue()) {
-                listComponent.selection.setValue(ListComponent.Selection.NEEDS_ONE);
+                listComponent.selection.setValue(Selection.NEEDS_ONE);
             }
         });
         return listComponent;

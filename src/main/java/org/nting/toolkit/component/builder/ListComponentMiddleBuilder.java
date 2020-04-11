@@ -8,7 +8,7 @@ import org.nting.data.ValueChangeListener;
 import org.nting.data.binding.Bindings;
 import org.nting.data.query.DataProvider;
 import org.nting.toolkit.component.ListComponent;
-import org.nting.toolkit.component.ListComponent.Selection;
+import org.nting.toolkit.component.Selection;
 import org.nting.toolkit.component.renderer.ItemRenderer;
 
 public class ListComponentMiddleBuilder<T extends ContainerBuilder<?, ?>, I>
