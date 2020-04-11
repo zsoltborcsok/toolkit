@@ -38,7 +38,7 @@ public final class Root extends Panel {
 
         ((ObjectProperty<Boolean>) this.attached).forceValue(true);
         if (renderingOptimisation()) {
-            toolkitManager().schedule(createLoopedRunnable(-1, 100, this::repaint));
+            toolkitManager().schedule(createLoopedRunnable(-1, 2500, this::repaint));
         }
         notifications().setParent(this);
     }
