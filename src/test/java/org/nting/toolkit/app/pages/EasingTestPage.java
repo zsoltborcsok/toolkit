@@ -57,7 +57,7 @@ public class EasingTestPage implements ITestPage {
         AbstractComponent component = new ContentBuilder()
                 .content(FontIcon.VIEWPORT.getContent(FontManager.FontSize.EXTRA_EXTRA_LARGE_FONT, 0xffff5005))
                 .asComponent();
-        component.x.setValue(100f);
+        component.x.setValue(120f);
         component.y.setValue(150f);
         panelBuilder.addPanel(xyw(1, 3, 6)).layoutManager(new AbsoluteLayout()).addComponent(component,
                 customPosition());
