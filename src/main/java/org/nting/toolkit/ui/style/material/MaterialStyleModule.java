@@ -11,6 +11,7 @@ import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_CO
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.DIVIDER_OPACITY_PRIMARY;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_BACKGROUND_COLOR;
+import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.PRIMARY_TEXT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.SECONDARY_TEXT_COLOR;
 import static org.nting.toolkit.ui.style.material.MaterialStyleColors.TOOLTIP_COLOR;
@@ -19,10 +20,12 @@ import static playn.core.Font.Style.BOLD;
 import org.nting.data.inject.Provider;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.component.AbstractComponent;
+import org.nting.toolkit.component.AbstractTextComponent;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.Dialog;
 import org.nting.toolkit.component.DropDownList;
+import org.nting.toolkit.component.Link;
 import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.PasswordField;
 import org.nting.toolkit.component.Popup;
@@ -121,6 +124,9 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(ListComponent.class).bind("color", PRIMARY_TEXT_COLOR);
         toType(ListComponent.class).bind("secondaryColor", SECONDARY_TEXT_COLOR);
         toType(ListComponent.class).bind("listCellRenderer", listCellRenderer());
+
+        toType(AbstractTextComponent.class).bind("color", PRIMARY_TEXT_COLOR);
+        toType(Link.class).bind("color", PRIMARY_COLOR);
     }
 
     @Override

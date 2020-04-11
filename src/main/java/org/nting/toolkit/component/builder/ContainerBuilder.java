@@ -9,6 +9,7 @@ import org.nting.toolkit.component.CheckBox;
 import org.nting.toolkit.component.DropDownList;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.LabelWithEllipsis;
+import org.nting.toolkit.component.Link;
 import org.nting.toolkit.component.ListComponent;
 import org.nting.toolkit.component.MultiLineLabel;
 import org.nting.toolkit.component.Panel;
@@ -78,6 +79,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
     public LabelWithEllipsisMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addLabelWithEllipsis(
             Object constraints) {
         return new LabelWithEllipsisMiddleBuilder<>(addComponent(new LabelWithEllipsis(), constraints));
+    }
+
+    public LabelMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addLink(Object constraints, String text,
+            String url) {
+        return new LabelMiddleBuilder<>(addComponent(new Link(text, url), constraints));
     }
 
     public ButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addButton(Object constraints) {

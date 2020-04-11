@@ -26,7 +26,7 @@ public class TestsPage implements ITestPage {
         testPages.add(Pair.of("Button | CheckBox | RadioButton | ToggleButton", ButtonTestPage::new));
         testPages.add(Pair.of("DropDownList", DropDownListTestPage::new));
         testPages.add(Pair.of("ListComponent", ListComponentTestPage::new));
-        testPages.add(Pair.of("Label | LabelWithEllipsis", LabelTestPage::new));
+        testPages.add(Pair.of("Label | LabelWithEllipsis | Link", LabelTestPage::new));
         testPages.add(Pair.of("TextField | PasswordField", TextFieldTestPage::new));
         testPages.add(Pair.of("TextArea", TextAreaTestPage::new));
         testPages.add(Pair.of("Popup", PopupTestPage::new));

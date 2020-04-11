@@ -33,6 +33,7 @@ import org.nting.data.Property;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.util.ColorUtils;
 
+// https://material.io/resources/color/#!/
 public class MaterialStyleColors {
 
     public static final boolean IS_LIGHT = true;

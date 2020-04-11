@@ -30,7 +30,7 @@ public class LabelTestPage implements ITestPage {
     @Override
     public Component createContent() {
         FormLayout formLayout = new FormLayout("pref, 7dlu, 0px:grow",
-                "pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
+                "pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout);
         panelBuilder.addLabel(xy(0, 0)).text("Label Alignments (large and bold)").pass().font(LARGE_FONT, BOLD);
         panelBuilder.addLabel(xy(0, 2)).text("Left (italic)").alignment(LEFT).pass().font(SMALL_FONT, ITALIC)
@@ -52,7 +52,9 @@ public class LabelTestPage implements ITestPage {
                         + "voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat "
                         + "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
                 .end().backgroundColor(0x10FF0000);
-        panelBuilder.addPanel(xyw(0, 16, 3)).layoutManager("0px:grow", "pref").addMultiLineLabel(xy(0, 0))
+        panelBuilder.addLink(xy(0, 16), "link: github.com/zsoltborcsok/toolkit",
+                "https://github.com/zsoltborcsok/toolkit");
+        panelBuilder.addPanel(xyw(0, 18, 3)).layoutManager("0px:grow", "pref").addMultiLineLabel(xy(0, 0))
                 .text("Can't get element 0\n" + "java.lang.IndexOutOfBoundsException: Can't get element 0\n"
                         + "\tat Unknown.Exception_0(oncanvas-0.js@3)\n"
                         + "\tat Unknown.RuntimeException_1(oncanvas-0.js@15)\n"
