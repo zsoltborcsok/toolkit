@@ -91,7 +91,7 @@ public class TextField extends FieldComponent {
         return new TextFieldKeyHandler();
     }
 
-    private class TextFieldKeyHandler extends KeyHandler {
+    protected class TextFieldKeyHandler extends KeyHandler {
         @Override
         public void keyTyped(KeyEvent keyEvent) {
             if (((byte) keyEvent.getKeyChar(false)) != 10) {
@@ -101,10 +101,10 @@ public class TextField extends FieldComponent {
     }
 
     protected MouseListener createMouseHandler() {
-        return new MouseHandler();
+        return new TextFieldMouseHandler();
     }
 
-    protected class MouseHandler implements MouseListener {
+    protected class TextFieldMouseHandler implements MouseListener {
 
         private double lastPressTime = -1000.0;
         private int lastCaretPosition = -1;

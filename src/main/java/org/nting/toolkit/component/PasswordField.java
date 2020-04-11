@@ -77,7 +77,7 @@ public class PasswordField extends TextField {
     }
 
     protected MouseListener createMouseHandler() {
-        return new MouseHandler();
+        return new PasswordFieldMouseHandler();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class PasswordField extends TextField {
         // Selection not supported
     }
 
-    private class MouseHandler extends TextField.MouseHandler {
+    private class PasswordFieldMouseHandler extends TextFieldMouseHandler {
 
         @Override
         public void mousePressed(MouseEvent e) {
