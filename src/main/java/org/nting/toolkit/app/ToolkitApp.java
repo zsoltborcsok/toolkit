@@ -15,7 +15,7 @@ import playn.core.PlayN;
 public class ToolkitApp extends Game.Default {
 
     @FunctionalInterface
-    interface InitPromise {
+    public interface InitPromise {
 
         void then(Consumer<ToolkitManager> initConsumer);
     }

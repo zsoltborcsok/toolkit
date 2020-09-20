@@ -39,7 +39,7 @@ public class MaterialButtonUI implements ComponentUI<Button> {
 
     @Override
     public void paintComponent(Button button, Canvas canvas) {
-        if (RAISED.getValueOf(button)) {
+        if (RAISED.<Boolean> getValueOf(button)) {
             paintRaisedButton(button, canvas);
         } else {
             paintFlatButton(button, canvas);
@@ -124,7 +124,7 @@ public class MaterialButtonUI implements ComponentUI<Button> {
     @Override
     public Dimension getPreferredSize(Button button) {
         Dimension preferredSize = getPreferredSizeOfFlat(button);
-        if (RAISED.getValueOf(button)) {
+        if (RAISED.<Boolean> getValueOf(button)) {
             preferredSize.width += 4; // 2 + 2
             preferredSize.height += 4; // 1 + 3
         }
