@@ -1,5 +1,7 @@
 package org.nting.toolkit.event;
 
+import java.util.function.Consumer;
+
 /** Implement only those listener method(s) which is required. */
 public interface MouseListener {
 
@@ -29,5 +31,19 @@ public interface MouseListener {
     }
 
     default void mouseMoved(MouseMotionEvent e) {
+    }
+
+    /**
+     * Creates a click listener, which consumes all the the clicks ignoring the modifiers.
+     */
+    static MouseListener onClick(Consumer<MouseEvent> clickHandler) {
+        return new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                clickHandler.accept(e);
+                e.consume();
+            }
+        };
     }
 }
