@@ -83,7 +83,7 @@ public class ScrollPane extends ScrollComponent {
     @Override
     public boolean isDirty() {
         if (!super.isDirty() && (vsbVisible.getValue() || hsbVisible.getValue())) {
-            Component view = getView();
+            Component view = getEffectiveView();
             if (view != null && getAllComponents(view).stream().anyMatch(Component::isDirty)) {
                 repaint(); // Repaint the whole ScrollPane if any child component is dirty when showing scrollbars.
             }
@@ -114,13 +114,21 @@ public class ScrollPane extends ScrollComponent {
 
     @Override
     public Component getView() {
+        Component effectiveView = getEffectiveView();
+        if (effectiveView != null && usePaddingForAntialias.getValue()) {
+            return effectiveView.componentAt(xy(1, 1));
+        } else {
+            return effectiveView;
+        }
+    }
+
+    private Component getEffectiveView() {
         List<Component> components = getComponents();
-        if (components.size() > 0) {
+        if (0 < components.size()) {
             return components.get(0);
         } else {
             return null;
         }
-
     }
 
     public Dimension getViewSize() {
@@ -144,7 +152,7 @@ public class ScrollPane extends ScrollComponent {
         if (p != viewPosition) {
             rewindScrollBarVisibilityAnimations();
         }
-        Component view = getView();
+        Component view = getEffectiveView();
         if (view != null) {
             float x = Math.max(0, p.x);
             float y = Math.max(0, p.y);
@@ -331,7 +339,7 @@ public class ScrollPane extends ScrollComponent {
         public void layout(Component component) {
             ScrollPane scrollPane = (ScrollPane) component;
 
-            Component view = scrollPane.getView();
+            Component view = scrollPane.getEffectiveView();
             if (view != null) {
                 scrollPane.viewPrefSize = view.getPreferredSize();
                 // Layout should fix the view position (sizes might have changed)!
@@ -358,11 +366,14 @@ public class ScrollPane extends ScrollComponent {
             }
 
             ScrollPane scrollPane = (ScrollPane) component;
-            if (scrollPane.hsbPolicy.getValue() == NEVER || prefSize.width == 0) {
-                prefSize.width = scrollPane.getView().getPreferredSize().width;
-            }
-            if (scrollPane.vsbPolicy.getValue() == NEVER || prefSize.height == 0) {
-                prefSize.height = scrollPane.getView().getPreferredSize().height;
+            Component view = scrollPane.getEffectiveView();
+            if (view != null) {
+                if (scrollPane.hsbPolicy.getValue() == NEVER || prefSize.width == 0) {
+                    prefSize.width = view.getPreferredSize().width;
+                }
+                if (scrollPane.vsbPolicy.getValue() == NEVER || prefSize.height == 0) {
+                    prefSize.height = view.getPreferredSize().height;
+                }
             }
 
             return prefSize;
