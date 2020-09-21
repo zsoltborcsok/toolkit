@@ -221,7 +221,11 @@ public final class Root extends Panel {
             }
         }
 
-        super.doPaintChildren(canvas);
+        // Do a proper order of child painting; instead of super.doPaintChildren(canvas);
+        List<Component> components = Lists.newArrayList(super.getComponents());
+        components.addAll(overlayComponents);
+        components.addAll(popups);
+        components.forEach(child -> doPaintChild(child, canvas));
     }
 
     public void doPaintForeground(Canvas canvas) {
