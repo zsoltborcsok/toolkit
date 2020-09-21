@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
-import org.nting.toolkit.Notifications;
+import org.nting.toolkit.PaintableComponent;
 import org.nting.toolkit.component.Dialog;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.Popup;
@@ -29,6 +29,7 @@ import pythagoras.f.Rectangle;
 public final class Root extends Panel {
 
     private final List<Popup> popups = Lists.newArrayList();// popups in reverse order of paint sequence
+    private final List<PaintableComponent> overlayComponents = Lists.newArrayList(notifications());
     private boolean duringLayout = false;
     private boolean canvasDirty = false;
     private boolean modalityPainted = true;
@@ -40,7 +41,8 @@ public final class Root extends Panel {
         if (renderingOptimisation()) {
             toolkitManager().schedule(createLoopedRunnable(-1, 2500, this::repaint));
         }
-        notifications().setParent(this);
+
+        overlayComponents.forEach(overlayComponent -> overlayComponent.setParent(this));
     }
 
     public boolean isCanvasDirty() {
@@ -53,7 +55,7 @@ public final class Root extends Panel {
             return super.getComponents();
         } else {
             List<Component> components = Lists.newArrayList(popups);
-            components.add(notifications());
+            components.addAll(overlayComponents);
             components.addAll(super.getComponents());
             return components;
         }
@@ -157,7 +159,8 @@ public final class Root extends Panel {
             List<Rectangle> clips = Lists.newLinkedList();
             components.add(this);
             clips.add(null);
-            boolean hasPopups = 0 < popups.size() || notifications().isVisible();
+            boolean hasPopups = 0 < popups.size()
+                    || overlayComponents.stream().map(PaintableComponent::isVisible).reduce(false, Boolean::logicalOr);
             for (int i = 0; i < components.size(); i++) {
                 Component component = components.get(i);
                 if (!component.isVisible()) {
@@ -211,16 +214,17 @@ public final class Root extends Panel {
             canvasDirty = true;
         }
 
+        // Overlay components are not layout by Root, let them take care of it before their paint
+        for (PaintableComponent overlayComponent : overlayComponents) {
+            if (overlayComponent.isVisible()) {
+                overlayComponent.doLayout();
+            }
+        }
+
         super.doPaintChildren(canvas);
     }
 
     public void doPaintForeground(Canvas canvas) {
-        Notifications notifications = notifications();
-        if (notifications.isVisible()) {
-            notifications.doLayout();
-            notifications.repaint();
-            doPaintChild(notifications, canvas);
-        }
         for (int i = popups.size() - 1; i >= 0; i--) {
             Popup popup = popups.get(i);
             popup.repaint();
@@ -253,6 +257,6 @@ public final class Root extends Panel {
         for (int i = popups.size() - 1; i >= 0; i--) {
             popups.get(i).update(delta);
         }
-        notifications().update(delta);
+        overlayComponents.forEach(overlayComponent -> overlayComponent.update(delta));
     }
 }
