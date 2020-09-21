@@ -1,6 +1,7 @@
 package org.nting.toolkit.internal;
 
 import static org.nting.toolkit.ToolkitRunnable.createLoopedRunnable;
+import static org.nting.toolkit.ToolkitServices.developerTools;
 import static org.nting.toolkit.ToolkitServices.notifications;
 import static org.nting.toolkit.ToolkitServices.toolkitManager;
 
@@ -29,7 +30,7 @@ import pythagoras.f.Rectangle;
 public final class Root extends Panel {
 
     private final List<Popup> popups = Lists.newArrayList();// popups in reverse order of paint sequence
-    private final List<PaintableComponent> overlayComponents = Lists.newArrayList(notifications());
+    private final List<PaintableComponent> overlayComponents = Lists.newArrayList(notifications(), developerTools());
     private boolean duringLayout = false;
     private boolean canvasDirty = false;
     private boolean modalityPainted = true;
