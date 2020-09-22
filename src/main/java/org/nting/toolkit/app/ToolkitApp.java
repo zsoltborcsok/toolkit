@@ -6,6 +6,7 @@ import static org.nting.toolkit.ToolkitServices.toolkitManager;
 import java.util.function.Consumer;
 
 import org.nting.toolkit.ToolkitManager;
+import org.nting.toolkit.app.tools.CanvasDeveloperTool;
 import org.nting.toolkit.app.tools.ToolkitDeveloperTool;
 import org.nting.toolkit.ui.style.AbstractStyleModule;
 import org.nting.toolkit.ui.style.material.MaterialStyleModule;
@@ -35,6 +36,7 @@ public class ToolkitApp extends Game.Default {
 
     private final ToolkitManager toolkitManager;
     private final ToolkitDeveloperTool toolkitDeveloperTool;
+    private final CanvasDeveloperTool canvasDeveloperTool;
     private int paintCount = 0;
     private int time = 0;
 
@@ -42,6 +44,7 @@ public class ToolkitApp extends Game.Default {
         super(updateRate);
         this.toolkitManager = toolkitManager;
         toolkitDeveloperTool = new ToolkitDeveloperTool(toolkitManager);
+        canvasDeveloperTool = new CanvasDeveloperTool(toolkitManager);
     }
 
     @Override
@@ -69,6 +72,7 @@ public class ToolkitApp extends Game.Default {
         }
 
         toolkitDeveloperTool.update(paintCount * 1000f / time);
+        canvasDeveloperTool.update();
 
         time += delta;
         if (time > 5000) {
