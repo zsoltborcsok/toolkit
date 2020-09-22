@@ -114,7 +114,7 @@ public class DeveloperToolsImpl extends AbstractComponent implements DeveloperTo
         panelBuilder.addComponent(new Separator(Orientation.HORIZONTAL),
                 xyw(1, panelBuilder.formLayout().lastRow(), 2));
         panelBuilder.formLayout().addRow("pref");
-        panelBuilder.addComponent(tool, xyw(0, panelBuilder.formLayout().lastRow(), 4));
+        panelBuilder.addComponent(tool, xyw(1, panelBuilder.formLayout().lastRow(), 2));
         content.addComponent(panelBuilder.build());
 
         return Conditions.convert(isActivated).and(tool.visible);

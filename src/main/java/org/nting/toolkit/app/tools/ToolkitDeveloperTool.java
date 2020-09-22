@@ -10,7 +10,10 @@ import org.nting.data.binding.Bindings;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.component.Panel;
+import org.nting.toolkit.component.StoneComponent;
 import org.nting.toolkit.component.builder.ContainerBuilder;
+import org.nting.toolkit.ui.shape.RectangleShape;
+import org.nting.toolkit.ui.stone.Background;
 
 import playn.core.Color;
 import playn.core.ImageLayer;
@@ -24,17 +27,17 @@ public class ToolkitDeveloperTool {
     private Property<Integer> color = new ObjectProperty<>(0);
     private Property<String> argbColor = new ObjectProperty<>("N/A");
     private Property<String> htmlColor = new ObjectProperty<>("N/A");
-    private Property<Boolean> isToolkitDeveloperToolActive = new ObjectProperty<>(false);
+    private Property<Boolean> isActive = new ObjectProperty<>(false);
 
     private final ToolkitManager toolkitManager;
 
     public ToolkitDeveloperTool(ToolkitManager toolkitManager) {
         this.toolkitManager = toolkitManager;
-        registerToolkitDeveloperTool();
+        register();
     }
 
-    public void updateToolkitDeveloperTool(float fps) {
-        if (!isToolkitDeveloperToolActive.getValue()) {
+    public void update(float fps) {
+        if (!isActive.getValue()) {
             return;
         }
 
@@ -49,7 +52,7 @@ public class ToolkitDeveloperTool {
         htmlColor.setValue("HTML(#" + Integer.toHexString(color.getValue()) + ")");
     }
 
-    private void registerToolkitDeveloperTool() {
+    private void register() {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("right:max(pref;64dlu), 3dlu, 0px:grow", "");
 
         panelBuilder.formLayout().addRow("4dlu").addRow("baseline:pref");
@@ -62,13 +65,16 @@ public class ToolkitDeveloperTool {
                 .color(0xFF999999);
         panelBuilder.addLabel(xy(2, panelBuilder.formLayout().lastRow())).text(mousePosition);
 
-        panelBuilder.formLayout().addRow("4dlu").addRow("baseline:pref").addRow("4dlu").addRow("pref");
+        panelBuilder.formLayout().addRow("4dlu").addRow("baseline:pref").addRow("2dlu").addRow("pref");
         panelBuilder.addLabel(xy(0, panelBuilder.formLayout().lastRow(2))).text("Color at mouse").pass()
                 .color(0xFF999999);
         panelBuilder.addLabel(xy(2, panelBuilder.formLayout().lastRow(2))).text(argbColor);
         panelBuilder.addLabel(xy(2, panelBuilder.formLayout().lastRow())).text(htmlColor);
+        panelBuilder.formLayout().addRow("2dlu").addRow("8dlu").done()
+                .addComponent(new StoneComponent(null), xy(2, panelBuilder.formLayout().lastRow()))
+                .bind("stone", color, c -> new Background(new RectangleShape().strokeColor(0xFF7f7f7f).fillColor(c)));
 
         Property<Boolean> isToolActive = developerTools().addTool("Toolkit", panelBuilder.build());
-        Bindings.bind(READ, isToolActive, isToolkitDeveloperToolActive);
+        Bindings.bind(READ, isToolActive, isActive);
     }
 }

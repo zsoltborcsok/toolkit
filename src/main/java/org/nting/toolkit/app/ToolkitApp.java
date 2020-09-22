@@ -68,7 +68,7 @@ public class ToolkitApp extends Game.Default {
             PlayN.log(getClass()).error(e.getMessage(), e);
         }
 
-        toolkitDeveloperTool.updateToolkitDeveloperTool(paintCount * 1000f / time);
+        toolkitDeveloperTool.update(paintCount * 1000f / time);
 
         time += delta;
         if (time > 5000) {
