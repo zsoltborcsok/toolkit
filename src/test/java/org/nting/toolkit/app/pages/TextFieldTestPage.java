@@ -11,13 +11,15 @@ import static playn.core.Font.Style.BOLD_ITALIC;
 import static playn.core.Font.Style.ITALIC;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 
 import playn.core.Font;
 
-public class TextFieldTestPage implements ITestPage {
+public class TextFieldTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -25,7 +27,7 @@ public class TextFieldTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("0px:grow",
                 "pref, 14dlu, pref");
 

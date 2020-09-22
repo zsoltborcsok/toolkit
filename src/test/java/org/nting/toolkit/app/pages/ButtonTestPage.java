@@ -14,6 +14,8 @@ import static playn.core.Font.Style.BOLD;
 
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Button;
 import org.nting.toolkit.component.Panel;
@@ -21,7 +23,7 @@ import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
-public class ButtonTestPage implements ITestPage {
+public class ButtonTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -29,7 +31,7 @@ public class ButtonTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         FormLayout formLayout = new FormLayout("0px:grow, 7dlu, 0px:grow, 7dlu, 0px:grow",
                 "pref, 4dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout) //

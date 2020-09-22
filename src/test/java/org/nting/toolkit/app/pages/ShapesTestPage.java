@@ -3,6 +3,8 @@ package org.nting.toolkit.app.pages;
 import static playn.core.PlayN.graphics;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.StoneComponent;
 import org.nting.toolkit.ui.shape.CircleShape;
@@ -18,7 +20,7 @@ import playn.core.TextFormat;
 import playn.core.TextLayout;
 import pythagoras.f.Dimension;
 
-public class ShapesTestPage implements ITestPage {
+public class ShapesTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -26,7 +28,7 @@ public class ShapesTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         StoneComponent stoneComponent = new StoneComponent(new Stone(null) {
 
             @Override

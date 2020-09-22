@@ -1,12 +1,14 @@
 package org.nting.toolkit.app.pages;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Label;
 import org.nting.toolkit.component.Orientation;
 import org.nting.toolkit.component.SplitPane;
 
-public class SplitPaneTestPage implements ITestPage {
+public class SplitPaneTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -14,7 +16,7 @@ public class SplitPaneTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         SplitPane splitPane1 = new SplitPane(Orientation.HORIZONTAL);
         splitPane1.type.setValue(SplitPane.Type.FIXED_LEFT);
         splitPane1.resizeWeight.setValue(0.25);

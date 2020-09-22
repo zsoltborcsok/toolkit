@@ -19,6 +19,8 @@ import org.nting.toolkit.animation.Easing.EasingFunction;
 import org.nting.toolkit.animation.Easing.EasingType;
 import org.nting.toolkit.animation.Timeline;
 import org.nting.toolkit.animation.TweenBuilder;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.AbstractComponent;
 import org.nting.toolkit.component.FontIcon;
@@ -30,7 +32,7 @@ import org.nting.toolkit.layout.AbsoluteLayout;
 import org.nting.toolkit.ui.stone.ContentBuilder;
 import org.nting.toolkit.util.EnumUtils;
 
-public class EasingTestPage implements ITestPage {
+public class EasingTestPage implements IPageFactory {
 
     private final Property<EasingType> easingType = new ObjectProperty<>(EasingType.TYPE_IN);
     private final Property<EasingFunction> easingFunction = new ObjectProperty<>(EasingFunction.FUNCTION_LINEAR);
@@ -43,7 +45,7 @@ public class EasingTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("7dlu, 100dlu, 7dlu, 100dlu, 7dlu, pref, 0px:grow, 7dlu",
                 "7dlu, pref, 7dlu, 0px:grow, 7dlu");
         panelBuilder.<EasingType> addDropDownList(xy(1, 1))

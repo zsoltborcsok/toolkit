@@ -9,6 +9,8 @@ import static playn.core.Font.Style.BOLD;
 import org.nting.data.Property;
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Alignment;
 import org.nting.toolkit.component.Button;
@@ -22,7 +24,7 @@ import org.nting.toolkit.event.ActionEvent;
 import org.nting.toolkit.event.ActionListener;
 import org.nting.toolkit.layout.FormLayout;
 
-public class PopupTestPage implements ITestPage {
+public class PopupTestPage implements IPageFactory {
 
     private enum PopupType {
         STANDARD, TOOLTIP, WINDOW
@@ -34,7 +36,7 @@ public class PopupTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         FormLayout layout = new FormLayout("0px:grow, pref, 20dlu, pref, 0px:grow",
                 "100dlu, pref, pref, 20dlu, pref, pref, 0px:grow");
         Panel panel = new Panel(layout);

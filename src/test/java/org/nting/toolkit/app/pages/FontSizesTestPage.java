@@ -4,6 +4,8 @@ import static org.nting.toolkit.ToolkitServices.fontManager;
 
 import org.nting.toolkit.Component;
 import org.nting.toolkit.FontManager.FontSize;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Alignment;
 import org.nting.toolkit.component.Button;
@@ -20,7 +22,7 @@ import org.nting.toolkit.event.ActionEvent;
 import org.nting.toolkit.event.ActionListener;
 import org.nting.toolkit.layout.FormLayout;
 
-public class FontSizesTestPage implements ITestPage {
+public class FontSizesTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -28,7 +30,7 @@ public class FontSizesTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         FormLayout layout = new FormLayout("2dlu, 0px:grow, 2dlu", "2dlu");
         Panel panel = new Panel(layout);
 

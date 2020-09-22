@@ -2,12 +2,14 @@ package org.nting.toolkit.app.pages;
 
 import org.nting.data.property.ObjectProperty;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.builder.CheckBoxMiddleBuilder;
 import org.nting.toolkit.component.builder.TextAreaMiddleBuilder;
 import org.nting.toolkit.form.ReadOnlyFormBuilder;
 
-public class ReadOnlyFormBuilderTestPage implements ITestPage {
+public class ReadOnlyFormBuilderTestPage implements IPageFactory {
 
     private static final String NOTES = "----- Mi, 22.01.2014 14:06 (Philipp Sauder) -----\n"
             + "bisher keine Rückmeldung. WV\n" + "\n" + "----- Do, 01.08.2013 16:45 (Philipp Sauder) -----\n"
@@ -23,7 +25,7 @@ public class ReadOnlyFormBuilderTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ReadOnlyFormBuilder readOnlyFormBuilder = new ReadOnlyFormBuilder();
         readOnlyFormBuilder.newZLayout();
 

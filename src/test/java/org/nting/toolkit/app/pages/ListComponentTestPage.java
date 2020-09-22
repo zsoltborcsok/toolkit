@@ -14,6 +14,8 @@ import org.nting.data.bean.BeanDescriptor;
 import org.nting.data.property.ObjectProperty;
 import org.nting.data.query.ListDataProvider;
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.FontIcon;
 import org.nting.toolkit.component.Icon;
@@ -31,7 +33,7 @@ import org.nting.toolkit.util.UUID;
 
 import com.google.common.collect.Lists;
 
-public class ListComponentTestPage implements ITestPage, ValueChangeListener<List<ListComponentTestPage.Data>> {
+public class ListComponentTestPage implements IPageFactory, ValueChangeListener<List<ListComponentTestPage.Data>> {
 
     public static class Data extends Properties {
 
@@ -62,7 +64,7 @@ public class ListComponentTestPage implements ITestPage, ValueChangeListener<Lis
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(new FormLayout("0px:grow", "0px:grow"));
         listComponent = panelBuilder.<Data> addListComponent(xy(0, 0), item -> item.name.getValue()).selection(SINGLE)
                 .dataProvider(new ListDataProvider<>(createBackendCollection(), new BeanDescriptor<>(Data.class),

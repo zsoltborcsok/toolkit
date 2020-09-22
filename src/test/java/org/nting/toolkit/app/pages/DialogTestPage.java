@@ -8,6 +8,8 @@ import static org.nting.toolkit.layout.FormLayout.xyw;
 import static playn.core.Font.Style.PLAIN;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.Separator;
@@ -15,7 +17,7 @@ import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.component.builder.DialogBuilder;
 import org.nting.toolkit.component.builder.FormLayoutMiddleBuilder;
 
-public class DialogTestPage implements ITestPage {
+public class DialogTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -23,7 +25,7 @@ public class DialogTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("7dlu, pref, 7dlu", "7dlu");
         FormLayoutMiddleBuilder<? extends ContainerBuilder<Panel, ?>> layoutBuilder = panelBuilder.formLayout();
 

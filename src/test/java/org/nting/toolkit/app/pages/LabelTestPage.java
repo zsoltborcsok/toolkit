@@ -15,12 +15,14 @@ import static playn.core.Font.Style.ITALIC;
 import static playn.core.Font.Style.PLAIN;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
-public class LabelTestPage implements ITestPage {
+public class LabelTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -28,7 +30,7 @@ public class LabelTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         FormLayout formLayout = new FormLayout("pref, 7dlu, 0px:grow",
                 "pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref, 7dlu, pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout);

@@ -16,13 +16,15 @@ import static org.nting.toolkit.ui.style.material.MaterialColorPalette.blue_grey
 import static org.nting.toolkit.ui.style.material.MaterialColorPalette.blue_grey_900;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.layout.AbsoluteLayout;
 import org.nting.toolkit.layout.ZLayout;
 
-public class ZLayoutTestPage implements ITestPage {
+public class ZLayoutTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -30,7 +32,7 @@ public class ZLayoutTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         Panel panel = new Panel(new ZLayout(200, 1, false));
         panel.addComponent(newComponent(150, 150, blue_grey_900));
         panel.addComponent(newComponent(150, 135, blue_grey_800));

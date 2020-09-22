@@ -45,15 +45,18 @@ public class Pages extends AbstractComponent {
     public final Property<Integer> color = createProperty("color", DARK_GREY);
 
     public Pages() {
-        super.setLayoutManager(new PagesLayout());
-        setFocusable(false);
-
-        color.setValue(toolkitManager().getStyleInjector().getPropertyValue(Separator.class.getName(), "color"));
+        this(new PagesLayout());
     }
 
     public Pages(float preferredWidth, float preferredHeight) {
-        super.setLayoutManager(new PagesLayout(preferredWidth, preferredHeight));
+        this(new PagesLayout(preferredWidth, preferredHeight));
+    }
+
+    private Pages(LayoutManager layoutManager) {
+        super.setLayoutManager(layoutManager);
         setFocusable(false);
+
+        color.setValue(toolkitManager().getStyleInjector().getPropertyValue(Separator.class.getName(), "color"));
     }
 
     @SuppressWarnings("rawtypes")
@@ -81,8 +84,13 @@ public class Pages extends AbstractComponent {
         }
     }
 
-    public void addPage(Component page, PageSize pageSize) {
+    public Pages addPage(Component page, PageSize pageSize) {
         addComponent(page, pageSize);
+        return this;
+    }
+
+    public Pages addPage(IPageFactory pageFactory) {
+        return addPage(pageFactory.createContent(this), pageFactory.getPageSize());
     }
 
     public Component getNextPage(Component sourcePage) {

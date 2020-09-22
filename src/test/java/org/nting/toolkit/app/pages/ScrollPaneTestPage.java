@@ -10,6 +10,8 @@ import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.FormLayout.xyw;
 
 import org.nting.toolkit.Component;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.ScrollPane;
@@ -17,7 +19,7 @@ import org.nting.toolkit.component.Separator;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.component.builder.FormLayoutMiddleBuilder;
 
-public class ScrollPaneTestPage implements ITestPage {
+public class ScrollPaneTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -25,7 +27,7 @@ public class ScrollPaneTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(
                 "7dlu, pref, 4dlu, max(pref;120dlu), 10dlu, pref, 4dlu, max(pref;120dlu), 7dlu", "7dlu");
         FormLayoutMiddleBuilder<? extends ContainerBuilder<Panel, ?>> layoutBuilder = panelBuilder.formLayout();

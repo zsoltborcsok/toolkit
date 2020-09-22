@@ -2,6 +2,8 @@ package org.nting.toolkit.app.pages;
 
 import org.nting.toolkit.Component;
 import org.nting.toolkit.FontManager.FontSize;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.FontIcon;
 import org.nting.toolkit.component.Label;
@@ -12,7 +14,7 @@ import org.nting.toolkit.component.SimpleIconComponent;
 import org.nting.toolkit.component.builder.LabelMiddleBuilder;
 import org.nting.toolkit.layout.FormLayout;
 
-public class FontIconTestPage implements ITestPage {
+public class FontIconTestPage implements IPageFactory {
 
     @Override
     public PageSize getPageSize() {
@@ -20,7 +22,7 @@ public class FontIconTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         FormLayout layout = new FormLayout(
                 "2dlu, center:0px:grow, 2dlu, center:0px:grow, 2dlu, center:0px:grow, 2dlu, center:0px:grow, 2dlu, "
                         + "center:0px:grow, 2dlu, center:0px:grow, 2dlu, center:0px:grow, 2dlu, center:0px:grow, 2dlu, "

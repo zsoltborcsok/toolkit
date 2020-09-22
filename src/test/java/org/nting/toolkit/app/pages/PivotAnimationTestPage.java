@@ -10,13 +10,14 @@ import static playn.core.Font.Style.BOLD;
 
 import org.nting.toolkit.Component;
 import org.nting.toolkit.animation.Easing;
+import org.nting.toolkit.app.IPageFactory;
 import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.layout.FormLayout;
 import org.nting.toolkit.layout.PivotAnimationLayout;
 
-public class PivotAnimationTestPage implements ITestPage {
+public class PivotAnimationTestPage implements IPageFactory {
 
     @Override
     public Pages.PageSize getPageSize() {
@@ -24,7 +25,7 @@ public class PivotAnimationTestPage implements ITestPage {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         PivotAnimationLayout pivotAnimationLayout = pivotLayout(new FormLayout("left:pref", "pref, pref, pref"));
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(pivotAnimationLayout);
 

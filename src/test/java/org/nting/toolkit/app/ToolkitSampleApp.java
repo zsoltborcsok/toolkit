@@ -34,8 +34,6 @@ public class ToolkitSampleApp {
     }
 
     private static Component createContent() {
-        Pages pages = new Pages();
-        pages.addPage(new TestsPage(pages).createContent(), Pages.PageSize.SINGLE_COLUMN);
-        return pages;
+        return new Pages().addPage(new TestsPage());
     }
 }

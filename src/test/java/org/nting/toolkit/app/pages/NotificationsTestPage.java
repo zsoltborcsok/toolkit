@@ -11,13 +11,15 @@ import static org.nting.toolkit.layout.FormLayout.xy;
 
 import org.nting.toolkit.Component;
 import org.nting.toolkit.Notifications;
+import org.nting.toolkit.app.IPageFactory;
+import org.nting.toolkit.app.Pages;
 import org.nting.toolkit.app.Pages.PageSize;
 import org.nting.toolkit.component.Panel;
 import org.nting.toolkit.component.builder.ContainerBuilder;
 import org.nting.toolkit.event.ActionEvent;
 import org.nting.toolkit.event.ActionListener;
 
-public class NotificationsTestPage implements ITestPage, ActionListener {
+public class NotificationsTestPage implements IPageFactory, ActionListener {
 
     @Override
     public PageSize getPageSize() {
@@ -25,7 +27,7 @@ public class NotificationsTestPage implements ITestPage, ActionListener {
     }
 
     @Override
-    public Component createContent() {
+    public Component createContent(Pages pages) {
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder("pref",
                 "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref");
 
