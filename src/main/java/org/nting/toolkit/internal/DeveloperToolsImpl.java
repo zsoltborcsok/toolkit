@@ -9,6 +9,7 @@ import static org.nting.toolkit.layout.FormLayout.xy;
 import static org.nting.toolkit.layout.FormLayout.xyw;
 import static playn.core.Font.Style.BOLD;
 import static playn.core.Font.Style.ITALIC;
+import static playn.core.Platform.Type.HTML;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ import org.nting.toolkit.layout.AbsoluteLayout;
 import org.nting.toolkit.layout.VerticalLayout;
 
 import playn.core.Key;
+import playn.core.PlayN;
 import pythagoras.f.Dimension;
 
 public class DeveloperToolsImpl extends AbstractComponent implements DeveloperTools {
@@ -80,7 +82,7 @@ public class DeveloperToolsImpl extends AbstractComponent implements DeveloperTo
 
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    if (e.isKeyCode(Key.F12)) {
+                    if ((PlayN.platformType() != HTML || e.isShiftPressed()) && e.isKeyCode(Key.F12)) {
                         isActivated.adjustValue(b -> !b);
                         parent.repaint();
                     }
