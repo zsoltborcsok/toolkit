@@ -18,6 +18,7 @@ import org.nting.data.Registration;
 import org.nting.data.ValueChangeListener;
 import org.nting.data.bean.RuntimeBean;
 import org.nting.data.binding.Bindings;
+import org.nting.data.inject.Injector;
 import org.nting.data.property.BeanProperty;
 import org.nting.data.property.ListProperty;
 import org.nting.data.property.MapProperty;
@@ -26,6 +27,7 @@ import org.nting.data.property.SetProperty;
 import org.nting.data.util.Pair;
 import org.nting.toolkit.Component;
 import org.nting.toolkit.PaintableComponent;
+import org.nting.toolkit.ToolkitManager;
 import org.nting.toolkit.animation.Behavior;
 import org.nting.toolkit.data.MouseOverProperty;
 import org.nting.toolkit.data.MousePositionProperty;
@@ -133,9 +135,22 @@ public abstract class AbstractComponent implements PaintableComponent, RuntimeBe
                     PlayN.log(getClass()).info("InjectStyleProperties@{}",
                             Optional.ofNullable(id).orElseGet(this::hashCode));
                 }
+
+                ToolkitManager toolkitManager = toolkitManager();
+                if (toolkitManager == null) {
+                    IllegalStateException exception = new IllegalStateException("ToolkitManager is not yet created!");
+                    PlayN.log(getClass()).warn(exception.getMessage(), exception);
+                    return;
+                }
+                Injector styleInjector = toolkitManager.getStyleInjector();
+                if (styleInjector == null) {
+                    IllegalStateException exception = new IllegalStateException("Style is not yet configured!");
+                    PlayN.log(getClass()).warn(exception.getMessage(), exception);
+                    return;
+                }
+
                 registration[0].remove();
-                collectImplementedTypes(this)
-                        .forEach(type -> toolkitManager().getStyleInjector().injectProperties(this, type.getName()));
+                collectImplementedTypes(this).forEach(type -> styleInjector.injectProperties(this, type.getName()));
             }
         });
     }
