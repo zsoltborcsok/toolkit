@@ -42,7 +42,8 @@ public class MaterialSwitchButtonUI implements ComponentUI<SwitchButton> {
     public void initialize(SwitchButton switchButton) {
         switchButton.createProperty(SELECTED_COLOR, PRIMARY_COLOR);
         switchButton.createProperty(UNSELECTED_COLOR, PRIMARY_BACKGROUND_COLOR);
-        animateSwitchPercent(switchButton, switchButton.createProperty(SWITCH_PERCENT, 0f));
+        animateSwitchPercent(switchButton,
+                switchButton.createProperty(SWITCH_PERCENT, switchButton.switched.getValue() ? 100f : 0f));
         switchButton.activateMouseOver();
     }
 
