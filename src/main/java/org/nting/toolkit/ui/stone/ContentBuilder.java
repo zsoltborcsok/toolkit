@@ -351,6 +351,26 @@ public class ContentBuilder {
         return this;
     }
 
+    public ContentBuilder topBorder(int topThickness) {
+        content = new Border(content, topThickness, 0, 0, 0);
+        return this;
+    }
+
+    public ContentBuilder rightBorder(int rightThickness) {
+        content = new Border(content, 0, rightThickness, 0, 0);
+        return this;
+    }
+
+    public ContentBuilder bottomBorder(int bottomThickness) {
+        content = new Border(content, 0, 0, bottomThickness, 0);
+        return this;
+    }
+
+    public ContentBuilder leftBorder(int leftThickness) {
+        content = new Border(content, 0, 0, 0, leftThickness);
+        return this;
+    }
+
     public ContentBuilder horizontalContents(Content rightContent) {
         content = new HorizontalContents(content, rightContent);
         return this;
