@@ -111,11 +111,11 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
         return new CheckBoxMiddleBuilder<>(addComponent(new CheckBox(), constraints));
     }
 
-    public CheckBoxMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addRadioButton(Object constraints,
+    public RadioButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addRadioButton(Object constraints,
             RadioButtonGroup radioButtonGroup) {
         RadioButton radioButton = new RadioButton();
         radioButtonGroup.add(radioButton);
-        return new CheckBoxMiddleBuilder<>(addComponent(radioButton, constraints));
+        return new RadioButtonMiddleBuilder<>(addComponent(radioButton, constraints));
     }
 
     public SwitchButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addSwitchButton(Object constraints) {
