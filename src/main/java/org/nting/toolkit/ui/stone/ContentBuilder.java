@@ -34,6 +34,26 @@ public class ContentBuilder {
         return new ContentBuilder().background(shape);
     }
 
+    public static ContentBuilder builderOnShape(BasicShape<?> shape) {
+        return builderOnContent(new BasicShapeContent(shape));
+    }
+
+    public static ContentBuilder builderOnShape(BasicShape<?> shape, Dimension size) {
+        return builderOnContent(new BasicShapeContent(size, shape));
+    }
+
+    public static ContentBuilder builderOnShape(BasicShape<?> shape, float width, float height) {
+        return builderOnShape(shape, new Dimension(width, height));
+    }
+
+    public static ContentBuilder builderOnFixShape(Shape<?> shape, Dimension size) {
+        return builderOnContent(new FixShapeContent(size, shape));
+    }
+
+    public static ContentBuilder builderOnFixShape(Shape<?> shape, float width, float height) {
+        return builderOnFixShape(shape, new Dimension(width, height));
+    }
+
     public static ContentBuilder circleWithElevation(float radius, int background) {
         ContentBuilder contentBuilder = new ContentBuilder();
 
