@@ -249,6 +249,41 @@ public class ContentBuilder {
         return this;
     }
 
+    public ContentBuilder alignTop() {
+        content = new PaddedContent(content, 0, 1, 1, 1).withoutClipping();
+        return this;
+    }
+
+    public ContentBuilder alignRight() {
+        content = new PaddedContent(content, 1, 0, 1, 1).withoutClipping();
+        return this;
+    }
+
+    public ContentBuilder alignBottom() {
+        content = new PaddedContent(content, 1, 1, 0, 1).withoutClipping();
+        return this;
+    }
+
+    public ContentBuilder alignLeft() {
+        content = new PaddedContent(content, 1, 1, 1, 0).withoutClipping();
+        return this;
+    }
+
+    public ContentBuilder center() {
+        content = new PaddedContent(content, 1, 1, 1, 1).withoutClipping();
+        return this;
+    }
+
+    public ContentBuilder centerHorizontally() {
+        content = new PaddedContent(content, 0, 1, 0, 1).withoutClipping();
+        return this;
+    }
+
+    public ContentBuilder centerVertically() {
+        content = new PaddedContent(content, 1, 0, 1, 0).withoutClipping();
+        return this;
+    }
+
     // Note that emptyBorder doesn't do padding.
     public ContentBuilder paddedContentWithoutClipping(float topPadding, float rightPadding, float bottomPadding,
             float leftPadding) {
