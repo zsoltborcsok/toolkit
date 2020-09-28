@@ -47,18 +47,18 @@ public class DropDownListTestPage implements IPageFactory {
     @Override
     public Component createContent(Pages pages) {
         FormLayout formLayout = new FormLayout("pref, 7dlu, 0px:grow(2), 7dlu, 0px:grow(1)",
-                "pref, 4dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 4dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref");
+                "pref, 4dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref, 7dlu, center:pref");
         ContainerBuilder<Panel, ?> panelBuilder = panelBuilder(formLayout);
 
-        panelBuilder.addLabel(xyw(0, 14, 5)).text("DropDownLists").pass().font(LARGE_FONT, BOLD).end() //
-                .addLabel(xy(0, 16)).text("LanguageSelection").end() //
-                .addComponent(createLanguageDropDownList(), xy(2, 16)).end() //
-                .addLabel(xy(0, 18)).text("With random data").end() //
-                .addComponent(createDropDownList(20, true), xy(2, 18)).end() //
-                .addLabel(xy(0, 20)).text("No scroll").end() //
-                .addComponent(createDropDownList(5, true), xy(2, 20)).end() //
-                .addLabel(xy(0, 22)).text("Disabled").end() //
-                .addComponent(createDropDownList(20, false), xy(2, 22));
+        panelBuilder.addLabel(xyw(0, 0, 5)).text("DropDownLists").pass().font(LARGE_FONT, BOLD).end() //
+                .addLabel(xy(0, 2)).text("LanguageSelection").end() //
+                .addComponent(createLanguageDropDownList(), xy(2, 2)).end() //
+                .addLabel(xy(0, 4)).text("With random data").end() //
+                .addComponent(createDropDownList(20, true), xy(2, 4)).end() //
+                .addLabel(xy(0, 6)).text("No scroll").end() //
+                .addComponent(createDropDownList(5, true), xy(2, 6)).end() //
+                .addLabel(xy(0, 8)).text("Disabled").end() //
+                .addComponent(createDropDownList(20, false), xy(2, 8));
 
         return wrap(panelBuilder.build());
     }
@@ -92,7 +92,7 @@ public class DropDownListTestPage implements IPageFactory {
         } else {
             dropDownList.enabled.setValue(true);
             dropDownList.emptySelectionAllowed.setValue(true);
-            dropDownList.emptySelectionCaption.setValue("[NOTHING SELECTED] :>");
+            dropDownList.emptySelectionCaption.setValue("[NOTHING SELECTED]");
         }
         return dropDownList;
     }
