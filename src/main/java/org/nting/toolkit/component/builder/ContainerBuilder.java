@@ -17,6 +17,7 @@ import org.nting.toolkit.component.PasswordField;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.RadioButtonGroup;
 import org.nting.toolkit.component.SimpleIconComponent;
+import org.nting.toolkit.component.Slider;
 import org.nting.toolkit.component.SwitchButton;
 import org.nting.toolkit.component.TextArea;
 import org.nting.toolkit.component.TextField;
@@ -120,6 +121,10 @@ public class ContainerBuilder<CONTAINER extends AbstractComponent, PARENT_BUILDE
 
     public SwitchButtonMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addSwitchButton(Object constraints) {
         return new SwitchButtonMiddleBuilder<>(addComponent(new SwitchButton(), constraints));
+    }
+
+    public SliderMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>> addSlider(Object constraints) {
+        return new SliderMiddleBuilder<>(addComponent(new Slider(), constraints));
     }
 
     public <SELECTION> DropDownListMiddleBuilder<ContainerBuilder<CONTAINER, PARENT_BUILDER>, SELECTION> addDropDownList(

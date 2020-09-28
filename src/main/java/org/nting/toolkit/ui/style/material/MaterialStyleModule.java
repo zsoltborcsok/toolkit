@@ -32,6 +32,7 @@ import org.nting.toolkit.component.Popup;
 import org.nting.toolkit.component.RadioButton;
 import org.nting.toolkit.component.ScrollPane;
 import org.nting.toolkit.component.Separator;
+import org.nting.toolkit.component.Slider;
 import org.nting.toolkit.component.SplitPane;
 import org.nting.toolkit.component.StandardPopup;
 import org.nting.toolkit.component.SwitchButton;
@@ -67,6 +68,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(RadioButton.class).bind("componentUI", new MaterialRadioButtonUI());
         toType(SwitchButton.class).bind("componentUI", new MaterialSwitchButtonUI());
         toType(DropDownList.class).bind("componentUI", new MaterialDropDownListUI());
+        toType(Slider.class).bind("componentUI", new MaterialSliderUI());
     }
 
     @Override
@@ -113,6 +115,7 @@ public class MaterialStyleModule extends AbstractStyleModule {
         toType(RadioButton.class).bind(CHECK_BOX_SIZE, 2 * dluY(4));
 
         toType(SwitchButton.class).bind("padding", dluY(4));
+        toType(Slider.class).bind("padding", dluY(8));
 
         toType(DropDownList.class).bind("hPadding", dluX(3));
         toType(DropDownList.class).bind("vPadding", dluY(3));
