@@ -5,8 +5,9 @@ import org.nting.toolkit.app.ListPageFactory;
 public class TestsPage extends ListPageFactory {
 
     public TestsPage() {
-        registerSubPage("Button | CheckBox | RadioButton | ToggleButton", ButtonTestPage::new);
+        registerSubPage("Button | CheckBox | RadioButton | SwitchButton", ButtonTestPage::new);
         registerSubPage("DropDownList", DropDownListTestPage::new);
+        registerSubPage("Slider", SliderTestPage::new);
         registerSubPage("ListComponent", ListComponentTestPage::new);
         registerSubPage("Label | LabelWithEllipsis | Link", LabelTestPage::new);
         registerSubPage("TextField | PasswordField", TextFieldTestPage::new);
